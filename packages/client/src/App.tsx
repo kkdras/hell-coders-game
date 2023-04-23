@@ -16,32 +16,13 @@ function App() {
     fetchServerData()
   }, [])
 
-    return (
-      <Routes>
-        <Route path="/" element={<Layout />}>
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="dashboard" element={<Dashboard />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
-  )
-}
-
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  )
-}
-
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
   )
 }
 

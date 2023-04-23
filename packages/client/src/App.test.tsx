@@ -3,8 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
-
-const appContent = 'It\'ll be our game app.'
+import { appReducer } from './store/appSlice'
 
 // @ts-ignore
 global.fetch = jest.fn(() =>
@@ -12,7 +11,7 @@ global.fetch = jest.fn(() =>
 )
 
 test('Example test', async () => {
-  const store = configureStore({ reducer: {} })
+  const store = configureStore({ reducer: { appReducer } })
 
   render(
     <Provider store={store}>
