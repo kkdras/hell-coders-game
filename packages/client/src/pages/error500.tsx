@@ -13,4 +13,3 @@ export function Error500() {
       </div>
     )
   }
-  

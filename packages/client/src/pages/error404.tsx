@@ -7,6 +7,7 @@ export function Error404() {
            display: "flex",
            alignItems: "center",
            justifyContent: "center",
+           margin: 20,
        }}>
         <h2>Ошибка 404!</h2>
         <p>
