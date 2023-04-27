@@ -1,15 +1,20 @@
-import { Link } from 'react-router-dom'
+import { Component } from 'react'
+import Error from '../components/error'
+import Image from "../assets/500.png";
 
-export function Error500() {
-    return (
-      <div style={{ background: 'red' }}>
-        <h2>Ошибка сервера!</h2>
-        <p>
-          Мы уже бросили все свои дела и стремительно ремонтируем...
-        </p>
-        <p>
-          <Link to="/">Go to the home page</Link>
-        </p>
-      </div>
-    )
+export class Error500 extends Component {
+
+  componentDidMount() {
+    document.title = "Ошибка сервера 500";
   }
+
+  render() {
+    return (
+        <Error 
+            title='Ошибка сервера!'
+            text='Мы уже бросили все свои дела и стремительно ремонтируем...' 
+            img={Image}
+        />
+    );
+  }
+}
