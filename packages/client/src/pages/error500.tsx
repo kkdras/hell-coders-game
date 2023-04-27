@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import Error from '../components/error'
-import Image from "../assets/500.png";
+import Image from "../../public/500.png";
 
 export class Error500 extends Component {
 
