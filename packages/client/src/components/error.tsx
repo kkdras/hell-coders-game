@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { Button, Box } from '@mui/material'
 
-export default class Error extends Component<{title: string, text: string, img: string}, {}> {
+export default class Error extends Component<{title: string, text: string, img: string}> {
 
     render() {
     
