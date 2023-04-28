@@ -1,9 +1,4 @@
-import {
-  Container,
-  AppBar,
-  Toolbar,
-  IconButton,
-} from '@mui/material'
+import { Container, AppBar, Toolbar, IconButton } from '@mui/material'
 import { Box } from '@mui/system'
 import { Outlet } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -19,7 +14,7 @@ export function Layout() {
       <Drawler />
       <AppBar position="static">
         <Container>
-          <Toolbar sx={{ padding: "0 !important" }}>
+          <Toolbar sx={{ padding: '0 !important' }}>
             <IconButton
               onClick={() => dispatch(toggleDrawler())}
               size="large"
