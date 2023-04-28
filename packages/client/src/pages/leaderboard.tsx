@@ -1,7 +1,7 @@
-import { Component } from 'react'
 import { Box, Grid, Paper } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import testAvatar from '../../public/avatar1.png'
+import { useEffect } from 'react'
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -75,13 +75,12 @@ const Users = [
     },
 ];
 
-export class LeaderBoard extends Component {
+export function LeaderBoard() {
 
-  componentDidMount() {
-    document.title = "Таблица рекордов - Тетрис";
-  }
+    useEffect(() => {
+    document.title = 'Таблица рекордов - Тетрис'
+    }, [])
 
-  render() {
     return (
         <Box sx={{ 
             display: 'flex',
@@ -117,5 +116,4 @@ export class LeaderBoard extends Component {
             </Box>
         </Box>
     );
-  }
 }
