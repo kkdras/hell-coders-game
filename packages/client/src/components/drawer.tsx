@@ -63,9 +63,9 @@ export const Drawler = () => {
                 />
               </Link>
             </ListItemButton>
-          </ListItem>  
+          </ListItem>
           <ListItem>
-            <ListItemButton>  
+            <ListItemButton>
               <Link to="/error404">
                 <ListItemText
                   sx={{ color: 'text.primary' }}
@@ -73,9 +73,9 @@ export const Drawler = () => {
                 />
               </Link>
             </ListItemButton>
-          </ListItem> 
+          </ListItem>
           <ListItem>
-            <ListItemButton>  
+            <ListItemButton>
               <Link to="/error500">
                 <ListItemText
                   sx={{ color: 'text.primary' }}

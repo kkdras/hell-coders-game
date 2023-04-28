@@ -1,21 +1,17 @@
-import { Component } from 'react'
 import Error from '../components/error'
-import Image from "../../public/404.png";
+import Image from '../../public/404.png'
+import { useEffect } from 'react'
 
-export class Error404 extends Component {
+export function Error404() {
+  useEffect(() => {
+    document.title = 'Ошибка 404 - Страница не найдена'
+  }, [])
 
-    componentDidMount() {
-        document.title = "Ошибка 404 - Страница не найдена";
-    }
-    
-    render() {
-
-        return (
-            <Error 
-                title='Ошибка 404!'
-                text='К сожалению, запрашиваемая страница не найдена.' 
-                img={Image} 
-            />
-        );
-    }
+  return (
+    <Error
+      title="Ошибка 404!"
+      text="К сожалению, запрашиваемая страница не найдена."
+      img={Image}
+    />
+  )
 }

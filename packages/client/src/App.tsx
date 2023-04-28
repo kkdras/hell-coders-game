@@ -22,7 +22,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/error500" element={<Error500 />}/>
+        <Route path="/error500" element={<Error500 />} />
         <Route path="*" element={<Error404 />} />
       </Route>
     </Routes>
