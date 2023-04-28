@@ -1,5 +1,5 @@
 import Error from '../components/error'
-import Image from '../../public/404.png'
+import Image from '../image/404.png'
 import { useEffect } from 'react'
 
 export function Error404() {
