@@ -39,10 +39,10 @@ export const Drawler = () => {
           </ListItem>
           <ListItem>
             <ListItemButton>
-              <Link to="/leadbord">
+              <Link to="/leaderboard">
                 <ListItemText
                   sx={{ color: 'text.primary' }}
-                  primary="Leadbord"
+                  primary="Leaderboard"
                 />
               </Link>
             </ListItemButton>

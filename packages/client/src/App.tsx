@@ -3,6 +3,7 @@ import './App.css'
 import { Routes, Route, Link } from 'react-router-dom'
 import { Layout } from './components/layout'
 import { Home } from './pages/home'
+import { LeaderBoard } from './pages/leaderboard'
 
 function App() {
   useEffect(() => {
@@ -20,6 +21,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="/leaderboard" element={<LeaderBoard />} />        
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
