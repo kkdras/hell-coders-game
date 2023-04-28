@@ -1,6 +1,6 @@
 import { Box, Grid, Paper } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import testAvatar from '../../public/avatar1.png'
+import testAvatar from '../image/avatar1.png'
 import { useEffect } from 'react'
 
 const Item = styled(Paper)(({ theme }) => ({
