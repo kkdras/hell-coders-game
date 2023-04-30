@@ -39,7 +39,10 @@ export const Home = () => {
             новая фигурка уже не может поместиться в параметры поля и тогда
             подсчитываются итоговые набранные очки за игру.
           </Typography>
-          <Button sx={{ mt: 4 }} onClick={() => navigate(RouteNames.GAME)}>
+          <Button
+            variant="contained"
+            sx={{ mt: 4 }}
+            onClick={() => navigate(RouteNames.GAME)}>
             Играть
           </Button>
         </Box>
