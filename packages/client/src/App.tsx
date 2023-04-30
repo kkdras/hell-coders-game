@@ -8,6 +8,9 @@ import { Game } from './pages/Game/Game'
 export enum RouteNames {
   MAIN = '/',
   GAME = '/game',
+  BLOG = '/blog',
+  LEADERBOARD = '/leaderboard',
+  PROFILE = '/profile',
 }
 
 function App() {

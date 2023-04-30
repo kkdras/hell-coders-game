@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../store'
 import { toggleDrawler } from '../store/appSlice'
 import { isDrawlerOpenSelector } from '../store/selector'
 import { Link } from 'react-router-dom'
+import { RouteNames } from '../App'
 
 export const Drawler = () => {
   const dispatch = useAppDispatch()
@@ -25,38 +26,38 @@ export const Drawler = () => {
         <List>
           <ListItem>
             <ListItemButton>
-              <Link to="/">
+              <Link to={RouteNames.MAIN}>
                 <ListItemText sx={{ color: 'text.primary' }} primary="Home" />
               </Link>
             </ListItemButton>
           </ListItem>
           <ListItem>
             <ListItemButton>
-              <Link to="/blog">
+              <Link to={RouteNames.BLOG}>
                 <ListItemText sx={{ color: 'text.primary' }} primary="Blog" />
               </Link>
             </ListItemButton>
           </ListItem>
           <ListItem>
             <ListItemButton>
-              <Link to="/leadbord">
+              <Link to={RouteNames.LEADERBOARD}>
                 <ListItemText
                   sx={{ color: 'text.primary' }}
-                  primary="Leadbord"
+                  primary="leaderboard"
                 />
               </Link>
             </ListItemButton>
           </ListItem>
           <ListItem>
             <ListItemButton>
-              <Link to="/game">
+              <Link to={RouteNames.GAME}>
                 <ListItemText sx={{ color: 'text.primary' }} primary="Game" />
               </Link>
             </ListItemButton>
           </ListItem>
           <ListItem>
             <ListItemButton>
-              <Link to="/profile">
+              <Link to={RouteNames.PROFILE}>
                 <ListItemText
                   sx={{ color: 'text.primary' }}
                   primary="Profile"
