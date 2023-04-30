@@ -2,7 +2,13 @@ import { useEffect } from 'react'
 import './App.css'
 import { Routes, Route, Link } from 'react-router-dom'
 import { Layout } from './components/layout'
-import { Home } from './pages/home'
+import { Home } from './pages/Home/Home'
+import { Game } from './pages/Game/Game'
+
+export enum RouteNames {
+  MAIN = '/',
+  GAME = '/game',
+}
 
 function App() {
   useEffect(() => {
@@ -18,9 +24,10 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path={RouteNames.MAIN} element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="*" element={<NoMatch />} />
+        <Route path={RouteNames.GAME} element={<Game />} />
       </Route>
     </Routes>
   )
