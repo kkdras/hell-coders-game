@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 import './App.css'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { Layout } from './components/layout'
 import { Home } from './pages/Home/Home'
 import { Game } from './pages/Game/Game'
 import { Register } from './pages/Register/Register'
+import { Error500 } from './pages/error500'
+import { Error404 } from './pages/error404'
 
 export enum RouteNames {
   MAIN = '/',
@@ -14,6 +16,7 @@ export enum RouteNames {
   PROFILE = '/profile',
   REGISTER = '/register',
 }
+
 
 function App() {
   useEffect(() => {
@@ -31,22 +34,12 @@ function App() {
     <Routes>
       <Route path={RouteNames.MAIN} element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="*" element={<NoMatch />} />
         <Route path={RouteNames.GAME} element={<Game />} />
         <Route path={RouteNames.REGISTER} element={<Register />} />
+        <Route path="/error500" element={<Error500 />} />
+        <Route path="*" element={<Error404 />} />
       </Route>
     </Routes>
-  )
-}
-
-function NoMatch() {
-  return (
-    <div>
-      <h2>Nothing to see here!</h2>
-      <p>
-        <Link to={RouteNames.MAIN}>Go to the home page</Link>
-      </p>
-    </div>
   )
 }
 
