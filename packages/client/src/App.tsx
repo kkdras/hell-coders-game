@@ -4,6 +4,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import { Layout } from './components/layout'
 import { Home } from './pages/Home/Home'
 import { Game } from './pages/Game/Game'
+import { Register } from './pages/Register/Register'
 
 export enum RouteNames {
   MAIN = '/',
@@ -11,6 +12,7 @@ export enum RouteNames {
   BLOG = '/blog',
   LEADERBOARD = '/leaderboard',
   PROFILE = '/profile',
+  REGISTER = '/register',
 }
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="*" element={<NoMatch />} />
         <Route path={RouteNames.GAME} element={<Game />} />
+        <Route path={RouteNames.REGISTER} element={<Register />} />
       </Route>
     </Routes>
   )
@@ -41,7 +44,7 @@ function NoMatch() {
     <div>
       <h2>Nothing to see here!</h2>
       <p>
-        <Link to="/">Go to the home page</Link>
+        <Link to={RouteNames.MAIN}>Go to the home page</Link>
       </p>
     </div>
   )

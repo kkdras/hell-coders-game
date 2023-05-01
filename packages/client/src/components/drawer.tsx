@@ -6,22 +6,21 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material'
-import { useAppDispatch, useAppSelector } from '../store'
-import { toggleDrawler } from '../store/appSlice'
-import { isDrawlerOpenSelector } from '../store/selector'
+import { toggleDrawler } from '../store/app/slice'
 import { Link } from 'react-router-dom'
 import { RouteNames } from '../App'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const Drawler = () => {
-  const dispatch = useAppDispatch()
-  const isDrawlerOpen = useAppSelector(isDrawlerOpenSelector) as boolean
+  const dispatch = useDispatch()
+  const { isDrawlerOpened } = useSelector(state => state.app)
 
   return (
     <Drawer
       onKeyDown={() => dispatch(toggleDrawler())}
       onClose={() => dispatch(toggleDrawler())}
       anchor="right"
-      open={isDrawlerOpen}>
+      open={isDrawlerOpened}>
       <Box sx={{ width: 250 }}>
         <List>
           <ListItem>
@@ -43,7 +42,7 @@ export const Drawler = () => {
               <Link to={RouteNames.LEADERBOARD}>
                 <ListItemText
                   sx={{ color: 'text.primary' }}
-                  primary="leaderboard"
+                  primary="Leaderboard"
                 />
               </Link>
             </ListItemButton>
@@ -61,6 +60,16 @@ export const Drawler = () => {
                 <ListItemText
                   sx={{ color: 'text.primary' }}
                   primary="Profile"
+                />
+              </Link>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton>
+              <Link to={RouteNames.REGISTER}>
+                <ListItemText
+                  sx={{ color: 'text.primary' }}
+                  primary="Register"
                 />
               </Link>
             </ListItemButton>
