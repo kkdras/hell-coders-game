@@ -18,7 +18,6 @@ export enum RouteNames {
   REGISTER = '/register',
 }
 
-
 function App() {
   useEffect(() => {
     const fetchServerData = async () => {

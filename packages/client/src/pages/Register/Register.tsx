@@ -1,19 +1,10 @@
 import { Box, Typography, Card, Button, Grid } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'
-import { DevTool } from '@hookform/devtools'
 import { FormInput } from '../../components/FormInput'
 import { useDispatch } from 'react-redux'
 import { postRegister } from '../../store/auth/actions'
 import { SignUpRequest } from '../../store/auth/const'
-
-export interface RegisterForm {
-  name: string
-  lastName: string
-  login: string
-  email: string
-  password: string
-  phone: string
-}
+import { RegisterForm } from './types'
 
 export const Register = () => {
   const dispatch = useDispatch()
@@ -27,7 +18,7 @@ export const Register = () => {
   }
   const methods = useForm<RegisterForm>({ defaultValues })
 
-  const { handleSubmit, control } = methods
+  const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
     const requestData: SignUpRequest = {
       first_name: data.name,
@@ -37,7 +28,6 @@ export const Register = () => {
       phone: data.phone,
       password: data.password,
     }
-    console.log(requestData)
     dispatch(postRegister(requestData))
   })
 
@@ -64,7 +54,6 @@ export const Register = () => {
           </form>
         </FormProvider>
       </Card>
-      <DevTool control={control} />
     </Box>
   )
 }
