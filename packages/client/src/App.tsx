@@ -3,10 +3,10 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import { Layout } from './components/layout'
 import { Home } from './pages/Home/Home'
+import { Error500 } from './pages/error500'
+import { Error404 } from './pages/error404'
 import { Game } from './pages/Game/Game'
 import { Register } from './pages/Register/Register'
-import { Error500 } from './pages/Error500/Error500'
-import { Error404 } from './pages/Error404/Error404'
 
 export enum RouteNames {
   MAIN = '/',
@@ -34,10 +34,10 @@ function App() {
     <Routes>
       <Route path={RouteNames.MAIN} element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="/error500" element={<Error500 />} />
+        <Route path="*" element={<Error404 />} />
         <Route path={RouteNames.GAME} element={<Game />} />
         <Route path={RouteNames.REGISTER} element={<Register />} />
-        <Route path={RouteNames.ERROR_500} element={<Error500 />} />
-        <Route path="*" element={<Error404 />} />
       </Route>
     </Routes>
   )
