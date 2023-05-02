@@ -1,11 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-const initialState = {
-  isDrawlerOpened: false,
-}
+import { initialState } from './const'
 
 export const appSlice = createSlice({
-  name: 'appSlice',
+  name: 'app',
   initialState,
   reducers: {
     toggleDrawler: state => {
@@ -15,5 +12,3 @@ export const appSlice = createSlice({
 })
 
 export const { toggleDrawler } = appSlice.actions
-
-export const appReducer = appSlice.reducer
