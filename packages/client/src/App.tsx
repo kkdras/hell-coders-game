@@ -6,6 +6,7 @@ import { Home } from './pages/Home/Home'
 import { Error500 } from './pages/error500'
 import { Error404 } from './pages/error404'
 import { Game } from './pages/Game/Game'
+import { Forum } from './pages/Forum/Forum'
 
 export enum RouteNames {
   MAIN = '/',
@@ -14,8 +15,9 @@ export enum RouteNames {
   LEADERBOARD = '/leaderboard',
   PROFILE = '/profile',
   ERROR_500 = '/error500',
+  FORUM = '/forum',
 }
-import { Forum } from './pages/Forum/Forum'
+
 
 function App() {
   useEffect(() => {
@@ -36,7 +38,7 @@ function App() {
         <Route path="/error500" element={<Error500 />} />
         <Route path="*" element={<Error404 />} />
         <Route path={RouteNames.GAME} element={<Game />} />
-        <Route path="/forum" element={<Forum />} />
+        <Route path={RouteNames.FORUM} element={<Forum />} />
       </Route>
     </Routes>
   )

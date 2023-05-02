@@ -57,14 +57,7 @@ export const Drawler = () => {
           </ListItem>
           <ListItem>
             <ListItemButton>
-              <Link to="/forum">
-                <ListItemText sx={{ color: 'text.primary' }} primary="Forum" />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to="/forum">
+              <Link to={RouteNames.FORUM}>
                 <ListItemText sx={{ color: 'text.primary' }} primary="Forum" />
               </Link>
             </ListItemButton>

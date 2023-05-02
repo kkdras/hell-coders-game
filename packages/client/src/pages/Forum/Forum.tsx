@@ -7,12 +7,17 @@ import { useNavigate } from 'react-router-dom'
 import { forums } from './const'
 import { ArrowBack } from '@mui/icons-material';
 import ForumAccordeon from './components/ForumAccordeon/ForumAccordion';
+import { useEffect } from 'react';
 
 
 
 
 export function Forum() {
+
     const navigate = useNavigate();
+    useEffect(() => {
+        document.title = 'Форум'
+    }, [])
 
     return (<Box pt={4}>
         <ArrowBack onClick={() => { navigate(-1) }} />

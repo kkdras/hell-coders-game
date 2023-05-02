@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 export function Error404() {
   useEffect(() => {
     document.title = 'Ошибка 404 - Страница не найдена'
-    return () => { document.title = 'Тетрис' }
   }, [])
 
   return (
