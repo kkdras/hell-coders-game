@@ -17,7 +17,7 @@ export enum RouteNames {
   PROFILE = '/profile',
   ERROR_500 = '/error500',
   REGISTER = '/register',
-  ERROR_404 = '/error404'
+  ERROR_404 = '/error404',
   FORUM = '/forum',
 }
 
