@@ -1,6 +1,6 @@
 import {
     Grid,
-    Typography,  
+    Typography,
     Box,
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
@@ -11,7 +11,7 @@ import ForumAccordeon from './components/ForumAccordeon/ForumAccordion';
 
 
 
-export default function Forum() {
+export function Forum() {
     const navigate = useNavigate();
 
     return (<Box pt={4}>

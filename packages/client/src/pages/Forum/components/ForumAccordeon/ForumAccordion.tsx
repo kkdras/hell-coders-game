@@ -4,13 +4,15 @@ import { IForum } from "../../types";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import ThemeAccordeon from "../ThemeAccordeon/ThemeAccordeon";
+import { lightBlue } from '@mui/material/colors';
 
 
 
 
 export default function ForumAccordeon(forum: IForum) {
+    const lightLightBlue = lightBlue[50];
     return (
-        <Accordion sx={{ backgroundColor: '#e3f2fd', borderRadius: '5%' }} key={forum.id}>
+        <Accordion sx={{ backgroundColor: lightLightBlue, borderRadius: '5%' }} key={forum.id}>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
