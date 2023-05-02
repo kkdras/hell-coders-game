@@ -7,7 +7,6 @@ import { LeaderBoard } from './pages/leaderboard'
 import { Error500 } from './pages/error500'
 import { Error404 } from './pages/error404'
 
-
 function App() {
   useEffect(() => {
     const fetchServerData = async () => {
@@ -24,7 +23,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/leaderboard" element={<LeaderBoard />} />        
+        <Route path="/leaderboard" element={<LeaderBoard />} />
         <Route path="/error500" element={<Error500 />} />
         <Route path="*" element={<Error404 />} />
       </Route>
