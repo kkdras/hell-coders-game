@@ -5,6 +5,7 @@ import { Layout } from './components/layout'
 import { Home } from './pages/home'
 import { Error500 } from './pages/error500'
 import { Error404 } from './pages/error404'
+import { Forum } from './pages/Forum/Forum'
 
 function App() {
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/error500" element={<Error500 />} />
         <Route path="*" element={<Error404 />} />
+        <Route path="/forum" element={<Forum />} />
       </Route>
     </Routes>
   )
