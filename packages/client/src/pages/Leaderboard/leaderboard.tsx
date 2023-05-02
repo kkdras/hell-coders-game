@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Box } from '@mui/material'
-import testAvatar from '../image/avatar1.png'
+import testAvatar from '../../image/avatar1.png'
 import { DataGrid, GridCellParams } from '@mui/x-data-grid'
 
 const columns = [
