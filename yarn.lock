@@ -1717,7 +1717,7 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
-"@mui/x-data-grid@^6.3.0":
+"@mui/x-data-grid@6.3.0":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-6.3.0.tgz#7b26a35b573fcc56cee1ac07de7ad786e29e2be1"
   integrity sha512-yp0ptjYdZdGrsat9HJ47D4Pnjp+KkdR8/NBmaqs0x9q8aBhtE+WAkmeT3ynWc59R9zjzZ5tNpt2+8WF1acakOQ==
