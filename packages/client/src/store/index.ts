@@ -1,17 +1,9 @@
-import { appReducer } from './appSlice'
 import { configureStore } from '@reduxjs/toolkit'
-import { useDispatch, useSelector } from 'react-redux'
+import { rootReducer } from './rootReducer'
 
 export const store = configureStore({
-  reducer: {
-    appReducer,
-  },
+  devTools: process.env.NODE_ENV === 'development',
+  reducer: rootReducer,
 })
 
-export type RootState = ReturnType<typeof store.getState>
-
-export type AppDispatch = typeof store.dispatch
-
-export const useAppDispatch: () => AppDispatch = useDispatch
-
-export const useAppSelector = useSelector<RootState>
+export type AppStoreDispatch = typeof store.dispatch

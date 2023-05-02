@@ -3,11 +3,11 @@ import { Box } from '@mui/system'
 import { Outlet } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Drawler } from './drawer'
-import { useAppDispatch } from '../store'
-import { toggleDrawler } from '../store/appSlice'
+import { toggleDrawler } from '../store/app/slice'
+import { useDispatch } from 'react-redux'
 
 export function Layout() {
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
 
   return (
     <Box>
