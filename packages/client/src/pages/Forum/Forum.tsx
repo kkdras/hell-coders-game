@@ -61,7 +61,7 @@ export const Forum = () => {
                                 </IconButton>
                             </Grid>
                             <Grid item xs={1} >
-                                <Typography pt={1} >{forum.answers}</Typography>
+                                <Typography pt={1} >{forum.answersCount}</Typography>
                             </Grid>
                         </Grid>
                     </AccordionSummary>
@@ -77,7 +77,7 @@ export const Forum = () => {
                                 <Typography pl={10} variant="body2">Последний</Typography>
                             </Grid>
                         </Grid>
-                        {themes.map(theme => (
+                        {themes.map(theme => (theme.forumId === forum.id &&
                             <Accordion sx={{ backgroundColor: '#e3f2fd', borderRadius: '5%' }} key={theme.id}>
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
@@ -88,7 +88,7 @@ export const Forum = () => {
                                             <Typography >{theme.title}</Typography>
                                         </Grid>
                                         <Grid item xs={1} >
-                                            <Typography >{theme.answers}</Typography>
+                                            <Typography >{theme.answersCount}</Typography>
                                         </Grid>
                                         <Grid item xs={2} >
                                             <Typography pl={2}>{theme.lastAnswer}</Typography>
@@ -111,7 +111,7 @@ export const Forum = () => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody sx={{ backgroundColor: '#ffab91' }}>
-                                            {messages.map(message => (
+                                            {messages.map(message => ( message.themeId === theme.id &&
                                                 <TableRow key={message.id}>
                                                     <TableCell align="left" colSpan={2}>
                                                         {message.text}
