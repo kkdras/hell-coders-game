@@ -11,16 +11,23 @@ import { SignInRequest } from '../../store/auth/const';
 import { postAuth } from '../../store/auth/actions';
 import { AnyAction } from '@reduxjs/toolkit';
 import { FormInput } from '../../components/FormInput';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 export function Auth() {
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        document.title = 'Авторизация'
+    }, []);
+
     const defaultValues = {
         login: '',
         password: '',
     }
+
     const methods = useForm<AuthForm>({ defaultValues })
 
     const { handleSubmit } = methods
@@ -32,8 +39,8 @@ export function Auth() {
         dispatch(postAuth(requestData) as unknown as AnyAction).then((response: any) => {
             console.log(response);
             if (response.error) alert("Неверный логин или пароль")
-            else 
-            if (response.payload.status === 200 || response.reason === "User already in system") navigate("/game");            
+            else
+                if (response.payload.status === 200 || response.reason === "User already in system") navigate("/game");
         })
 
     })
