@@ -10,10 +10,12 @@ import { toggleDrawler } from '../store/app/slice'
 import { Link } from 'react-router-dom'
 import { RouteNames } from '../App'
 import { useDispatch, useSelector } from 'react-redux'
+import { appState } from '../store/app/const'
 
 export const Drawler = () => {
   const dispatch = useDispatch()
-  const { isDrawlerOpened } = useSelector(state => state.app)
+  
+  const { isDrawlerOpened } = useSelector(state  => state.app)
 
   return (
     <Drawer

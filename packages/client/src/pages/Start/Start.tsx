@@ -1,12 +1,29 @@
 import { Box, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { RouteNames } from '../../App'
 
 export function Start() {
-    useEffect(() => {
-        document.title = 'Старт игры!'
-    }, [])
+    const navigate = useNavigate()
 
     const [secondsBefore, setSecondsBefore] = useState<number>(3);
+
+    useEffect(() => {
+        document.title = 'Старт игры!';
+    }, [])
+
+    useEffect(() => {
+        if (secondsBefore > 0) {
+            const timer = setTimeout(() => {
+                setSecondsBefore(secondsBefore - 1);
+                return () => clearTimeout(timer);
+            }, 1000);
+        }
+        else {
+            navigate(RouteNames.GAME)
+        }
+    }, [secondsBefore])
+
 
     return (
         <Box

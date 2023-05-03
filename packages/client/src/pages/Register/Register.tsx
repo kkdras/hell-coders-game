@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { postRegister } from '../../store/auth/actions'
 import { SignUpRequest } from '../../store/auth/const'
 import { RegisterForm } from './types'
+import { AnyAction } from '@reduxjs/toolkit'
 
 export const Register = () => {
   const dispatch = useDispatch()
@@ -28,7 +29,7 @@ export const Register = () => {
       phone: data.phone,
       password: data.password,
     }
-    dispatch(postRegister(requestData))
+    dispatch(postRegister(requestData) as unknown as AnyAction)
   })
 
   return (
