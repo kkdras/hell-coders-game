@@ -7,7 +7,6 @@ import { SignUpRequest } from '../../store/auth/const'
 import { RegisterForm } from './types'
 import { AppStoreDispatch } from '../../store/index'
 
-
 export const Register = () => {
   const dispatch = useDispatch<AppStoreDispatch>()
   const defaultValues = {
@@ -29,8 +28,8 @@ export const Register = () => {
       login: data.login,
       phone: data.phone,
       password: data.password,
-    }   
-    dispatch(postRegister(requestData))
+    }
+    dispatch(postRegister(requestData) )
   })
 
   return (

@@ -15,16 +15,3 @@ export const postRegister = createAsyncThunk<
     return rejectWithValue((error as AxiosError)?.response)
   }
 })
-
-export const postAuth = createAsyncThunk<
-  AxiosResponse,
-  SignInRequest,
-  { rejectValue: AxiosError['response'] }
->('auth/postAuth', async (data, { rejectWithValue }) => {
-  try {  
-    const response = axios.post(`${BASE_URL}/auth/signin`, data)   
-    return response
-  } catch (error) {
-    return rejectWithValue((error as AxiosError)?.response)
-  }
-})
