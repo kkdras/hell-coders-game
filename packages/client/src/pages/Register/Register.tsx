@@ -5,10 +5,10 @@ import { useDispatch } from 'react-redux'
 import { postRegister } from '../../store/auth/actions'
 import { SignUpRequest } from '../../store/auth/const'
 import { RegisterForm } from './types'
-import { AnyAction } from '@reduxjs/toolkit'
+import { AppStoreDispatch } from '../../store/index'
 
 export const Register = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppStoreDispatch>()
   const defaultValues = {
     name: '',
     lastName: '',
@@ -29,7 +29,7 @@ export const Register = () => {
       phone: data.phone,
       password: data.password,
     }
-    dispatch(postRegister(requestData) as unknown as AnyAction)
+    dispatch(postRegister(requestData) )
   })
 
   return (
