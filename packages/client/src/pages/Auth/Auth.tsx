@@ -11,9 +11,11 @@ import { SignInRequest } from '../../store/auth/const';
 import { postAuth } from '../../store/auth/actions';
 import { AnyAction } from '@reduxjs/toolkit';
 import { FormInput } from '../../components/FormInput';
+import { useNavigate } from 'react-router-dom'
 
 
 export function Auth() {
+    const navigate = useNavigate();
     const dispatch = useDispatch()
     const defaultValues = {
         login: '',
@@ -27,8 +29,8 @@ export function Auth() {
             login: data.login,
             password: data.password,
         }
-        console.log(data);
-        dispatch(postAuth(requestData) as unknown as AnyAction)
+        dispatch(postAuth(requestData) as unknown as AnyAction).then((response: any) => 
+        console.log(response));
     })
 
 
