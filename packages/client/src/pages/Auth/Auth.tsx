@@ -9,7 +9,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { AuthForm } from './types';
 import { SignInRequest } from '../../store/auth/const';
 import { postAuth } from '../../store/auth/actions';
-import { AnyAction } from '@reduxjs/toolkit';
+import { AppStoreDispatch } from '../../store/index';
 import { FormInput } from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -17,7 +17,7 @@ import { useEffect } from 'react';
 
 export function Auth() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppStoreDispatch>();
 
     useEffect(() => {
         document.title = 'Авторизация'
@@ -36,7 +36,7 @@ export function Auth() {
             login: data.login,
             password: data.password,
         }
-        dispatch(postAuth(requestData) as unknown as AnyAction).then((response: any) => {
+        dispatch(postAuth(requestData) ).then((response: any) => {
             console.log(response);
             if (response.error) alert("Неверный логин или пароль")
             else
