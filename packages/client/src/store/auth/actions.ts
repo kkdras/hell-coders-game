@@ -7,9 +7,9 @@ export const postRegister = createAsyncThunk<
   AxiosResponse,
   SignUpRequest,
   { rejectValue: AxiosError['response'] }
->('auth/postRegister', async (graphPath, { rejectWithValue }) => {
+>('auth/postRegister', async (data, { rejectWithValue }) => {
   try {
-    const response = axios.post(`${BASE_URL}/auth/signup`)
+    const response = axios.post(`${BASE_URL}/auth/signup`, data)
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
