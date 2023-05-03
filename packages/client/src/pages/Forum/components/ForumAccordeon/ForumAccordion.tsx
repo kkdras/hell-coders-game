@@ -3,13 +3,13 @@ import { themes } from "../../const";
 import { IForum } from "../../types";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
-import ThemeAccordeon from "../ThemeAccordeon/ThemeAccordeon";
+import {ThemeAccordeon} from "../ThemeAccordeon/ThemeAccordeon";
 import { lightBlue } from '@mui/material/colors';
 
 
 
 
-export default function ForumAccordeon(forum: IForum) {
+export function ForumAccordeon(forum: IForum) {
     const lightLightBlue = lightBlue[50];
     return (
         <Accordion sx={{ backgroundColor: lightLightBlue, borderRadius: '5%' }} key={forum.id}>

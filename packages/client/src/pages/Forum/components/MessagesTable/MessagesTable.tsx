@@ -1,7 +1,7 @@
 import { TableCell, TableRow } from "@mui/material";
 import { IMessage } from "../../types";
 
-export default function ForumAccordeon(message: IMessage) {
+export function MessagesTable(message: IMessage) {
 
     return (
         <TableRow key={message.id}>

@@ -6,7 +6,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { forums } from './const'
 import { ArrowBack } from '@mui/icons-material';
-import ForumAccordeon from './components/ForumAccordeon/ForumAccordion';
+import {ForumAccordeon}  from './components/ForumAccordeon/ForumAccordion';
 import { useEffect } from 'react';
 
 

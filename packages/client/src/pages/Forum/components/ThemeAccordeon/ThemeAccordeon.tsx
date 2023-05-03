@@ -2,10 +2,10 @@ import { Accordion, AccordionDetails, AccordionSummary, Grid, Table, TableBody, 
 import { messages } from "../../const";
 import { ITheme } from "../../types";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MessagesTable from "../MessagesTable/MessagesTable";
+import { MessagesTable}  from "../MessagesTable/MessagesTable";
 import { deepOrange } from '@mui/material/colors';
 
-export default function ForumAccordeon(theme: ITheme) {
+export function ThemeAccordeon(theme: ITheme) {
     const lightOrange = deepOrange[400];
 
     return (
