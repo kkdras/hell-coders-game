@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 export function Error500() {
   useEffect(() => {
-    document.title = 'Ошибка сервера 500'
+    document.title = 'Ошибка сервера 500'    
   }, [])
 
   return (
