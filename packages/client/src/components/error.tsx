@@ -1,4 +1,5 @@
 import { Button, Box } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 interface Props {
   title: string
@@ -19,14 +20,14 @@ export default function Error(props: Props) {
       <Box sx={{ color: 'error.main', margin: 2 }}>
         <h1>{props.title}</h1>
       </Box>
-      <Box sx={{ color: 'error.main', margin: 2 }}>
+      <Box sx={{ margin: 2 }}>
         <img src={props.img} />
       </Box>
       <Box sx={{ fontSize: 20, margin: 2 }}>{props.text}</Box>
       <Box sx={{ margin: 2 }}>
-        <Button variant="contained" href="/">
-          HOME PAGE
-        </Button>
+        <Link to="/">
+          <Button variant="contained">Home Page</Button>
+        </Link>
       </Box>
     </Box>
   )
