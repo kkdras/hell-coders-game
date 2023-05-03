@@ -15,7 +15,7 @@ import { appState } from '../store/app/const'
 export const Drawler = () => {
   const dispatch = useDispatch()
   
-  const { isDrawlerOpened } = useSelector(state  => state.app)
+  const { isDrawlerOpened } = useSelector(state  => (state as any).app )
 
   return (
     <Drawer
