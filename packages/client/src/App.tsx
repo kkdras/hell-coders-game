@@ -20,7 +20,7 @@ export enum RouteNames {
   ERROR_500 = '/error500',
   REGISTER = '/register',
   ERROR_404 = '/error404',
-  FORUM = '/forum',,
+  FORUM = '/forum',
   AUTH = '/auth'
 }
 
@@ -32,7 +32,7 @@ function App() {
       const response = await fetch(url)
       const data = await response.json()
       console.log(data)
-    }
+    }  
 
     fetchServerData()
   }, [])
