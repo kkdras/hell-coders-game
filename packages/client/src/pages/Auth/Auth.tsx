@@ -29,8 +29,13 @@ export function Auth() {
             login: data.login,
             password: data.password,
         }
-        dispatch(postAuth(requestData) as unknown as AnyAction).then((response: any) => 
-        console.log(response));
+        dispatch(postAuth(requestData) as unknown as AnyAction).then((response: any) => {
+            console.log(response);
+            if (response.error) alert("Неверный логин или пароль")
+            else 
+            if (response.payload.status === 200 || response.reason === "User already in system") navigate("/game");            
+        })
+
     })
 
 

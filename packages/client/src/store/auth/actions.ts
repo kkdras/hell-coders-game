@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { SignInRequest, SignUpRequest } from './const'
 import { BASE_URL } from '../../shared/consts'
-import { useNavigate } from 'react-router-dom'
 
 export const postRegister = createAsyncThunk<
   AxiosResponse,
@@ -22,11 +21,8 @@ export const postAuth = createAsyncThunk<
   SignInRequest,
   { rejectValue: AxiosError['response'] }
 >('auth/postAuth', async (data, { rejectWithValue }) => {
-  try {
-  
-    const response = axios.post(`${BASE_URL}/auth/signin`, data)
-  
-   
+  try {  
+    const response = axios.post(`${BASE_URL}/auth/signin`, data)   
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
