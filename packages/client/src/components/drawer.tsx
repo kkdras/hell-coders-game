@@ -101,6 +101,16 @@ export const Drawler = () => {
               </Link>
             </ListItemButton>
           </ListItem>
+          <ListItem>
+            <ListItemButton>
+              <Link to={RouteNames.START}>
+                <ListItemText
+                  sx={{ color: 'text.primary' }}
+                  primary="Start"
+                />
+              </Link>
+            </ListItemButton>
+          </ListItem>
         </List>
       </Box>
     </Drawer>
