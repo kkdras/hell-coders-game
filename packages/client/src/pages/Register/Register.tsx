@@ -28,8 +28,8 @@ export const Register = () => {
       login: data.login,
       phone: data.phone,
       password: data.password,
-    }
-    dispatch(postRegister(requestData))
+    }   
+    dispatch(postRegister(requestData) as unknown as AnyAction)
   })
 
   return (
