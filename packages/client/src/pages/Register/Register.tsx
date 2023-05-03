@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { postRegister } from '../../store/auth/actions'
 import { SignUpRequest } from '../../store/auth/const'
 import { RegisterForm } from './types'
+import { AnyAction, AsyncThunkAction } from '@reduxjs/toolkit'
 
 export const Register = () => {
   const dispatch = useDispatch()

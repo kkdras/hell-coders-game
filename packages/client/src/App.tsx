@@ -7,6 +7,8 @@ import { Error500 } from './pages/error500'
 import { Error404 } from './pages/error404'
 import { Game } from './pages/Game/Game'
 import { Register } from './pages/Register/Register'
+import { Auth } from './pages/Auth/Auth'
+
 
 export enum RouteNames {
   MAIN = '/',
@@ -16,7 +18,8 @@ export enum RouteNames {
   PROFILE = '/profile',
   ERROR_500 = '/error500',
   REGISTER = '/register',
-  ERROR_404 = '/error404'
+  ERROR_404 = '/error404',
+  AUTH = '/auth'
 }
 
 function App() {
@@ -39,6 +42,7 @@ function App() {
         <Route path="*" element={<Error404 />} />
         <Route path={RouteNames.GAME} element={<Game />} />
         <Route path={RouteNames.REGISTER} element={<Register />} />
+        <Route path={RouteNames.AUTH} element={<Auth />} />
       </Route>
     </Routes>
   )

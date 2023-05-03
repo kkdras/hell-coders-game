@@ -6,14 +6,6 @@ export const initialState: authState = {
   user: null,
 }
 
-export interface SignUpRequest {
-  first_name: string
-  second_name: string
-  login: string
-  email: string
-  password: string
-  phone: string
-}
 export interface User {
   id: number
   first_name: string
@@ -23,4 +15,18 @@ export interface User {
   email: string
   phone: string
   avatar: string
+}
+
+export interface SignUpRequest {
+  first_name: string
+  second_name: string
+  login: string
+  email: string
+  password: string
+  phone: string
+}
+
+export interface SignInRequest {
+  login: string
+  password: string
 }
