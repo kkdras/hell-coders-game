@@ -9,11 +9,12 @@ import {
 import { toggleDrawler } from '../store/app/slice'
 import { Link } from 'react-router-dom'
 import { RouteNames } from '../App'
+import { RootState } from '../store/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const Drawler = () => {
   const dispatch = useDispatch()
-  const { isDrawlerOpened } = useSelector(state => state.app)
+  const { isDrawlerOpened } = useSelector((state:RootState) => state.app)
 
   return (
     <Drawer
@@ -56,6 +57,13 @@ export const Drawler = () => {
           </ListItem>
           <ListItem>
             <ListItemButton>
+              <Link to={RouteNames.GAME_OVER}>
+                <ListItemText sx={{ color: 'text.primary' }} primary="GameOver" />
+              </Link>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton>
               <Link to={RouteNames.FORUM}>
                 <ListItemText sx={{ color: 'text.primary' }} primary="Forum" />
               </Link>
@@ -73,7 +81,7 @@ export const Drawler = () => {
           </ListItem>
           <ListItem>
             <ListItemButton>
-              <Link to="/error404">
+              <Link to={RouteNames.ERROR_404}>
                 <ListItemText
                   sx={{ color: 'text.primary' }}
                   primary="Error 404"
@@ -83,7 +91,7 @@ export const Drawler = () => {
           </ListItem>
           <ListItem>
             <ListItemButton>
-              <Link to="/error500">
+              <Link to={RouteNames.ERROR_500}>
                 <ListItemText
                   sx={{ color: 'text.primary' }}
                   primary="Error 500"
