@@ -1,9 +1,22 @@
 export interface authState {
-  user: User | null
+  user: User | null;
+  isUserAuthorized: boolean;
 }
 
 export const initialState: authState = {
   user: null,
+  isUserAuthorized: false
+}
+
+export interface User {
+  id: number
+  first_name: string
+  second_name: string
+  display_name: string
+  login: string
+  email: string
+  phone: string
+  avatar: string
 }
 
 export interface SignUpRequest {
@@ -14,13 +27,8 @@ export interface SignUpRequest {
   password: string
   phone: string
 }
-export interface User {
-  id: number
-  first_name: string
-  second_name: string
-  display_name: string
+
+export interface SignInRequest {
   login: string
-  email: string
-  phone: string
-  avatar: string
+  password: string
 }

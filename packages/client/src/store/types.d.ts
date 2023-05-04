@@ -35,6 +35,6 @@ declare module '@reduxjs/toolkit' {
       ThunkArg,
       ThunkApiConfig
     >,
-    options?: any
+    options?: unknown
   ): AsyncThunk<Returned, ThunkArg, ThunkApiConfig>
 }

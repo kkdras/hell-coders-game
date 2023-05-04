@@ -11,6 +11,8 @@ import { Game } from './pages/Game/Game'
 import { Register } from './pages/Register/Register'
 import { Forum } from './pages/Forum/Forum'
 import { Start } from './pages/Start/Start'
+import { Auth } from './pages/Auth/Auth'
+
 
 export enum RouteNames {
   MAIN = '/',
@@ -24,6 +26,7 @@ export enum RouteNames {
   FORUM = '/forum',
   GAME_OVER = '/gameover',
   START = '/start',
+  AUTH = '/auth'
 }
 
 
@@ -34,7 +37,7 @@ function App() {
       const response = await fetch(url)
       const data = await response.json()
       console.log(data)
-    }
+    }  
 
     fetchServerData()
   }, [])
@@ -51,6 +54,7 @@ function App() {
         <Route path={RouteNames.ERROR_500} element={<Error500 />} />
         <Route path={RouteNames.START} element={<Start />} />
         <Route path="*" element={<Error404 />} />
+        <Route path={RouteNames.AUTH} element={<Auth />} />
       </Route>
     </Routes>
   )
