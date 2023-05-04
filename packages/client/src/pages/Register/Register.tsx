@@ -7,16 +7,18 @@ import { SignUpRequest } from '../../store/auth/const'
 import { RegisterForm } from './types'
 import { AppStoreDispatch } from '../../store/index'
 
+const defaultValues = {
+  name: '',
+  lastName: '',
+  login: '',
+  email: '',
+  password: '',
+  phone: '',
+}
+
 export const Register = () => {
   const dispatch = useDispatch<AppStoreDispatch>()
-  const defaultValues = {
-    name: '',
-    lastName: '',
-    login: '',
-    email: '',
-    password: '',
-    phone: '',
-  }
+
   const methods = useForm<RegisterForm>({ defaultValues })
 
   const { handleSubmit } = methods
@@ -29,7 +31,7 @@ export const Register = () => {
       phone: data.phone,
       password: data.password,
     }
-    dispatch(postRegister(requestData) )
+    dispatch(postRegister(requestData))
   })
 
   return (

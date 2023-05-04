@@ -13,7 +13,13 @@ import { AppStoreDispatch } from '../../store/index';
 import { FormInput } from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { RouteNames } from '../../App';
 
+
+const defaultValues: SignInRequest = {
+    login: '',
+    password: '',
+}
 
 export function Auth() {
     const navigate = useNavigate();
@@ -21,23 +27,13 @@ export function Auth() {
 
     useEffect(() => {
         document.title = 'Авторизация'
-    }, []);
-
-    const defaultValues = {
-        login: '',
-        password: '',
-    }
+    }, []);    
 
     const methods = useForm<AuthForm>({ defaultValues })
 
     const { handleSubmit } = methods
-    const formSubmit = handleSubmit(data => {
-        const requestData: SignInRequest = {
-            login: data.login,
-            password: data.password,
-        }
-        dispatch(postAuth(requestData) ).then((response: any) => {
-            console.log(response);
+    const formSubmit = handleSubmit(data => {        
+        dispatch(postAuth(data) ).then((response) => {          
             if (response.error) alert("Неверный логин или пароль")
             else
                 if (response.payload.status === 200 || response.reason === "User already in system") navigate("/game");
@@ -80,8 +76,8 @@ export function Auth() {
                         >
                             Авторизация
                         </Button>
-                        <Link to="/register">
-                            {"У вас нет акаунта? Регистрация"}
+                        <Link to= {RouteNames.REGISTER}>
+                            У вас нет акаунта? Регистрация
                         </Link>
 
                     </form>

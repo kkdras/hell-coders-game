@@ -9,7 +9,7 @@ export const postRegister = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('auth/postRegister', async (data, { rejectWithValue }) => {
   try {
-    const response = axios.post(`${BASE_URL}/auth/signup`, data)
+    const response = await axios.post(`${BASE_URL}/auth/signup`, data)
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -22,7 +22,7 @@ export const postAuth = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('auth/postAuth', async (data, { rejectWithValue }) => {
   try {
-    const response = axios.post(`${BASE_URL}/auth/signin`, data)
+    const response = await axios.post(`${BASE_URL}/auth/signin`, data)
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
