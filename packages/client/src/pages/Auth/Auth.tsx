@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FormProvider, useForm } from 'react-hook-form';
 import { AuthForm } from './types';
 import { SignInRequest } from '../../store/auth/const';
@@ -14,6 +14,9 @@ import { FormInput } from '../../components/FormInput';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { RouteNames } from '../../App';
+import { RootState } from '../../store/rootReducer';
+
+
 
 
 const defaultValues: SignInRequest = {
@@ -24,22 +27,25 @@ const defaultValues: SignInRequest = {
 export function Auth() {
     const navigate = useNavigate();
     const dispatch = useDispatch<AppStoreDispatch>();
+    const { isUserAuthorized } = useSelector((state: RootState) => state.auth)
+
 
     useEffect(() => {
         document.title = 'Авторизация'
-    }, []);    
+    }, []);
+
+    useEffect(() => {
+        if(isUserAuthorized) navigate(RouteNames.GAME);
+    }, [isUserAuthorized])
 
     const methods = useForm<AuthForm>({ defaultValues })
 
     const { handleSubmit } = methods
-    const formSubmit = handleSubmit(data => {        
-        dispatch(postAuth(data) ).then((response) => {          
-            if (response.error) alert("Неверный логин или пароль")
-            else
-                if (response.payload.status === 200 || response.reason === "User already in system") navigate("/game");
-        })
-
+    const formSubmit = handleSubmit(data => {
+        dispatch(postAuth(data))
     })
+
+
 
 
     return (
@@ -76,7 +82,7 @@ export function Auth() {
                         >
                             Авторизация
                         </Button>
-                        <Link to= {RouteNames.REGISTER}>
+                        <Link to={RouteNames.REGISTER}>
                             У вас нет акаунта? Регистрация
                         </Link>
 
