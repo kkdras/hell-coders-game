@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export const Drawler = () => {
   const dispatch = useDispatch()
-  const { isDrawlerOpened } = useSelector((state:RootState) => state.app)
+  const { isDrawlerOpened } = useSelector((state: RootState) => state.app)
 
   return (
     <Drawer
@@ -58,7 +58,10 @@ export const Drawler = () => {
           <ListItem>
             <ListItemButton>
               <Link to={RouteNames.GAME_OVER}>
-                <ListItemText sx={{ color: 'text.primary' }} primary="GameOver" />
+                <ListItemText
+                  sx={{ color: 'text.primary' }}
+                  primary="GameOver"
+                />
               </Link>
             </ListItemButton>
           </ListItem>
@@ -112,20 +115,14 @@ export const Drawler = () => {
           <ListItem>
             <ListItemButton>
               <Link to={RouteNames.START}>
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="Start"
-                />
+                <ListItemText sx={{ color: 'text.primary' }} primary="Start" />
               </Link>
             </ListItemButton>
           </ListItem>
           <ListItem>
             <ListItemButton>
               <Link to={RouteNames.AUTH}>
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="Auth"
-                />
+                <ListItemText sx={{ color: 'text.primary' }} primary="Auth" />
               </Link>
             </ListItemButton>
           </ListItem>
