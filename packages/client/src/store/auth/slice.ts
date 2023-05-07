@@ -1,6 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { postAuth } from './actions'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { getAuthUser, postAuth } from './actions'
 import { initialState } from './const'
+import { AxiosResponse } from 'axios'
+import { User } from '../user/types'
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -18,5 +20,11 @@ export const authSlice = createSlice({
         alert('Неверный логин или пароль')
       }
     })
+    builder.addCase(
+      getAuthUser.fulfilled,
+      (state, { payload }: PayloadAction<AxiosResponse<User>>) => {
+        state.user = payload.data
+      }
+    )
   },
 })

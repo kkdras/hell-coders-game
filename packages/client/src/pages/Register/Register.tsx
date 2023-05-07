@@ -3,9 +3,9 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { FormInput } from '../../components/FormInput'
 import { useDispatch } from 'react-redux'
 import { postRegister } from '../../store/auth/actions'
-import { SignUpRequest } from '../../store/auth/const'
 import { RegisterForm } from './types'
-import { AppStoreDispatch } from '../../store/index'
+import { AppStoreDispatch } from '../../store'
+import { SignUpRequest } from '../../store/auth/types'
 
 const defaultValues = {
   name: '',
@@ -38,7 +38,7 @@ export const Register = () => {
     <Box
       sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Card sx={{ p: 4, mt: 10, mb: 10, maxWidth: 500 }} variant="outlined">
-        <Typography variant="h4" sx={{ mb: 2 }}>
+        <Typography variant="h4" sx={{ mb: 2, textAlign: 'center' }}>
           Регистрация
         </Typography>
         <FormProvider {...methods}>
