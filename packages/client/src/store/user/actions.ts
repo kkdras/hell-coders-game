@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { BASE_URL } from '../../shared/consts'
-import { User, UserUpdateRequest } from './types'
+import { ChangePasswordRequest, User, UserUpdateRequest } from './types'
 
 export const getAuthUser = createAsyncThunk<
   AxiosResponse<User>,
@@ -53,6 +53,28 @@ export const putAvatar = createAsyncThunk<
     })
     return response
   } catch (error) {
+    return rejectWithValue((error as AxiosError)?.response)
+  }
+})
+
+export const putPassword = createAsyncThunk<
+  AxiosResponse,
+  ChangePasswordRequest,
+  { rejectValue: AxiosError['response'] }
+>('user/putPassword', async (data, { rejectWithValue }) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/user/password`, data, {
+      withCredentials: true,
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+    return response
+  } catch (error) {
+    // @ts-ignore
+    if (error.response?.data?.reason === 'Password is incorrect') {
+      alert('Введен неверный пароль')
+    }
     return rejectWithValue((error as AxiosError)?.response)
   }
 })

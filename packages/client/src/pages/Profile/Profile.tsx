@@ -18,12 +18,15 @@ import {
   cardStyles,
   pageStyles,
 } from './styles'
+import { PasswordPopup } from './PasswordPopup/PasswordPopup'
 
 export const Profile = () => {
   const { user } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch<AppStoreDispatch>()
   const [avatar, setAvatar] = useState<string>()
   const [showChangeAvatarPopup, setShowChangeAvatarPopup] =
+    useState<boolean>(false)
+  const [showChangePasswordPopup, setShowChangePasswordPopup] =
     useState<boolean>(false)
 
   const methods = useForm<ProfileForm>({ defaultValues })
@@ -70,7 +73,9 @@ export const Profile = () => {
           <Button size="small" onClick={() => setShowChangeAvatarPopup(true)}>
             Изменить аватар
           </Button>
-          <Button size="small">Изменить пароль</Button>
+          <Button size="small" onClick={() => setShowChangePasswordPopup(true)}>
+            Изменить пароль
+          </Button>
         </Box>
         <FormProvider {...methods}>
           <form onSubmit={formSubmit}>
@@ -91,6 +96,10 @@ export const Profile = () => {
       <AvatarPopup
         open={showChangeAvatarPopup}
         onClose={() => setShowChangeAvatarPopup(false)}
+      />
+      <PasswordPopup
+        open={showChangePasswordPopup}
+        onClose={() => setShowChangePasswordPopup(false)}
       />
     </Box>
   )

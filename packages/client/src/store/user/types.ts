@@ -17,3 +17,8 @@ export interface User {
   phone: string
   avatar: string
 }
+
+export interface ChangePasswordRequest {
+  oldPassword: string
+  newPassword: string
+}
