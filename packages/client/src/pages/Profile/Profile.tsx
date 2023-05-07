@@ -1,34 +1,37 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/rootReducer'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { AppStoreDispatch } from '../../store'
-import { getAuthUser } from '../../store/auth/actions'
-import { Box, Button, Card, Grid } from '@mui/material'
+import { getAuthUser } from '../../store/user/actions'
+import { Avatar, Box, Button, Card, Grid } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'
 import { FormInput } from '../../components/FormInput'
 import { ProfileForm } from './types'
-import { DevTool } from '@hookform/devtools'
 import { UserUpdateRequest } from '../../store/user/types'
 import { putUser } from '../../store/user/actions'
-
-const defaultValues = {
-  name: '',
-  lastName: '',
-  displayName: '',
-  email: '',
-  phone: '',
-  login: '',
-}
+import { BASE_URL } from '../../shared/consts'
+import { AvatarPopup } from './AvatarPopup/AvatarPopup'
+import { defaultValues } from './const'
+import {
+  avatarStyles,
+  buttonContainerStyles,
+  cardStyles,
+  pageStyles,
+} from './styles'
 
 export const Profile = () => {
-  const { user } = useSelector((state: RootState) => state.auth)
+  const { user } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch<AppStoreDispatch>()
+  const [avatar, setAvatar] = useState<string>()
+  const [showChangeAvatarPopup, setShowChangeAvatarPopup] =
+    useState<boolean>(false)
 
   const methods = useForm<ProfileForm>({ defaultValues })
 
-  const { handleSubmit, control, reset } = methods
+  const { handleSubmit, reset } = methods
 
   useEffect(() => {
+    document.title = 'Профиль'
     dispatch(getAuthUser())
   }, [])
 
@@ -43,6 +46,7 @@ export const Profile = () => {
         phone: user.phone,
         login: user.login,
       })
+      setAvatar(`${BASE_URL}/resources${user.avatar}`)
     }
   }, [user])
 
@@ -59,9 +63,15 @@ export const Profile = () => {
   })
 
   return (
-    <Box
-      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Card sx={{ p: 4, mt: 10, mb: 10, maxWidth: 500 }} variant="outlined">
+    <Box sx={pageStyles}>
+      <Card sx={cardStyles} variant="outlined">
+        <Avatar sx={avatarStyles} src={avatar} />
+        <Box sx={buttonContainerStyles}>
+          <Button size="small" onClick={() => setShowChangeAvatarPopup(true)}>
+            Изменить аватар
+          </Button>
+          <Button size="small">Изменить пароль</Button>
+        </Box>
         <FormProvider {...methods}>
           <form onSubmit={formSubmit}>
             <Grid container justifyContent="center">
@@ -70,15 +80,18 @@ export const Profile = () => {
               <FormInput name="displayName" placeholder="Никнейм" />
               <FormInput name="email" placeholder="Email" type="email" />
               <FormInput name="phone" placeholder="Телефон" type="tel" />
-              <FormInput name="login" placeholder="Логин" type="tel" />
+              <FormInput name="login" placeholder="Логин" />
               <Button type="submit" variant="contained">
                 Сохранить
               </Button>
             </Grid>
-            <DevTool control={control} />
           </form>
         </FormProvider>
       </Card>
+      <AvatarPopup
+        open={showChangeAvatarPopup}
+        onClose={() => setShowChangeAvatarPopup(false)}
+      />
     </Box>
   )
 }

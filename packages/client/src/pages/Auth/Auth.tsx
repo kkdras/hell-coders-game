@@ -14,12 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { RouteNames } from '../../App'
 import { RootState } from '../../store/rootReducer'
-import { SignInRequest } from '../../store/auth/types'
-
-const defaultValues: SignInRequest = {
-  login: '',
-  password: '',
-}
+import { defaultValues } from './const'
 
 export function Auth() {
   const navigate = useNavigate()

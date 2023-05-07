@@ -1,4 +1,4 @@
-import { Box, Typography, Card, Button, Grid } from '@mui/material'
+import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'
 import { FormInput } from '../../components/FormInput'
 import { useDispatch } from 'react-redux'
@@ -6,15 +6,7 @@ import { postRegister } from '../../store/auth/actions'
 import { RegisterForm } from './types'
 import { AppStoreDispatch } from '../../store'
 import { SignUpRequest } from '../../store/auth/types'
-
-const defaultValues = {
-  name: '',
-  lastName: '',
-  login: '',
-  email: '',
-  password: '',
-  phone: '',
-}
+import { defaultValues } from './const'
 
 export const Register = () => {
   const dispatch = useDispatch<AppStoreDispatch>()
