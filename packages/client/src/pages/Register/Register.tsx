@@ -6,6 +6,8 @@ import { postRegister } from '../../store/auth/actions'
 import { SignUpRequest } from '../../store/auth/const'
 import { RegisterForm } from './types'
 import { AppStoreDispatch } from '../../store/index'
+import { validationSchema } from '../../shared/utils/formSchema'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 const defaultValues = {
   name: '',
@@ -19,7 +21,10 @@ const defaultValues = {
 export const Register = () => {
   const dispatch = useDispatch<AppStoreDispatch>()
 
-  const methods = useForm<RegisterForm>({ defaultValues })
+  const methods = useForm<RegisterForm>({
+    defaultValues,
+    resolver: yupResolver(validationSchema),
+  })
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {

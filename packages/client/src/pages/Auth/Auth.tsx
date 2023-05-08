@@ -15,6 +15,8 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { RouteNames } from '../../App'
 import { RootState } from '../../store/rootReducer'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { authSchema } from '../../shared/utils/formSchema'
 
 const defaultValues: SignInRequest = {
   login: '',
@@ -34,7 +36,10 @@ export function Auth() {
     if (isUserAuthorized) navigate(RouteNames.GAME)
   }, [isUserAuthorized])
 
-  const methods = useForm<AuthForm>({ defaultValues })
+  const methods = useForm<AuthForm>({
+    defaultValues,
+    resolver: yupResolver(authSchema),
+  })
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
