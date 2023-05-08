@@ -1,22 +1,22 @@
 export interface IMessage {
-  id: number;
-  themeId: number;
-  text?: string;
-  author: string;
-  time: string;
+  id: number
+  themeId: number
+  text?: string
+  author: string
+  time: string
 }
 
 export interface ITheme {
-  id: number;
-  forumId: number;
-  title?: string;
-  answersCount?: number;
-  lastAnswer?: string;
+  id: number
+  forumId: number
+  title?: string
+  answersCount?: number
+  lastAnswer?: string
 }
 
 export interface IForum {
-  id: number;
-  title?: string;
-  themesCount: number;
-  answersCount: number;
+  id: number
+  title?: string
+  themesCount: number
+  answersCount: number
 }
