@@ -101,6 +101,16 @@ export const Drawler = () => {
           </ListItem>
           <ListItem>
             <ListItemButton>
+              <Link to={RouteNames.ERROR_COMPONENT}>
+                <ListItemText
+                  sx={{ color: 'text.primary' }}
+                  primary="Error Component"
+                />
+              </Link>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton>
               <Link to={RouteNames.REGISTER}>
                 <ListItemText
                   sx={{ color: 'text.primary' }}
