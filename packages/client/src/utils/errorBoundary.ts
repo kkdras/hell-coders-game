@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component, ErrorInfo, ReactNode } from 'react'
 
 interface Props {
-  children: React.ReactNode
+  children?: ReactNode
 }
 
 interface State {
@@ -9,7 +9,7 @@ interface State {
   errorMessage?: string
 }
 
-export class ErrorBoundary extends React.Component<Props, State> {
+export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -22,7 +22,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
     return { hasError: true }
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Error:', error, 'Error Info:', errorInfo)
     this.setState({ errorMessage: error.toString() })
   }
