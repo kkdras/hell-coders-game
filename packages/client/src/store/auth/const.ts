@@ -1,11 +1,11 @@
 export interface authState {
-  user: User | null;
-  isUserAuthorized: boolean;
+  user: User | null
+  isUserAuthorized: boolean
 }
 
 export const initialState: authState = {
   user: null,
-  isUserAuthorized: false
+  isUserAuthorized: false,
 }
 
 export interface User {

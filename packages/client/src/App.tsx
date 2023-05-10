@@ -14,7 +14,6 @@ import { Forum } from './pages/Forum/Forum'
 import { Start } from './pages/Start/Start'
 import { Auth } from './pages/Auth/Auth'
 
-
 export enum RouteNames {
   MAIN = '/',
   GAME = '/game',
@@ -28,9 +27,8 @@ export enum RouteNames {
   FORUM = '/forum',
   GAME_OVER = '/gameover',
   START = '/start',
-  AUTH = '/auth'
+  AUTH = '/auth',
 }
-
 
 function App() {
   useEffect(() => {
@@ -39,7 +37,7 @@ function App() {
       const response = await fetch(url)
       const data = await response.json()
       console.log(data)
-    }  
+    }
 
     fetchServerData()
   }, [])

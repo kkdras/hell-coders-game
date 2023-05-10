@@ -10,17 +10,17 @@ export function ErrorComponent() {
 
   return (
     <Box
-    sx={{
+      sx={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
         m: 1,
         mt: 5,
-    }}> 
-        <ErrorBoundary>
-            <TestError/>
-        </ErrorBoundary>
+      }}>
+      <ErrorBoundary>
+        <TestError />
+      </ErrorBoundary>
     </Box>
   )
 }
