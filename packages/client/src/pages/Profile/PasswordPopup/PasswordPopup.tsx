@@ -9,10 +9,15 @@ import { FC } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { AppStoreDispatch } from '../../../store'
-import { PasswordForm, PasswordPopupProps } from './types'
+import { PasswordForm } from './types'
 import { defaultValues } from './const'
 import { FormInput } from '../../../components/FormInput'
 import { putPassword } from '../../../store/user/actions'
+
+interface PasswordPopupProps {
+  open: boolean
+  onClose: () => void
+}
 
 export const PasswordPopup: FC<PasswordPopupProps> = ({ open, onClose }) => {
   const dispatch = useDispatch<AppStoreDispatch>()

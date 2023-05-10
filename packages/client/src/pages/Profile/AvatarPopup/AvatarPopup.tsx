@@ -6,11 +6,16 @@ import {
   DialogTitle,
 } from '@mui/material'
 import { FC } from 'react'
-import { AvatarForm, AvatarPopupProps } from './types'
+import { AvatarForm } from './types'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { AppStoreDispatch } from '../../../store'
 import { putAvatar } from '../../../store/user/actions'
+
+interface AvatarPopupProps {
+  open: boolean
+  onClose: () => void
+}
 
 export const AvatarPopup: FC<AvatarPopupProps> = ({ open, onClose }) => {
   const dispatch = useDispatch<AppStoreDispatch>()
