@@ -1,22 +1,14 @@
-import { Box, Typography, Card, Button, Grid } from '@mui/material'
+import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'
 import { FormInput } from '../../components/FormInput'
 import { useDispatch } from 'react-redux'
 import { postRegister } from '../../store/auth/actions'
-import { SignUpRequest } from '../../store/auth/const'
 import { RegisterForm } from './types'
-import { AppStoreDispatch } from '../../store/index'
+import { AppStoreDispatch } from '../../store'
+import { SignUpRequest } from '../../store/auth/types'
+import { defaultValues } from './const'
 import { validationSchema } from '../../shared/utils/formSchema'
 import { yupResolver } from '@hookform/resolvers/yup'
-
-const defaultValues = {
-  name: '',
-  lastName: '',
-  login: '',
-  email: '',
-  password: '',
-  phone: '',
-}
 
 export const Register = () => {
   const dispatch = useDispatch<AppStoreDispatch>()
@@ -43,7 +35,7 @@ export const Register = () => {
     <Box
       sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Card sx={{ p: 4, mt: 10, mb: 10, maxWidth: 500 }} variant="outlined">
-        <Typography variant="h4" sx={{ mb: 2 }}>
+        <Typography variant="h4" sx={{ mb: 2, textAlign: 'center' }}>
           Регистрация
         </Typography>
         <FormProvider {...methods}>
