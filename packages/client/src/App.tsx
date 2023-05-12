@@ -7,6 +7,7 @@ import { LeaderBoard } from './pages/Leaderboard/Leaderboard'
 import { GameOver } from './pages/Gameover/Gameover'
 import { Error500 } from './pages/Error/Error500'
 import { Error404 } from './pages/Error/Error404'
+import { ErrorComponent } from './pages/Error/ErrorComponent'
 import { Game } from './pages/Game/Game'
 import { Register } from './pages/Register/Register'
 import { Forum } from './pages/Forum/Forum'
@@ -23,6 +24,7 @@ export enum RouteNames {
   ERROR_500 = '/error500',
   REGISTER = '/register',
   ERROR_404 = '/error404',
+  ERROR_COMPONENT = '/errorcomponent',
   FORUM = '/forum',
   GAME_OVER = '/gameover',
   START = '/start',
@@ -51,6 +53,7 @@ function App() {
         <Route path={RouteNames.FORUM} element={<Forum />} />
         <Route path={RouteNames.GAME_OVER} element={<GameOver />} />
         <Route path={RouteNames.ERROR_500} element={<Error500 />} />
+        <Route path={RouteNames.ERROR_COMPONENT} element={<ErrorComponent />} />
         <Route path={RouteNames.START} element={<Start />} />
         <Route path="*" element={<Error404 />} />
         <Route path={RouteNames.AUTH} element={<Auth />} />
