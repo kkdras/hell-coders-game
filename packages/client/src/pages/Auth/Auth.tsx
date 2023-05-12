@@ -65,7 +65,9 @@ export function Auth() {
               sx={{ mt: 3, mb: 2 }}>
               Авторизация
             </Button>
-            <Link to={RouteNames.REGISTER}>У вас нет аккаунта? Регистрация</Link>
+            <Link to={RouteNames.REGISTER}>
+              У вас нет аккаунта? Регистрация
+            </Link>
           </form>
         </FormProvider>
       </Box>

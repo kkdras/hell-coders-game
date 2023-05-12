@@ -19,6 +19,8 @@ import {
   pageStyles,
 } from './styles'
 import { PasswordPopup } from './PasswordPopup/PasswordPopup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { validationSchema } from '../../shared/utils/formSchema'
 
 export const Profile = () => {
   const { user } = useSelector((state: RootState) => state.user)
@@ -29,7 +31,10 @@ export const Profile = () => {
   const [showChangePasswordPopup, setShowChangePasswordPopup] =
     useState<boolean>(false)
 
-  const methods = useForm<ProfileForm>({ defaultValues })
+  const methods = useForm<ProfileForm>({
+    defaultValues,
+    resolver: yupResolver(validationSchema),
+  })
 
   const { handleSubmit, reset } = methods
 

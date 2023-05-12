@@ -26,12 +26,11 @@ export const validationSchema = yup.object().shape({
     .matches(/^[A-ZЁА-Я][A-Za-zЁёА-Яа-я-]*$/, ERROR_MESSAGE.name),
   email: yup.string().matches(email, ERROR_MESSAGE.email),
   password: yup.string().matches(password, ERROR_MESSAGE.password),
-  oldPassword: yup.string().matches(password, ERROR_MESSAGE.password),
+  oldPassword: yup.string().required(ERROR_MESSAGE.isRequired),
   newPassword: yup.string().matches(password, ERROR_MESSAGE.password),
   phone: yup.string().matches(phone, ERROR_MESSAGE.phone),
   login: yup.string().matches(login, ERROR_MESSAGE.login),
 })
-
 
 export const authSchema = yup.object().shape({
   password: yup.string().required(ERROR_MESSAGE.isRequired),
