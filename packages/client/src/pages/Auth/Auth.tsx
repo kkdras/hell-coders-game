@@ -7,19 +7,14 @@ import Container from '@mui/material/Container'
 import { useDispatch, useSelector } from 'react-redux'
 import { FormProvider, useForm } from 'react-hook-form'
 import { AuthForm } from './types'
-import { SignInRequest } from '../../store/auth/const'
 import { postAuth } from '../../store/auth/actions'
-import { AppStoreDispatch } from '../../store/index'
+import { AppStoreDispatch } from '../../store'
 import { FormInput } from '../../components/FormInput'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { RouteNames } from '../../App'
 import { RootState } from '../../store/rootReducer'
-
-const defaultValues: SignInRequest = {
-  login: '',
-  password: '',
-}
+import { defaultValues } from './const'
 
 export function Auth() {
   const navigate = useNavigate()
@@ -65,7 +60,9 @@ export function Auth() {
               sx={{ mt: 3, mb: 2 }}>
               Авторизация
             </Button>
-            <Link to={RouteNames.REGISTER}>У вас нет акаунта? Регистрация</Link>
+            <Link to={RouteNames.REGISTER}>
+              У вас нет аккаунта? Регистрация
+            </Link>
           </form>
         </FormProvider>
       </Box>

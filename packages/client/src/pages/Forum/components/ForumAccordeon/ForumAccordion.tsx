@@ -4,11 +4,6 @@ import {
   AccordionSummary,
   Grid,
   IconButton,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
   Typography,
 } from '@mui/material'
 import { themes } from '../../const'

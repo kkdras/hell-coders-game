@@ -13,6 +13,7 @@ import { Register } from './pages/Register/Register'
 import { Forum } from './pages/Forum/Forum'
 import { Start } from './pages/Start/Start'
 import { Auth } from './pages/Auth/Auth'
+import { Profile } from './pages/Profile/Profile'
 
 export enum RouteNames {
   MAIN = '/',
@@ -56,6 +57,7 @@ function App() {
         <Route path={RouteNames.START} element={<Start />} />
         <Route path="*" element={<Error404 />} />
         <Route path={RouteNames.AUTH} element={<Auth />} />
+        <Route path={RouteNames.PROFILE} element={<Profile />} />
       </Route>
     </Routes>
   )
