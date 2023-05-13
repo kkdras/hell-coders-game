@@ -13,13 +13,18 @@ export const FormInput: FC<FormInputProps> = ({
   type = 'text',
   placeholder,
 }) => {
-  const { control } = useFormContext()
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext()
   return (
     <Controller
       control={control}
       name={name}
       render={({ field: { onChange, onBlur, value } }) => (
         <TextField
+          error={!!errors[name]}
+          helperText={errors[name]?.message as string}
           fullWidth
           onChange={onChange}
           onBlur={onBlur}

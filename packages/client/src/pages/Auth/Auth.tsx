@@ -15,6 +15,8 @@ import { useEffect } from 'react'
 import { RouteNames } from '../../App'
 import { RootState } from '../../store/rootReducer'
 import { defaultValues } from './const'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { authSchema } from '../../shared/utils/formSchema'
 
 export function Auth() {
   const navigate = useNavigate()
@@ -29,7 +31,10 @@ export function Auth() {
     if (isUserAuthorized) navigate(RouteNames.GAME)
   }, [isUserAuthorized])
 
-  const methods = useForm<AuthForm>({ defaultValues })
+  const methods = useForm<AuthForm>({
+    defaultValues,
+    resolver: yupResolver(authSchema),
+  })
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
