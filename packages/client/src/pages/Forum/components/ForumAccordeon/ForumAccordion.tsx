@@ -70,6 +70,7 @@ export function ForumAccordeon(forum: IForum) {
           theme =>
             theme.forumId === forum.id && (
               <ThemeAccordeon
+                key={theme.id}
                 id={theme.id}
                 forumId={theme.forumId}
                 title={theme.title}
