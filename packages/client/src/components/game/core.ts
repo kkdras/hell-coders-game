@@ -7,6 +7,7 @@ import {
   Matrix,
 } from './const'
 import { getRandomInt, rotateMatrix } from './utils'
+import Image from './gameover.png'
 
 interface FigureParameters {
   name: FigureNames
@@ -175,9 +176,9 @@ export class GameConstructor {
       this.canvas.width / 2,
       this.canvas.height / 4
     )
-    const img = new Image()
-    img.onload = () => { this.context.drawImage(img, 0, 0) };
-    img.src = './gameover.png'
+    const img = new window.Image()
+    img.onload = () => { this.context.drawImage(img, 25, this.canvas.height / 3, 300, 300) };
+    img.src = Image
 
   }
 
