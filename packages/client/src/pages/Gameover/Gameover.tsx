@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Box } from '@mui/material'
-import Image from '../../image/gameover.png'
+/* import Image from '../../image/gameover.png' */
 import { RouteNames } from '../../App'
+
 
 export function GameOver() {
   useEffect(() => {
@@ -18,11 +19,12 @@ export function GameOver() {
         flexDirection: 'column',
         m: 1,
       }}>
+
       <Box sx={{ m: 1, mt: 3 }}>
         <h1>Game Over</h1>
       </Box>
       <Box sx={{ margin: 2 }}>
-        <img src={Image} />
+     {/*    <img src={Image} /> */}
       </Box>
       <Box sx={{ margin: 2 }}>
         <Link to={RouteNames.GAME}>

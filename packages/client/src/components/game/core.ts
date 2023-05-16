@@ -164,20 +164,23 @@ export class GameConstructor {
 
     cancelAnimationFrame(this.rAF)
 
+    
+
     this.isGameEnd = true
-
-    this.context.fillStyle = 'gray'
-    this.context.fillRect(0, this.canvas.height / 2 - 28, this.canvas.width, 56)
-
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.context.textAlign = 'center'
     this.context.textBaseline = 'middle'
     this.context.font = '30px monospace'
-    this.context.fillStyle = 'white'
+    this.context.fillStyle = 'black'
     this.context.fillText(
       this.endMessage,
       this.canvas.width / 2,
-      this.canvas.height / 2
+      this.canvas.height / 4
     )
+    const img = new Image()
+    img.onload = ()  => {this.context.drawImage(img, 0, 0)};
+    img.src = './gameover.png'
+    
   }
 
   private placeFigure(figure: Figure) {
@@ -198,7 +201,7 @@ export class GameConstructor {
       }
     }
 
-    for (let row = 0; row < this.gameField.length; ) {
+    for (let row = 0; row < this.gameField.length;) {
       const isCurrentRowFullFilled = this.gameField[row].every(item => !!item)
 
       if (isCurrentRowFullFilled) {
@@ -258,7 +261,7 @@ export class GameConstructor {
 
     const oldValue = figure.column
     const newValue = figure.column + (right ? 1 : -1)
-  
+
     figure.column = newValue
     const isValidPosition = this.isValidMove(figure)
 
