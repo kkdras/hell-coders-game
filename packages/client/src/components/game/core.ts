@@ -193,7 +193,7 @@ export class GameConstructor {
         const item = figure.matrix[row][col]
         if (!item) continue
 
-        if (figure.row + row < 0) {
+        if (figure.row + row <= 0) {
           this.showGameOver()
           return
         }
@@ -202,7 +202,7 @@ export class GameConstructor {
       }
     }
 
-    for (let row = 0; row < this.gameField.length; ) {
+    for (let row = 0; row < this.gameField.length;) {
       const isCurrentRowFullFilled = this.gameField[row].every(item => !!item)
 
       if (isCurrentRowFullFilled) {
