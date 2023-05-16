@@ -56,7 +56,6 @@ export class GameConstructor {
   public startMessage = 'GAME STARTING...'
   public beforeStartSeconds = 4
 
-
   constructor({ movesBoundary = 800, canvas, cellSize = 34 }: GameParameters) {
     this.movesBoundary = movesBoundary
     this.canvas = canvas
@@ -181,9 +180,8 @@ export class GameConstructor {
         this.canvas.height / 4
       )
       this.context.drawImage(img, 25, this.canvas.height / 3, 300, 300)
-    };
+    }
     img.src = Image
-
   }
 
   private placeFigure(figure: Figure) {
@@ -204,7 +202,7 @@ export class GameConstructor {
       }
     }
 
-    for (let row = 0; row < this.gameField.length;) {
+    for (let row = 0; row < this.gameField.length; ) {
       const isCurrentRowFullFilled = this.gameField[row].every(item => !!item)
 
       if (isCurrentRowFullFilled) {
@@ -226,7 +224,6 @@ export class GameConstructor {
     )
   }
 
-
   public gameLaunch() {
     this.figureSequence = [this.createNewFigure(), this.createNewFigure()]
     this.isGameEnd = false
@@ -239,9 +236,8 @@ export class GameConstructor {
     this.rAF = requestAnimationFrame(this.loop)
   }
 
-
   public start() {
-    let secondsBefore = this.beforeStartSeconds;
+    let secondsBefore = this.beforeStartSeconds
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.context.textAlign = 'center'
     this.context.textBaseline = 'middle'
@@ -254,26 +250,28 @@ export class GameConstructor {
     )
 
     const redraw = () => {
-      this.context.clearRect(0, this.canvas.height / 3, this.canvas.width, this.canvas.height);
+      this.context.clearRect(
+        0,
+        this.canvas.height / 3,
+        this.canvas.width,
+        this.canvas.height
+      )
       this.context.font = '40px monospace'
       this.context.fillStyle = 'red'
-      this.context.fillText(String(counter()), this.canvas.width / 2, 300);
+      this.context.fillText(String(counter()), this.canvas.width / 2, 300)
     }
 
-    const interval = setInterval(redraw, 1000);
+    const interval = setInterval(redraw, 1000)
 
     const counter = () => {
-      secondsBefore = secondsBefore - 1;
+      secondsBefore = secondsBefore - 1
       if (secondsBefore === 0) {
-        clearInterval(interval);
-        this.gameLaunch();
+        clearInterval(interval)
+        this.gameLaunch()
       }
-      return secondsBefore;
+      return secondsBefore
     }
   }
-
-
-
 
   private rotateCurrentFigure(rotateBack = false) {
     const figure = this.figureSequence?.[0]

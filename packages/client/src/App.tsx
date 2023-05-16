@@ -46,7 +46,7 @@ function App() {
         <Route path={RouteNames.LEADERBOARD} element={<LeaderBoard />} />
         <Route path={RouteNames.GAME} element={<Game />} />
         <Route path={RouteNames.REGISTER} element={<Register />} />
-        <Route path={RouteNames.FORUM} element={<Forum />} />      
+        <Route path={RouteNames.FORUM} element={<Forum />} />
         <Route path={RouteNames.ERROR_500} element={<Error500 />} />
         <Route path={RouteNames.ERROR_COMPONENT} element={<ErrorComponent />} />
         <Route path="*" element={<Error404 />} />
