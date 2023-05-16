@@ -7,6 +7,9 @@ import { ThemeProvider } from '@mui/material/styles'
 import { theme } from './theme'
 import { Provider } from 'react-redux'
 import { store } from './store'
+import { startServiceWorker } from './serviceWorker'
+
+startServiceWorker();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
