@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Box } from '@mui/material'
-/* import Image from '../../image/gameover.png' */
+/* import Image from '../../images/' */
 import { RouteNames } from '../../App'
 
 
@@ -24,7 +24,7 @@ export function GameOver() {
         <h1>Game Over</h1>
       </Box>
       <Box sx={{ margin: 2 }}>
-     {/*    <img src={Image} /> */}
+        {/*         <img src={Image} /> */}
       </Box>
       <Box sx={{ margin: 2 }}>
         <Link to={RouteNames.GAME}>

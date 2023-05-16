@@ -52,6 +52,7 @@ export class GameConstructor {
   private prevTime: number = Date.now()
 
   public endMessage = 'GAME OVER'
+  public startMessage = 'GAME STARTING...'
 
   constructor({ movesBoundary = 800, canvas, cellSize = 34 }: GameParameters) {
     this.movesBoundary = movesBoundary
@@ -163,9 +164,6 @@ export class GameConstructor {
     }
 
     cancelAnimationFrame(this.rAF)
-
-    
-
     this.isGameEnd = true
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.context.textAlign = 'center'
@@ -178,9 +176,9 @@ export class GameConstructor {
       this.canvas.height / 4
     )
     const img = new Image()
-    img.onload = ()  => {this.context.drawImage(img, 0, 0)};
+    img.onload = () => { this.context.drawImage(img, 0, 0) };
     img.src = './gameover.png'
-    
+
   }
 
   private placeFigure(figure: Figure) {
@@ -223,7 +221,8 @@ export class GameConstructor {
     )
   }
 
-  public start() {
+
+  public gameLaunch() {
     this.figureSequence = [this.createNewFigure(), this.createNewFigure()]
     this.isGameEnd = false
     for (let row = 0; row < this.fieldHeight; row++) {
@@ -232,9 +231,44 @@ export class GameConstructor {
         this.gameField[row][col] = 0
       }
     }
-
     this.rAF = requestAnimationFrame(this.loop)
   }
+
+
+  public start() {
+    let secondsBefore = 4;
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.context.textAlign = 'center'
+    this.context.textBaseline = 'middle'
+    this.context.font = '30px monospace'
+    this.context.fillStyle = 'black'
+    this.context.fillText(
+      this.startMessage,
+      this.canvas.width / 2,
+      this.canvas.height / 4
+    )
+
+    const redraw = () => {
+      this.context.clearRect(0, this.canvas.height / 3, this.canvas.width, this.canvas.height);
+      this.context.font = '40px monospace'
+      this.context.fillStyle = 'red'
+      this.context.fillText(String(counter()), this.canvas.width / 2, 300);
+    }
+
+    const interval = setInterval(redraw, 1000);
+
+    const counter = () => {
+      secondsBefore = secondsBefore - 1;
+      if (secondsBefore === -1) {
+        clearInterval(interval);
+        this.gameLaunch();
+      }
+      return secondsBefore;
+    }
+  }
+
+
+
 
   private rotateCurrentFigure(rotateBack = false) {
     const figure = this.figureSequence?.[0]
