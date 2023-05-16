@@ -52,9 +52,9 @@ export class GameConstructor {
   private lastedTime = 0
   private prevTime: number = Date.now()
 
-  public endMessage: string = 'GAME OVER'
-  public startMessage: string = 'GAME STARTING...'
-  public beforeStartSeconds: number = 4
+  public endMessage = 'GAME OVER'
+  public startMessage = 'GAME STARTING...'
+  public beforeStartSeconds = 4
 
 
   constructor({ movesBoundary = 800, canvas, cellSize = 34 }: GameParameters) {
