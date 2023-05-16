@@ -30,14 +30,7 @@ export const Drawler = () => {
                 <ListItemText sx={{ color: 'text.primary' }} primary="Home" />
               </Link>
             </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.BLOG}>
-                <ListItemText sx={{ color: 'text.primary' }} primary="Blog" />
-              </Link>
-            </ListItemButton>
-          </ListItem>
+          </ListItem>          
           <ListItem>
             <ListItemButton>
               <Link to={RouteNames.GAME}>

@@ -15,8 +15,7 @@ import { Profile } from './pages/Profile/Profile'
 
 export enum RouteNames {
   MAIN = '/',
-  GAME = '/game',
-  BLOG = '/blog',
+  GAME = '/game',  
   LEADERBOARD = '/leaderboard',
   PROFILE = '/profile',
   ERROR_500 = '/error500',
