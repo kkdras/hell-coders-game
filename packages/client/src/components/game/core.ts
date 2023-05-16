@@ -7,7 +7,7 @@ import {
   Matrix,
 } from './const'
 import { getRandomInt, rotateMatrix } from './utils'
-import Image from './gameover.png'
+import Image from '../../image/gameover.png'
 
 interface FigureParameters {
   name: FigureNames
@@ -52,8 +52,10 @@ export class GameConstructor {
   private lastedTime = 0
   private prevTime: number = Date.now()
 
-  public endMessage = 'GAME OVER'
-  public startMessage = 'GAME STARTING...'
+  public endMessage: string = 'GAME OVER'
+  public startMessage: string = 'GAME STARTING...'
+  public beforeStartSeconds: number = 4
+
 
   constructor({ movesBoundary = 800, canvas, cellSize = 34 }: GameParameters) {
     this.movesBoundary = movesBoundary
@@ -166,18 +168,20 @@ export class GameConstructor {
 
     cancelAnimationFrame(this.rAF)
     this.isGameEnd = true
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
-    this.context.textAlign = 'center'
-    this.context.textBaseline = 'middle'
-    this.context.font = '30px monospace'
-    this.context.fillStyle = 'black'
-    this.context.fillText(
-      this.endMessage,
-      this.canvas.width / 2,
-      this.canvas.height / 4
-    )
     const img = new window.Image()
-    img.onload = () => { this.context.drawImage(img, 25, this.canvas.height / 3, 300, 300) };
+    img.onload = () => {
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      this.context.textAlign = 'center'
+      this.context.textBaseline = 'middle'
+      this.context.font = '30px monospace'
+      this.context.fillStyle = 'black'
+      this.context.fillText(
+        this.endMessage,
+        this.canvas.width / 2,
+        this.canvas.height / 4
+      )
+      this.context.drawImage(img, 25, this.canvas.height / 3, 300, 300)
+    };
     img.src = Image
 
   }
@@ -237,7 +241,7 @@ export class GameConstructor {
 
 
   public start() {
-    let secondsBefore = 4;
+    let secondsBefore = this.beforeStartSeconds;
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.context.textAlign = 'center'
     this.context.textBaseline = 'middle'
@@ -260,7 +264,7 @@ export class GameConstructor {
 
     const counter = () => {
       secondsBefore = secondsBefore - 1;
-      if (secondsBefore === -1) {
+      if (secondsBefore === 0) {
         clearInterval(interval);
         this.gameLaunch();
       }
