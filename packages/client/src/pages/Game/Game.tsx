@@ -1,5 +1,17 @@
-import { Typography } from '@mui/material'
+import { Box } from '@mui/material'
+import { GameContainer } from '../../components/game'
+
 
 export const Game = () => {
-  return <Typography variant="h5">Тут будет страница с игрой</Typography>
+  return <Box
+    sx={{
+      display: 'flex',
+      justifyContent: 'center',
+      minHeight: '100%',
+      alignItems: 'center',
+      padding: 3
+    }}
+  >
+    <GameContainer />
+  </Box>
 }

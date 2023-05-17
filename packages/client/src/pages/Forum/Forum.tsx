@@ -31,6 +31,7 @@ export function Forum() {
       </Grid>
       {forums.map(forum => (
         <ForumAccordeon
+          key={forum.id}
           id={forum.id}
           themesCount={forum.themesCount}
           answersCount={forum.answersCount}

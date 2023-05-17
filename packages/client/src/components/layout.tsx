@@ -9,14 +9,24 @@ import { useDispatch } from 'react-redux'
 export function Layout() {
   const dispatch = useDispatch()
 
+  const handleToggleMenu = () => {
+    dispatch(toggleDrawler())
+  }
+
   return (
-    <Box>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%'
+      }}
+    >
       <Drawler />
       <AppBar position="static">
         <Container>
           <Toolbar sx={{ padding: '0 !important' }}>
             <IconButton
-              onClick={() => dispatch(toggleDrawler())}
+              onClick={handleToggleMenu}
               size="large"
               edge="start"
               color="inherit"
@@ -27,7 +37,7 @@ export function Layout() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container>
+      <Container sx={{ flex: '1 1 auto' }}>
         <Outlet />
       </Container>
     </Box>
