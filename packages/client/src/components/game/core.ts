@@ -16,7 +16,7 @@ interface FigureParameters {
   column: number
 }
 
-class Figure implements FigureParameters {
+export class Figure implements FigureParameters {
   name: FigureNames
   matrix: Matrix
   row: number
@@ -42,7 +42,7 @@ export class GameConstructor {
   private cellSize: number
   private gameField: (number | FigureNames)[][] = []
   private rAF: number | null = null
-  private figureSequence: [Figure, Figure] | null = null
+  figureSequence: [Figure, Figure] | null = null
   private fieldHeight = 20
   private fieldWidth = 10
   public isGameEnd = true
@@ -202,7 +202,7 @@ export class GameConstructor {
       }
     }
 
-    for (let row = 0; row < this.gameField.length;) {
+    for (let row = 0; row < this.gameField.length; ) {
       const isCurrentRowFullFilled = this.gameField[row].every(item => !!item)
 
       if (isCurrentRowFullFilled) {

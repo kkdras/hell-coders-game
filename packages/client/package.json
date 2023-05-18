@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "list:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "test": "jest ./"
+    "test": "jest ./ --maxWorkers 1"
   },
   "dependencies": {
     "@emotion/react": "11.10.6",
