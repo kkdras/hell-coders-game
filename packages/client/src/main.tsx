@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import { store } from './store'
 import { startServiceWorker } from './serviceWorker'
 
-startServiceWorker();
+startServiceWorker()
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
