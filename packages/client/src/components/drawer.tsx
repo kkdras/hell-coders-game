@@ -33,13 +33,6 @@ export const Drawler = () => {
           </ListItem>
           <ListItem>
             <ListItemButton>
-              <Link to={RouteNames.BLOG}>
-                <ListItemText sx={{ color: 'text.primary' }} primary="Blog" />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
               <Link to={RouteNames.LEADERBOARD}>
                 <ListItemText
                   sx={{ color: 'text.primary' }}
@@ -52,16 +45,6 @@ export const Drawler = () => {
             <ListItemButton>
               <Link to={RouteNames.GAME}>
                 <ListItemText sx={{ color: 'text.primary' }} primary="Game" />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.GAME_OVER}>
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="GameOver"
-                />
               </Link>
             </ListItemButton>
           </ListItem>
@@ -119,13 +102,6 @@ export const Drawler = () => {
                   sx={{ color: 'text.primary' }}
                   primary="Register"
                 />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.START}>
-                <ListItemText sx={{ color: 'text.primary' }} primary="Start" />
               </Link>
             </ListItemButton>
           </ListItem>

@@ -7,6 +7,7 @@ import {
   Matrix,
 } from './const'
 import { getRandomInt, rotateMatrix } from './utils'
+import Image from '../../image/gameover.png'
 
 interface FigureParameters {
   name: FigureNames
@@ -52,6 +53,8 @@ export class GameConstructor {
   private prevTime: number = Date.now()
 
   public endMessage = 'GAME OVER'
+  public startMessage = 'GAME STARTING...'
+  public beforeStartSeconds = 4
 
   constructor({ movesBoundary = 800, canvas, cellSize = 34 }: GameParameters) {
     this.movesBoundary = movesBoundary
@@ -163,21 +166,22 @@ export class GameConstructor {
     }
 
     cancelAnimationFrame(this.rAF)
-
     this.isGameEnd = true
-
-    this.context.fillStyle = 'gray'
-    this.context.fillRect(0, this.canvas.height / 2 - 28, this.canvas.width, 56)
-
-    this.context.textAlign = 'center'
-    this.context.textBaseline = 'middle'
-    this.context.font = '30px monospace'
-    this.context.fillStyle = 'white'
-    this.context.fillText(
-      this.endMessage,
-      this.canvas.width / 2,
-      this.canvas.height / 2
-    )
+    const img = new window.Image()
+    img.onload = () => {
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      this.context.textAlign = 'center'
+      this.context.textBaseline = 'middle'
+      this.context.font = '30px monospace'
+      this.context.fillStyle = 'black'
+      this.context.fillText(
+        this.endMessage,
+        this.canvas.width / 2,
+        this.canvas.height / 4
+      )
+      this.context.drawImage(img, 25, this.canvas.height / 3, 300, 300)
+    }
+    img.src = Image
   }
 
   private placeFigure(figure: Figure) {
@@ -189,7 +193,7 @@ export class GameConstructor {
         const item = figure.matrix[row][col]
         if (!item) continue
 
-        if (figure.row + row < 0) {
+        if (figure.row + row <= 0) {
           this.showGameOver()
           return
         }
@@ -198,7 +202,7 @@ export class GameConstructor {
       }
     }
 
-    for (let row = 0; row < this.gameField.length; ) {
+    for (let row = 0; row < this.gameField.length;) {
       const isCurrentRowFullFilled = this.gameField[row].every(item => !!item)
 
       if (isCurrentRowFullFilled) {
@@ -220,7 +224,7 @@ export class GameConstructor {
     )
   }
 
-  public start() {
+  public gameLaunch() {
     this.figureSequence = [this.createNewFigure(), this.createNewFigure()]
     this.isGameEnd = false
     for (let row = 0; row < this.fieldHeight; row++) {
@@ -229,8 +233,44 @@ export class GameConstructor {
         this.gameField[row][col] = 0
       }
     }
-
     this.rAF = requestAnimationFrame(this.loop)
+  }
+
+  public start() {
+    let secondsBefore = this.beforeStartSeconds
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.context.textAlign = 'center'
+    this.context.textBaseline = 'middle'
+    this.context.font = '30px monospace'
+    this.context.fillStyle = 'black'
+    this.context.fillText(
+      this.startMessage,
+      this.canvas.width / 2,
+      this.canvas.height / 4
+    )
+
+    const redraw = () => {
+      this.context.clearRect(
+        0,
+        this.canvas.height / 3,
+        this.canvas.width,
+        this.canvas.height
+      )
+      this.context.font = '40px monospace'
+      this.context.fillStyle = 'red'
+      this.context.fillText(String(counter()), this.canvas.width / 2, 300)
+    }
+
+    const interval = setInterval(redraw, 1000)
+
+    const counter = () => {
+      secondsBefore = secondsBefore - 1
+      if (secondsBefore === 0) {
+        clearInterval(interval)
+        this.gameLaunch()
+      }
+      return secondsBefore
+    }
   }
 
   private rotateCurrentFigure(rotateBack = false) {
@@ -258,7 +298,7 @@ export class GameConstructor {
 
     const oldValue = figure.column
     const newValue = figure.column + (right ? 1 : -1)
-  
+
     figure.column = newValue
     const isValidPosition = this.isValidMove(figure)
 

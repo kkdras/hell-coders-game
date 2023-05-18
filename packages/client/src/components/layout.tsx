@@ -18,9 +18,8 @@ export function Layout() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100%'
-      }}
-    >
+        height: '100%',
+      }}>
       <Drawler />
       <AppBar position="static">
         <Container>

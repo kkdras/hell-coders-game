@@ -1,7 +1,8 @@
-import styled from "@emotion/styled"
-import { Box, Button } from "@mui/material"
-import { useRef } from "react"
-import { useGame } from "./hooks"
+import styled from '@emotion/styled'
+import { Link } from 'react-router-dom'
+import { Box, Button } from '@mui/material'
+import { useRef } from 'react'
+import { useGame } from './hooks'
 
 const StyledCanvas = styled.canvas`
   width: 340px;
@@ -17,17 +18,28 @@ export const GameContainer = () => {
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'start'
-      }}
-    >
-      <StyledCanvas width={340} height={680} ref={refGame}/>
-      <Button
-        onClick={() => game.current?.start()}
-        variant='contained'
-        sx={{ ml: 4 }}
-      >
-        Начать игру
-      </Button>
+        alignItems: 'start',
+      }}>
+      <StyledCanvas width={340} height={680} ref={refGame} />
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          m: 1,
+        }}>
+        <Button onClick={() => game.current?.start()} variant="contained">
+          Начать игру
+        </Button>
+        <Box sx={{ mt: 2 }}>
+          <Link to="/">
+            <Button sx={{ width: '127px' }} variant="contained">
+              Home Page
+            </Button>
+          </Link>
+        </Box>
+      </Box>
     </Box>
   )
 }
