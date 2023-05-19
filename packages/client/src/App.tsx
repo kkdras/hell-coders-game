@@ -15,7 +15,7 @@ import { Profile } from './pages/Profile/Profile'
 
 export enum RouteNames {
   MAIN = '/',
-  GAME = '/game',  
+  GAME = '/game',
   LEADERBOARD = '/leaderboard',
   PROFILE = '/profile',
   ERROR_500 = '/error500',
@@ -28,7 +28,7 @@ export enum RouteNames {
 
 function App() {
   useEffect(() => {
-      const fetchServerData = async () => {
+    const fetchServerData = async () => {
       const url = `http://localhost:${__SERVER_PORT__}`
       const response = await fetch(url)
       const data = await response.json()

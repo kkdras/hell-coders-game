@@ -10,6 +10,7 @@ export default {
       '<rootDir>/mocks/fileMock.js',
     '\\.(css|less)$': '<rootDir>/mocks/styleMock.js',
   },
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   globals: {
     __SERVER_PORT__: process.env.SERVER_PORT,
   },

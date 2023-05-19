@@ -7,7 +7,6 @@ import {
   Typography,
 } from '@mui/material'
 import { Box } from '@mui/material'
-import Image from '../../image/tetris.jpeg'
 import { listOptions } from './const'
 import { useNavigate } from 'react-router-dom'
 import { RouteNames } from '../../App'
@@ -16,11 +15,11 @@ export const Home = () => {
   const navigate = useNavigate()
   return (
     <>
-      <Typography pt={2} variant="h3" textAlign="center">
+      <Typography pt={2} variant="h3" textAlign="center" role="header">
         Тетрис
       </Typography>
       <Box sx={{ pt: 4, display: 'flex', gap: 4, pb: 4 }}>
-        <img width="50%" src={Image} alt="Tetris" />
+        <img width="50%" src={'/tetris.jpeg'} alt="Tetris" />
         <Box
           sx={{
             display: 'flex',
