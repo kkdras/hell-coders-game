@@ -33,3 +33,60 @@ export const getRandomSequence = <T extends I[], I>(seq: T) => {
 
   return newSeq
 }
+
+export const throttle = <T extends []>(fn: (...args: T) => void, t: number) => {
+  let lastArgs: null | T = null
+  let needStartExecute = true
+
+  const execute = () => {
+    if (lastArgs && needStartExecute) {
+      fn.apply(this, lastArgs)
+      needStartExecute = false
+      lastArgs = null
+
+      setTimeout(() => {
+        needStartExecute = true
+        execute()
+      }, t)
+    }
+  }
+
+  function debounced(...args: T) {
+    lastArgs = args
+    execute()
+  }
+
+  debounced.cancel = () => {
+    needStartExecute = false
+    lastArgs = null
+  }
+
+  return debounced as typeof debounced & { cancel: () => void }
+}
+
+type AnyFunction = (...args: any[]) => void
+
+export class EventBus {
+  private hashMap: Record<string, AnyFunction[]> = {}
+
+  public on(eventName: string, handler: AnyFunction) {
+    if (!this.hashMap[eventName]) {
+      this.hashMap[eventName] = []
+    }
+    this.hashMap[eventName].push(handler)
+  }
+
+  public off(eventName: string, handler: AnyFunction) {
+    const handlers = this.hashMap[eventName]
+    if (handlers) {
+      this.hashMap[eventName] = handlers.filter(item => item !== handler)
+    }
+  }
+
+  public emit(eventName: string, ...args: any[]) {
+    const handlers = this.hashMap[eventName]
+    if (handlers) {
+      handlers.forEach(handler => handler(args))
+    }
+  }
+}
