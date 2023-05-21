@@ -6,7 +6,7 @@ import {
   figuresColors,
   Matrix,
 } from './const'
-import { getRandomInt, rotateMatrix } from './utils'
+import { EventBus, getRandomInt, rotateMatrix } from './utils'
 import Image from '../../image/gameover.png'
 
 interface FigureParameters {
@@ -36,7 +36,7 @@ type GameParameters = {
   cellSize?: number
 }
 
-export class GameConstructor {
+export class GameConstructor extends EventBus {
   private context: CanvasRenderingContext2D
   private canvas: HTMLCanvasElement
   private cellSize: number
@@ -57,6 +57,7 @@ export class GameConstructor {
   public beforeStartSeconds = 4
 
   constructor({ movesBoundary = 800, canvas, cellSize = 34 }: GameParameters) {
+    super()
     this.movesBoundary = movesBoundary
     this.canvas = canvas
     this.context = canvas.getContext('2d') as CanvasRenderingContext2D
@@ -327,8 +328,12 @@ export class GameConstructor {
     this.moveFigure()
   }
 
-  public accelerateTheFall() {
-    throw new Error("method doesn't implement")
+  public speedUp() {
+    this.lastedTime += this.movesBoundary
+  }
+
+  public getMoveBoundary() {
+    return this.movesBoundary
   }
 
   public getNextFigure() {
