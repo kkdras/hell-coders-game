@@ -105,13 +105,6 @@ export const Drawler = () => {
               </Link>
             </ListItemButton>
           </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.AUTH}>
-                <ListItemText sx={{ color: 'text.primary' }} primary="Auth" />
-              </Link>
-            </ListItemButton>
-          </ListItem>
         </List>
       </Box>
     </Drawer>
