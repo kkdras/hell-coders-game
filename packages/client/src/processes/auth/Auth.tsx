@@ -7,8 +7,10 @@ import { AuthorizationForm } from "./AuthorizationForm";
 
 export const Auth: FC<PropsWithChildren> = ({ children }) => {
   const { isUserAuthorized } = useSelector((state: RootState) => state.auth)
+  const { user } = useSelector((state: RootState) => state.user)
 
-  console.log(isUserAuthorized);
+  console.log("isUserAuthorized", isUserAuthorized);
+  console.log("user", user);
 
   return isUserAuthorized ? (
     <>{children}</>

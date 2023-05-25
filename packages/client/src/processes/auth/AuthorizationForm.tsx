@@ -14,6 +14,7 @@ import { RouteNames } from '../../App'
 import { defaultValues } from './const'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { authSchema } from '../../shared/utils/formSchema'
+import { getAuthUser } from '../../store/user/actions'
 
 export function AuthorizationForm() {
   const dispatch = useDispatch<AppStoreDispatch>()
@@ -26,6 +27,7 @@ export function AuthorizationForm() {
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
     dispatch(postAuth(data))
+    dispatch(getAuthUser())
   })
 
   return (

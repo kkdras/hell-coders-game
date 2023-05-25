@@ -40,7 +40,7 @@ export const Profile = () => {
 
   useEffect(() => {
     document.title = 'Профиль'
-    dispatch(getAuthUser())
+    /* dispatch(getAuthUser()) */
   }, [])
 
   useEffect(() => {

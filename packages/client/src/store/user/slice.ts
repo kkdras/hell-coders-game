@@ -1,13 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getAuthUser, putAvatar, putUser } from './actions'
-import { initialState } from './const'
+import { initialState, userState } from './const'
 import { AxiosResponse } from 'axios'
 import { User } from './types'
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    clearUser: (state: userState) => {
+      state.user = null;
+    },
+  },
   extraReducers: builder => {
     builder.addCase(
       getAuthUser.fulfilled,
@@ -29,3 +33,6 @@ export const userSlice = createSlice({
     )
   },
 })
+export const {
+  clearUser,
+} = userSlice.actions;

@@ -12,10 +12,16 @@ import { RouteNames } from '../App'
 import { RootState } from '../store/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../store/auth/slice'
+import { clearUser } from '../store/user/slice'
 
 export const Drawler = () => {
   const dispatch = useDispatch()
   const { isDrawlerOpened } = useSelector((state: RootState) => state.app)
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(clearUser());
+  }
 
   return (
     <Drawer
@@ -107,11 +113,11 @@ export const Drawler = () => {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton onClick={() => dispatch(logout())}>              
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="Выход"
-                />             
+            <ListItemButton onClick={handleLogout}>
+              <ListItemText
+                sx={{ color: 'text.primary' }}
+                primary="Выход"
+              />
             </ListItemButton>
           </ListItem>
         </List>
@@ -119,3 +125,5 @@ export const Drawler = () => {
     </Drawer>
   )
 }
+
+
