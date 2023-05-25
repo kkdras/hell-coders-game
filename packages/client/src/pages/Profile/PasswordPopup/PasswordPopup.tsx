@@ -14,7 +14,7 @@ import { defaultValues } from './const'
 import { FormInput } from '../../../components/FormInput'
 import { putPassword } from '../../../store/user/actions'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { validationSchema } from '../../../shared/utils/formSchema'
+import { passwordSchema } from '../../../shared/utils/formSchema'
 
 interface PasswordPopupProps {
   open: boolean
@@ -26,7 +26,7 @@ export const PasswordPopup: FC<PasswordPopupProps> = ({ open, onClose }) => {
 
   const methods = useForm<PasswordForm>({
     defaultValues,
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(passwordSchema),
   })
 
   const { handleSubmit, reset } = methods
