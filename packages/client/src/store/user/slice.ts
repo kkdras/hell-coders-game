@@ -9,7 +9,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     clearUser: (state: userState) => {
-      state.user = null;
+      state.user = null
     },
   },
   extraReducers: builder => {
@@ -33,6 +33,4 @@ export const userSlice = createSlice({
     )
   },
 })
-export const {
-  clearUser,
-} = userSlice.actions;
+export const { clearUser } = userSlice.actions

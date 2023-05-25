@@ -19,8 +19,8 @@ export const Drawler = () => {
   const { isDrawlerOpened } = useSelector((state: RootState) => state.app)
 
   const handleLogout = () => {
-    dispatch(logout());
-    dispatch(clearUser());
+    dispatch(logout())
+    dispatch(clearUser())
   }
 
   return (
@@ -114,10 +114,7 @@ export const Drawler = () => {
           </ListItem>
           <ListItem>
             <ListItemButton onClick={handleLogout}>
-              <ListItemText
-                sx={{ color: 'text.primary' }}
-                primary="Выход"
-              />
+              <ListItemText sx={{ color: 'text.primary' }} primary="Выход" />
             </ListItemButton>
           </ListItem>
         </List>
@@ -125,5 +122,3 @@ export const Drawler = () => {
     </Drawer>
   )
 }
-
-

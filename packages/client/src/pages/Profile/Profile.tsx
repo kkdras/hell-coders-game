@@ -39,7 +39,7 @@ export const Profile = () => {
   const { handleSubmit, reset } = methods
 
   useEffect(() => {
-    document.title = 'Профиль'  
+    document.title = 'Профиль'
   }, [])
 
   useEffect(() => {

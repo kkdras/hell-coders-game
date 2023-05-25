@@ -8,7 +8,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state: authState) => {
-      state.isUserAuthorized = false;
+      state.isUserAuthorized = false
     },
   },
   extraReducers: builder => {
@@ -16,7 +16,10 @@ export const authSlice = createSlice({
       state.isUserAuthorized = true
     })
     builder.addCase(postAuth.rejected, (state, action) => {
-      if ((action.payload?.data as RejectReason).reason === 'User already in system')
+      if (
+        (action.payload?.data as RejectReason).reason ===
+        'User already in system'
+      )
         state.isUserAuthorized = true
       else {
         state.isUserAuthorized = false
@@ -25,6 +28,4 @@ export const authSlice = createSlice({
     })
   },
 })
-export const {
-  logout,
-} = authSlice.actions;
+export const { logout } = authSlice.actions
