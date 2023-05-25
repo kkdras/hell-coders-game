@@ -28,7 +28,6 @@ export const postAuth = createAsyncThunk<
         'Content-type': 'application/json',
       },
     })
-    console.log(response)
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
