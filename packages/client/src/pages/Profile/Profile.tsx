@@ -39,8 +39,7 @@ export const Profile = () => {
   const { handleSubmit, reset } = methods
 
   useEffect(() => {
-    document.title = 'Профиль'
-    /* dispatch(getAuthUser()) */
+    document.title = 'Профиль'  
   }, [])
 
   useEffect(() => {
