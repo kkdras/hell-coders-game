@@ -10,8 +10,8 @@ import { ErrorComponent } from './pages/Error/ErrorComponent'
 import { Game } from './pages/Game/Game'
 import { Register } from './pages/Register/Register'
 import { Forum } from './pages/Forum/Forum'
-import { Auth } from './pages/Auth/Auth'
 import { Profile } from './pages/Profile/Profile'
+import { WithAuthorization } from './processes/auth/WithAuthorization'
 
 export enum RouteNames {
   MAIN = '/',
@@ -23,7 +23,6 @@ export enum RouteNames {
   ERROR_404 = '/error404',
   ERROR_COMPONENT = '/errorcomponent',
   FORUM = '/forum',
-  AUTH = '/auth',
 }
 
 function App() {
@@ -39,20 +38,24 @@ function App() {
   }, [])
 
   return (
-    <Routes>
-      <Route path={RouteNames.MAIN} element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path={RouteNames.LEADERBOARD} element={<LeaderBoard />} />
-        <Route path={RouteNames.GAME} element={<Game />} />
-        <Route path={RouteNames.REGISTER} element={<Register />} />
-        <Route path={RouteNames.FORUM} element={<Forum />} />
-        <Route path={RouteNames.ERROR_500} element={<Error500 />} />
-        <Route path={RouteNames.ERROR_COMPONENT} element={<ErrorComponent />} />
-        <Route path="*" element={<Error404 />} />
-        <Route path={RouteNames.AUTH} element={<Auth />} />
-        <Route path={RouteNames.PROFILE} element={<Profile />} />
-      </Route>
-    </Routes>
+    <WithAuthorization>
+      <Routes>
+        <Route path={RouteNames.MAIN} element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path={RouteNames.LEADERBOARD} element={<LeaderBoard />} />
+          <Route path={RouteNames.GAME} element={<Game />} />
+          <Route path={RouteNames.REGISTER} element={<Register />} />
+          <Route path={RouteNames.FORUM} element={<Forum />} />
+          <Route path={RouteNames.ERROR_500} element={<Error500 />} />
+          <Route
+            path={RouteNames.ERROR_COMPONENT}
+            element={<ErrorComponent />}
+          />
+          <Route path="*" element={<Error404 />} />
+          <Route path={RouteNames.PROFILE} element={<Profile />} />
+        </Route>
+      </Routes>
+    </WithAuthorization>
   )
 }
 

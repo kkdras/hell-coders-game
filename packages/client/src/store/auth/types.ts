@@ -11,3 +11,7 @@ export interface SignInRequest {
   login: string
   password: string
 }
+
+export interface RejectReason {
+  reason: string
+}

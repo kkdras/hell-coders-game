@@ -4,32 +4,20 @@ import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { FormProvider, useForm } from 'react-hook-form'
 import { AuthForm } from './types'
 import { postAuth } from '../../store/auth/actions'
 import { AppStoreDispatch } from '../../store'
 import { FormInput } from '../../components/FormInput'
-import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
 import { RouteNames } from '../../App'
-import { RootState } from '../../store/rootReducer'
 import { defaultValues } from './const'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { authSchema } from '../../shared/utils/formSchema'
+import { getAuthUser } from '../../store/user/actions'
 
-export function Auth() {
-  const navigate = useNavigate()
+export function AuthorizationForm() {
   const dispatch = useDispatch<AppStoreDispatch>()
-  const { isUserAuthorized } = useSelector((state: RootState) => state.auth)
-
-  useEffect(() => {
-    document.title = 'Авторизация'
-  }, [])
-
-  useEffect(() => {
-    if (isUserAuthorized) navigate(RouteNames.GAME)
-  }, [isUserAuthorized])
 
   const methods = useForm<AuthForm>({
     defaultValues,
@@ -39,6 +27,7 @@ export function Auth() {
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
     dispatch(postAuth(data))
+    dispatch(getAuthUser())
   })
 
   return (

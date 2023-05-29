@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/rootReducer'
 import { useEffect, useState } from 'react'
 import { AppStoreDispatch } from '../../store'
-import { getAuthUser } from '../../store/user/actions'
 import { Avatar, Box, Button, Card, Grid } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'
 import { FormInput } from '../../components/FormInput'
@@ -40,7 +39,6 @@ export const Profile = () => {
 
   useEffect(() => {
     document.title = 'Профиль'
-    dispatch(getAuthUser())
   }, [])
 
   useEffect(() => {
