@@ -13,7 +13,7 @@ const URLS = [
   '/src/image/404.png',
   '/src/image/avatar1.png',
   '/src/image/gameover.png',
-  '/src/image/tetris.jpeg',
+  '/tetris.jpeg',
 ]
 
 this.addEventListener('install', event => {
