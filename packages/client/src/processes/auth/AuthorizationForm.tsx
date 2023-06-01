@@ -28,6 +28,7 @@ export function AuthorizationForm() {
 
   const yandexOAuthRequest = () => {
     dispatch(getYandexServiceId(redirect_uri))
+    dispatch(getAuthUser())
   }
 
   const { handleSubmit } = methods
