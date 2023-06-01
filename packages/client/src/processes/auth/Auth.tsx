@@ -14,9 +14,8 @@ export const Auth: FC<PropsWithChildren> = ({ children }) => {
     location.pathname === '/game' ||
     location.pathname === '/leaderboard' ||
     location.pathname === '/forum'
-   
 
-  return isUserAuthorized && isNeedAuthorization || !isNeedAuthorization? (
+  return (isUserAuthorized && isNeedAuthorization) || !isNeedAuthorization ? (
     <>{children}</>
   ) : (
     <AuthorizationForm />
