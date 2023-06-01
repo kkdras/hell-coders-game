@@ -63,17 +63,16 @@ export const Drawler = () => {
               </Link>
             </ListItemButton>
           </ListItem>
-          {isUserAuthorized && (
-            <ListItem>
-              <ListItemButton>
-                <Link to={RouteNames.PROFILE}>
-                  <ListItemText
-                    sx={{ color: 'text.primary' }}
-                    primary="Profile"
-                  />
-                </Link>
-              </ListItemButton>
-            </ListItem>)}
+          <ListItem>
+            <ListItemButton>
+              <Link to={RouteNames.PROFILE}>
+                <ListItemText
+                  sx={{ color: 'text.primary' }}
+                  primary={isUserAuthorized ? 'Profile' : 'Войти'}
+                />
+              </Link>
+            </ListItemButton>
+          </ListItem>
           {!isUserAuthorized && (
             <ListItem>
               <ListItemButton>
