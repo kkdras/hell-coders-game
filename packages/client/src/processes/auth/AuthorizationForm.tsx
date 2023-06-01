@@ -7,7 +7,7 @@ import Container from '@mui/material/Container'
 import { useDispatch } from 'react-redux'
 import { FormProvider, useForm } from 'react-hook-form'
 import { AuthForm } from './types'
-import { postAuth } from '../../store/auth/actions'
+import { getYandexServiceId, postAuth } from '../../store/auth/actions'
 import { AppStoreDispatch } from '../../store'
 import { FormInput } from '../../components/FormInput'
 import { RouteNames } from '../../App'
@@ -15,6 +15,8 @@ import { defaultValues } from './const'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { authSchema } from '../../shared/utils/formSchema'
 import { getAuthUser } from '../../store/user/actions'
+import Image from '../../image/YandexLogo.png'
+import { BASE_URL } from '../../shared/consts'
 
 export function AuthorizationForm() {
   const dispatch = useDispatch<AppStoreDispatch>()
@@ -23,6 +25,10 @@ export function AuthorizationForm() {
     defaultValues,
     resolver: yupResolver(authSchema),
   })
+
+  const yandexOAuthRequest = () => {
+    dispatch(getYandexServiceId({ redirect_uri: `${BASE_URL}` }))
+  }
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
@@ -56,9 +62,11 @@ export function AuthorizationForm() {
             </Button>
             <Button
               fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}>
-              Авторизоваться через аккаунт Яндекс
+              variant="outlined"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={yandexOAuthRequest}>
+              <img width="30px" src={Image} padding-right="100px" />
+              <Typography variant="inherit" ml="15px">Авторизоваться через Яндекс</Typography>
             </Button>
             <Link to={RouteNames.REGISTER}>
               У вас нет аккаунта? Регистрация
