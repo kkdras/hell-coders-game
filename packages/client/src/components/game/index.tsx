@@ -41,7 +41,10 @@ export const GameContainer = () => {
           </Link>
         </Box>
         <Box sx={{ mt: 2 }}>
-          <Button id="toggler" onClick={() => toggleFullscreen()} variant="contained">
+          <Button
+            id="toggler"
+            onClick={() => toggleFullscreen()}
+            variant="contained">
             Fullscreen on
           </Button>
         </Box>
@@ -50,14 +53,12 @@ export const GameContainer = () => {
   )
 }
 
-document.addEventListener("fullscreenchange", function (e) {
-
-  const toggler = document.getElementById('toggler') as HTMLElement;
+document.addEventListener('fullscreenchange', function () {
+  const toggler = document.getElementById('toggler') as HTMLElement
 
   if (document.fullscreenElement) {
-    toggler.textContent = 'Fullscreen off';
+    toggler.textContent = 'Fullscreen off'
+  } else {
+    toggler.textContent = 'Fullscreen'
   }
-  else {
-    toggler.textContent = 'Fullscreen';
-  }
-});
+})

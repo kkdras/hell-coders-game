@@ -46,7 +46,6 @@ export const passwordSchema = yup.object().shape({
   newPassword: yup.string().matches(password, ERROR_MESSAGE.password),
 })
 
-
 export const authSchema = yup.object().shape({
   password: yup.string().required(ERROR_MESSAGE.isRequired),
   login: yup.string().required(ERROR_MESSAGE.isRequired),
