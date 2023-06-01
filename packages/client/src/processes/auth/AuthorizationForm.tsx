@@ -11,12 +11,12 @@ import { getYandexServiceId, postAuth } from '../../store/auth/actions'
 import { AppStoreDispatch } from '../../store'
 import { FormInput } from '../../components/FormInput'
 import { RouteNames } from '../../App'
-import { defaultValues } from './const'
+import { defaultValues, redirect_uri } from './const'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { authSchema } from '../../shared/utils/formSchema'
 import { getAuthUser } from '../../store/user/actions'
 import Image from '../../image/YandexLogo.png'
-import { BASE_URL } from '../../shared/consts'
+
 
 export function AuthorizationForm() {
   const dispatch = useDispatch<AppStoreDispatch>()
@@ -27,7 +27,7 @@ export function AuthorizationForm() {
   })
 
   const yandexOAuthRequest = () => {
-    dispatch(getYandexServiceId({ redirect_uri: `${BASE_URL}` }))
+    dispatch(getYandexServiceId(redirect_uri))
   }
 
   const { handleSubmit } = methods

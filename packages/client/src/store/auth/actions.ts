@@ -36,17 +36,16 @@ export const postAuth = createAsyncThunk<
 
 export const getYandexServiceId = createAsyncThunk<
   AxiosResponse,
-  {redirect_uri: string},
+  string,
   { rejectValue: AxiosError['response'] }
->('oauth/yandex/service-id', async (redirect_uri, { rejectWithValue }) => {
+>('oauth/yandex/service-id', async (redirect_uri, { rejectWithValue, dispatch }) => {
   try {
-    const response = await axios.get(`${BASE_URL}/oauth/yandex/${redirect_uri}`, {
-      withCredentials: true,
-      headers: {
-        'Content-type': 'application/json',
-      },
+    const response = await axios.get(`${BASE_URL}/oauth/yandex/service-id/`, {
+      params:
+        { redirect_uri: redirect_uri }
     })
-    console.log(response)
+    dispatch(postYandexOAuth({"code": response.data.service_id,
+    "redirect_uri": redirect_uri}))
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -70,3 +69,7 @@ export const postYandexOAuth = createAsyncThunk<
     return rejectWithValue((error as AxiosError)?.response)
   }
 })
+function dispatch() {
+  throw new Error('Function not implemented.')
+}
+
