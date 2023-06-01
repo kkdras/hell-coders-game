@@ -8,14 +8,15 @@ import { AuthorizationForm } from './AuthorizationForm'
 export const Auth: FC<PropsWithChildren> = ({ children }) => {
   const { isUserAuthorized } = useSelector((state: RootState) => state.auth)
   const location = useLocation()
-  const isNotNeedAuthorization =
-    location.pathname === '/register' ||
-    location.pathname === '/' ||
-    location.pathname === '/error500' ||
-    location.pathname === '/error404' ||
-    location.pathname === '/errorcomponent'
+  console.log(location.pathname)
+  const isNeedAuthorization =
+    location.pathname === '/profile' ||
+    location.pathname === '/game' ||
+    location.pathname === '/leaderboard' ||
+    location.pathname === '/forum'
+   
 
-  return isUserAuthorized || isNotNeedAuthorization ? (
+  return isUserAuthorized && isNeedAuthorization || !isNeedAuthorization? (
     <>{children}</>
   ) : (
     <AuthorizationForm />
