@@ -5,4 +5,4 @@ export const defaultValues: SignInRequest = {
   password: '',
 }
 
-export const redirect_uri: string = "https://github.com/hell-coders-tetris/hell-coders-game"
+export const redirect_uri = 'https://github.com/hell-coders-tetris/hell-coders-game'
