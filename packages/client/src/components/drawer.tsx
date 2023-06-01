@@ -72,37 +72,7 @@ export const Drawler = () => {
                 />
               </Link>
             </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.ERROR_404}>
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="Error 404"
-                />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.ERROR_500}>
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="Error 500"
-                />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.ERROR_COMPONENT}>
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="Error Component"
-                />
-              </Link>
-            </ListItemButton>
-          </ListItem>
+          </ListItem>          
           {!isUserAuthorized && (
             <ListItem>
               <ListItemButton>
@@ -115,12 +85,12 @@ export const Drawler = () => {
               </ListItemButton>
             </ListItem>
           )}
-
-          <ListItem>
-            <ListItemButton onClick={handleLogout}>
-              <ListItemText sx={{ color: 'text.primary' }} primary="Выход" />
-            </ListItemButton>
-          </ListItem>
+          {isUserAuthorized && (
+            <ListItem>
+              <ListItemButton onClick={handleLogout}>
+                <ListItemText sx={{ color: 'text.primary' }} primary="Выход" />
+              </ListItemButton>
+            </ListItem>)}
         </List>
       </Box>
     </Drawer>
