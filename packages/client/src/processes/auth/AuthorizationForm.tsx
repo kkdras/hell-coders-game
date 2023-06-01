@@ -54,6 +54,12 @@ export function AuthorizationForm() {
               sx={{ mt: 3, mb: 2 }}>
               Авторизация
             </Button>
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}>
+              Авторизоваться через аккаунт Яндекс
+            </Button>
             <Link to={RouteNames.REGISTER}>
               У вас нет аккаунта? Регистрация
             </Link>
