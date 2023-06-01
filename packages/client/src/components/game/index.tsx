@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Box, Button } from '@mui/material'
 import { useRef } from 'react'
 import { useGame } from './hooks'
+import { toggleFullscreen } from '../../utils/toggleFullscreen'
 
 const StyledCanvas = styled.canvas`
   width: 340px;
@@ -49,35 +50,14 @@ export const GameContainer = () => {
   )
 }
 
-function toggleFullscreen(elem?: Element) {
-  const toggler = document.getElementById('toggler') as HTMLElement;
-  elem = elem || document.documentElement;
-  if (!document.fullscreenElement && !document.mozFullScreenElement &&
-    !document.webkitFullscreenElement && !document.msFullscreenElement) {
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen();
-    } else if (elem.mozRequestFullScreen) {
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-    }
-    toggler.textContent = 'toggle off';
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    }
-    toggler.textContent = 'toggle on';
-  }
-}
+document.addEventListener("fullscreenchange", function (e) {
 
-// toggler.addEventListener('click', function() {
-//   toggleFullscreen();
-// });
+  const toggler = document.getElementById('toggler') as HTMLElement;
+
+  if (document.fullscreenElement) {
+    toggler.textContent = 'Fullscreen off';
+  }
+  else {
+    toggler.textContent = 'Fullscreen';
+  }
+});
