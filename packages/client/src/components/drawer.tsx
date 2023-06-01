@@ -72,7 +72,7 @@ export const Drawler = () => {
                 />
               </Link>
             </ListItemButton>
-          </ListItem>          
+          </ListItem>
           {!isUserAuthorized && (
             <ListItem>
               <ListItemButton>
@@ -90,7 +90,8 @@ export const Drawler = () => {
               <ListItemButton onClick={handleLogout}>
                 <ListItemText sx={{ color: 'text.primary' }} primary="Выход" />
               </ListItemButton>
-            </ListItem>)}
+            </ListItem>
+          )}
         </List>
       </Box>
     </Drawer>

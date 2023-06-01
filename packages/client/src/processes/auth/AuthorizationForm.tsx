@@ -17,7 +17,6 @@ import { authSchema } from '../../shared/utils/formSchema'
 import { getAuthUser } from '../../store/user/actions'
 import Image from '../../image/YandexLogo.png'
 
-
 export function AuthorizationForm() {
   const dispatch = useDispatch<AppStoreDispatch>()
 
@@ -67,7 +66,9 @@ export function AuthorizationForm() {
               sx={{ mt: 3, mb: 2 }}
               onClick={yandexOAuthRequest}>
               <img width="30px" src={Image} padding-right="100px" />
-              <Typography variant="inherit" ml="15px">Авторизоваться через Яндекс</Typography>
+              <Typography variant="inherit" ml="15px">
+                Авторизоваться через Яндекс
+              </Typography>
             </Button>
             <Link to={RouteNames.REGISTER}>
               У вас нет аккаунта? Регистрация
