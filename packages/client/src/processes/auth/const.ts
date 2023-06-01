@@ -5,4 +5,4 @@ export const defaultValues: SignInRequest = {
   password: '',
 }
 
-export const redirect_uri = `http://localhost:${__SERVER_PORT__}`
+export const redirect_uri = `http://localhost:3000`
