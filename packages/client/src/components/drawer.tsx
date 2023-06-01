@@ -15,6 +15,7 @@ import { logout } from '../store/auth/slice'
 import { clearUser } from '../store/user/slice'
 
 export const Drawler = () => {
+  const { isUserAuthorized } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
   const { isDrawlerOpened } = useSelector((state: RootState) => state.app)
 
@@ -102,16 +103,19 @@ export const Drawler = () => {
               </Link>
             </ListItemButton>
           </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.REGISTER}>
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="Register"
-                />
-              </Link>
-            </ListItemButton>
-          </ListItem>
+          {!isUserAuthorized && (
+            <ListItem>
+              <ListItemButton>
+                <Link to={RouteNames.REGISTER}>
+                  <ListItemText
+                    sx={{ color: 'text.primary' }}
+                    primary="Register"
+                  />
+                </Link>
+              </ListItemButton>
+            </ListItem>
+          )}
+
           <ListItem>
             <ListItemButton onClick={handleLogout}>
               <ListItemText sx={{ color: 'text.primary' }} primary="Выход" />

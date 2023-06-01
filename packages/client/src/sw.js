@@ -8,7 +8,7 @@ const URLS = [
   '/error500',
   '/forum',
   '/profile',
-  '/register', 
+  '/register',
   '/src/image/500.png',
   '/src/image/404.png',
   '/src/image/avatar1.png',
