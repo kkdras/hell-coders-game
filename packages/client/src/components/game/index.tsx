@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import { Box, Button } from '@mui/material'
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import { useGame } from './hooks'
 import FullscreenButton from '../FullscreenButton'
 
