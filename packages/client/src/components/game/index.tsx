@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Box, Button } from '@mui/material'
 import { useRef, useState, useEffect } from 'react'
 import { useGame } from './hooks'
-import FullscreenButton from "../FullscreenButton";
+import FullscreenButton from '../FullscreenButton'
 
 const StyledCanvas = styled.canvas`
   width: 340px;
