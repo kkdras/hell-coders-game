@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import { Box, Button } from '@mui/material'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useGame } from './hooks'
-import { toggleFullscreen } from '../../utils/toggleFullscreen'
+import FullscreenButton from "../FullscreenButton";
 
 const StyledCanvas = styled.canvas`
   width: 340px;
@@ -41,24 +41,9 @@ export const GameContainer = () => {
           </Link>
         </Box>
         <Box sx={{ mt: 2 }}>
-          <Button
-            id="toggler"
-            onClick={() => toggleFullscreen()}
-            variant="contained">
-            Fullscreen on
-          </Button>
+          <FullscreenButton />
         </Box>
       </Box>
     </Box>
   )
 }
-
-document.addEventListener('fullscreenchange', function () {
-  const toggler = document.getElementById('toggler') as HTMLElement
-
-  if (document.fullscreenElement) {
-    toggler.textContent = 'Fullscreen off'
-  } else {
-    toggler.textContent = 'Fullscreen'
-  }
-})
