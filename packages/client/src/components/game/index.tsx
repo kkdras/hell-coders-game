@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Box, Button } from '@mui/material'
 import { useRef } from 'react'
 import { useGame } from './hooks'
+import FullscreenButton from '../FullscreenButton'
 
 const StyledCanvas = styled.canvas`
   width: 340px;
@@ -38,6 +39,9 @@ export const GameContainer = () => {
               Home Page
             </Button>
           </Link>
+        </Box>
+        <Box sx={{ mt: 2 }}>
+          <FullscreenButton />
         </Box>
       </Box>
     </Box>
