@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { BASE_URL } from '../../shared/consts'
+import { getAuthUser } from '../user/actions'
 import { OauthSignInRequest, SignInRequest, SignUpRequest } from './types'
 
 export const postRegister = createAsyncThunk<
@@ -34,12 +35,32 @@ export const postAuth = createAsyncThunk<
   }
 })
 
+export const logout = createAsyncThunk<
+  AxiosResponse,
+  void,
+  { rejectValue: AxiosError['response'] }
+>('auth/logout', async (_: void, { rejectWithValue }) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/auth/logout`, {
+
+      withCredentials: true,
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+    return response
+  } catch (error) {
+    return rejectWithValue((error as AxiosError)?.response)
+  }
+})
+
+
 export const getYandexServiceId = createAsyncThunk<
   AxiosResponse,
   string,
   { rejectValue: AxiosError['response'] }
 >(
-  'oauth/yandex/service-id',
+  'auth/yandex/service-id',
   async (redirect_uri, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.get(`${BASE_URL}/oauth/yandex/service-id/`, {
@@ -62,7 +83,7 @@ export const postYandexOAuth = createAsyncThunk<
   AxiosResponse,
   OauthSignInRequest,
   { rejectValue: AxiosError['response'] }
->('oauth/yandex', async (data, { rejectWithValue }) => {
+>('auth/yandex', async (data, { rejectWithValue, dispatch }) => {
   try {
     const response = await axios.post(`${BASE_URL}/oauth/yandex`, data, {
       withCredentials: true,
@@ -70,6 +91,7 @@ export const postYandexOAuth = createAsyncThunk<
         'Content-type': 'application/json',
       },
     })
+    dispatch(getAuthUser())
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)

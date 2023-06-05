@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getYandexServiceId, postAuth, postYandexOAuth } from './actions'
+import { getYandexServiceId, logout, postAuth, postYandexOAuth } from './actions'
 import { authState, initialState } from './const'
 import { RejectReason } from './types'
 
@@ -7,9 +7,6 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    logout: (state: authState) => {
-      state.isUserAuthorized = false
-    },
   },
   extraReducers: builder => {
     builder.addCase(postAuth.fulfilled, state => {
@@ -45,6 +42,8 @@ export const authSlice = createSlice({
         alert('Аккаунт Яндекс не подтвержден')
       }
     })
+    builder.addCase(logout.fulfilled, (state) => {
+      state.isUserAuthorized = false
+    })
   },
 })
-export const { logout } = authSlice.actions

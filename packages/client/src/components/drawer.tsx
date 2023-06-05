@@ -11,15 +11,17 @@ import { Link } from 'react-router-dom'
 import { RouteNames } from '../App'
 import { RootState } from '../store/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../store/auth/slice'
 import { clearUser } from '../store/user/slice'
+import { logout } from '../store/auth/actions'
+import { AppStoreDispatch } from '../store'
 
 export const Drawler = () => {
   const { isUserAuthorized } = useSelector((state: RootState) => state.auth)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppStoreDispatch>()
   const { isDrawlerOpened } = useSelector((state: RootState) => state.app)
 
   const handleLogout = () => {
+    console.log("logout")
     dispatch(logout())
     dispatch(clearUser())
   }
