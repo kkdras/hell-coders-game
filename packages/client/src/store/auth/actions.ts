@@ -24,9 +24,10 @@ export const postAuth = createAsyncThunk<
 >('auth/postAuth', async (data, { rejectWithValue }) => {
   try {
     const response = await axios.post(`${BASE_URL}/auth/signin`, data, {
-      withCredentials: true,
+      withCredentials: true,      
       headers: {
         'Content-type': 'application/json',
+        'Cookie': 'COOKIE',
       },
     })
     return response
@@ -46,6 +47,7 @@ export const logout = createAsyncThunk<
       withCredentials: true,
       headers: {
         'Content-type': 'application/json',
+        'Cookie': 'COOKIE',
       },
     })
     return response
@@ -89,6 +91,7 @@ export const postYandexOAuth = createAsyncThunk<
       withCredentials: true,
       headers: {
         'Content-type': 'application/json',
+        'Cookie': 'COOKIE',
       },
     })
     dispatch(getAuthUser())
