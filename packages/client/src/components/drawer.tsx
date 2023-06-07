@@ -16,14 +16,13 @@ import { logout } from '../store/auth/actions'
 import { AppStoreDispatch } from '../store'
 
 export const Drawler = () => {
-  const { isUserAuthorized } = useSelector((state: RootState) => state.auth)
+  const isUserAuthorized = localStorage.getItem('auth')
   const dispatch = useDispatch<AppStoreDispatch>()
   const { isDrawlerOpened } = useSelector((state: RootState) => state.app)
 
   const handleLogout = () => {
-    console.log("logout")
     dispatch(logout())
-    dispatch(clearUser())
+    localStorage.removeItem("auth")
   }
 
   return (

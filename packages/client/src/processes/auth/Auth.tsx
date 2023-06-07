@@ -1,15 +1,23 @@
-import { FC, PropsWithChildren } from 'react'
-import { useSelector } from 'react-redux'
+import { FC, PropsWithChildren, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { RouteNames } from '../../App'
+import { AppStoreDispatch } from '../../store'
 
 import { RootState } from '../../store/rootReducer'
+import { getAuthUser } from '../../store/user/actions'
 import { AuthorizationForm } from './AuthorizationForm'
 
 export const Auth: FC<PropsWithChildren> = ({ children }) => {
-  const { isUserAuthorized } = useSelector((state: RootState) => state.auth)
+  const dispatch = useDispatch<AppStoreDispatch>()
+  const isUserAuthorized = localStorage.getItem('auth')
   const location = useLocation()
-  console.log(location.pathname)
+  const { user } = useSelector((state: RootState) => state.user)
+
+  useEffect(() => {
+    if (isUserAuthorized && !user) dispatch(getAuthUser())
+  }, [])
+
   const isNeedAuthorization =
     location.pathname === RouteNames.PROFILE ||
     location.pathname === RouteNames.GAME ||
