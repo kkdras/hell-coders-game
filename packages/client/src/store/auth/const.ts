@@ -1,8 +1,7 @@
 export interface authState {
-  isUserAuthorized: boolean
-  service_id?: string
+  serviceId?: string
 }
 
 export const initialState: authState = {
-  isUserAuthorized: false,
+
 }

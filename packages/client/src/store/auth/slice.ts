@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getYandexServiceId, logout, postAuth, postYandexOAuth } from './actions'
-import { authState, initialState } from './const'
+import { initialState } from './const'
 import { RejectReason } from './types'
 
 export const authSlice = createSlice({
@@ -9,20 +9,17 @@ export const authSlice = createSlice({
   reducers: {
   },
   extraReducers: builder => {
-    builder.addCase(postAuth.fulfilled, state => {
-      state.isUserAuthorized = true
+    builder.addCase(postAuth.fulfilled, () => {      
       localStorage.setItem('auth', "userAuthorized")
     })
-    builder.addCase(postAuth.rejected, (state, action) => {
+    builder.addCase(postAuth.rejected, (_, action) => {
       if (
         (action.payload?.data as RejectReason).reason ===
         'User already in system'
-      ) {
-        state.isUserAuthorized = true
+      ) {     
         localStorage.setItem('auth', "userAuthorized")
       }
-      else {
-        state.isUserAuthorized = false
+      else {       
         localStorage.removeItem('auth')
         alert('Неверный логин или пароль')
       }
@@ -30,14 +27,14 @@ export const authSlice = createSlice({
     )
 
     builder.addCase(getYandexServiceId.fulfilled, (state, action) => {
-      state.service_id = action.payload.data.service_id
+      state.serviceId = action.payload.data.service_id
     })
 
-    builder.addCase(postYandexOAuth.fulfilled, state => {
-      {
-        state.isUserAuthorized = true
+    builder.addCase(postYandexOAuth.fulfilled, () => {
+      
+        
         localStorage.setItem('auth', "userAuthorized")
-      }
+      
 
     })
     builder.addCase(postYandexOAuth.rejected, (state, action) => {
@@ -45,17 +42,16 @@ export const authSlice = createSlice({
         (action.payload?.data as RejectReason).reason ===
         'User already in system'
       ) {
-        state.isUserAuthorized = true
+        
         localStorage.setItem('auth', "userAuthorized")
       }
       else {
-        state.isUserAuthorized = false
+      
         localStorage.removeItem('auth')
         alert('Аккаунт Яндекс не подтвержден')
       }
     })
-    builder.addCase(logout.fulfilled, (state) => {
-      state.isUserAuthorized = false
+    builder.addCase(logout.fulfilled, () => {      
       localStorage.removeItem('auth')
     })
   },

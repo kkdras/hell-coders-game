@@ -22,6 +22,7 @@ export const Drawler = () => {
 
   const handleLogout = () => {
     dispatch(logout())
+    dispatch(clearUser())
     localStorage.removeItem("auth")
   }
 
