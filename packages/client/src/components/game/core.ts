@@ -8,6 +8,7 @@ import {
 } from './const'
 import { EventBus, getRandomInt, rotateMatrix } from './utils'
 import Image from '../../image/gameover.png'
+import { saveScore } from '../../store/leaderboard/actions'
 
 interface FigureParameters {
   name: FigureNames
@@ -196,6 +197,8 @@ export class GameConstructor extends EventBus {
 
         if (figure.row + row <= 0) {
           this.showGameOver()
+          const score = Math.floor(Math.random() * 100000); // TODO replace to real score
+          saveScore(score)
           return
         }
 
@@ -238,6 +241,7 @@ export class GameConstructor extends EventBus {
   }
 
   public start() {
+
     let secondsBefore = this.beforeStartSeconds
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.context.textAlign = 'center'
@@ -272,6 +276,8 @@ export class GameConstructor extends EventBus {
       }
       return secondsBefore
     }
+  
+
   }
 
   private rotateCurrentFigure(rotateBack = false) {
