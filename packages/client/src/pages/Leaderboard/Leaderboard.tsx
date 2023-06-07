@@ -1,7 +1,9 @@
-import { useEffect } from 'react'
+import { BASE_URL } from '../../shared/consts'
 import { Box } from '@mui/material'
-import testAvatar from '../../image/avatar1.png'
 import { DataGrid, GridCellParams } from '@mui/x-data-grid'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { User } from '../../store/leaderboard/types'
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 80 },
@@ -12,7 +14,7 @@ const columns = [
     width: 80,
     renderCell: (params: GridCellParams) => (
       <img
-        src={params.value as string}
+        src={`${BASE_URL}/resources${params.value}`}
         style={{ width: 37, borderRadius: '50%' }}
       />
     ),
@@ -23,30 +25,46 @@ const columns = [
     width: 150,
   },
   {
-    field: 'points',
-    headerName: 'Points',
+    field: 'score',
+    headerName: 'Score',
     type: 'number',
     width: 100,
   },
 ]
 
-const rows = [
-  { id: 1, avatar: testAvatar, name: 'Vasya', points: 1000000 },
-  { id: 2, avatar: testAvatar, name: 'Petya', points: 9000 },
-  { id: 3, avatar: testAvatar, name: 'Masha', points: 8000 },
-  { id: 4, avatar: testAvatar, name: 'Tetya', points: 7000 },
-  { id: 5, avatar: testAvatar, name: 'Motya', points: 6000 },
-  { id: 6, avatar: testAvatar, name: 'Ira', points: 5000 },
-  { id: 7, avatar: testAvatar, name: 'Dima', points: 4000 },
-  { id: 8, avatar: testAvatar, name: 'Tanya', points: 3000 },
-  { id: 9, avatar: testAvatar, name: 'Olga', points: 2000 },
-  { id: 10, avatar: testAvatar, name: 'Kostya Super Long Name', points: 1000 },
-  { id: 11, avatar: testAvatar, name: 'Name on next Page', points: 500 },
-]
+export const LeaderBoard = () => {
+  const data = {
+    ratingFieldName: 'score',
+    cursor: 0,
+    limit: 100,
+  }
 
-export function LeaderBoard() {
+  const [users, setUsers] = useState<User[]>([])
+
   useEffect(() => {
     document.title = 'Таблица рекордов - Тетрис'
+  }, [])
+
+  useEffect(() => {
+    axios
+      .post(`${BASE_URL}/leaderboard/hell-coders`, data, {
+        withCredentials: true,
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(response => {
+        const formattedData = response.data.map((item: any, index: number) => ({
+          id: index + 1,
+          name: item.data.name,
+          score: parseInt(item.data.score),
+          avatar: item.data.avatar,
+        }))
+        setUsers(formattedData)
+      })
+      .catch(error => {
+        console.error(error)
+      })
   }, [])
 
   return (
@@ -63,7 +81,7 @@ export function LeaderBoard() {
       </Box>
       <Box sx={{ m: 1, mt: 3 }}>
         <DataGrid
-          rows={rows}
+          rows={users}
           columns={columns}
           initialState={{
             pagination: {
