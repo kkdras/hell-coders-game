@@ -24,11 +24,8 @@ export const postAuth = createAsyncThunk<
 >('auth/postAuth', async (data, { rejectWithValue }) => {
   try {
     const response = await axios.post(`${BASE_URL}/auth/signin`, data, {
-      withCredentials: true,      
-      headers: {
-        'Content-type': 'application/json',
-        'Cookie': 'COOKIE',
-      },
+      withCredentials: true,
+
     })
     return response
   } catch (error) {
@@ -40,15 +37,16 @@ export const logout = createAsyncThunk<
   AxiosResponse,
   void,
   { rejectValue: AxiosError['response'] }
->('auth/logout', async (_: void, { rejectWithValue }) => {
+>('auth/logout', async (_, { rejectWithValue }) => {
   try {
     const response = await axios.post(`${BASE_URL}/auth/logout`, {
-
       withCredentials: true,
       headers: {
         'Content-type': 'application/json',
-        'Cookie': 'COOKIE',
+
+
       },
+      crossDomains: true
     })
     return response
   } catch (error) {
