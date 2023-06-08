@@ -31,7 +31,7 @@ class AuthController {
   async logout() {
     try {
       await this.api.logout();
-    } catch (e: any) { }
+    } catch (e: any) { console.log(e) }
   }
 }
 
