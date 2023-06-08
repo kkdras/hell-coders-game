@@ -14,6 +14,7 @@ export const Auth: FC<PropsWithChildren> = ({ children }) => {
   const location = useLocation()
   const { user } = useSelector((state: RootState) => state.user)
 
+  // после обновления, получаем пользователя заново
   useEffect(() => {
     if (isUserAuthorized && !user) dispatch(getAuthUser())
   }, [])

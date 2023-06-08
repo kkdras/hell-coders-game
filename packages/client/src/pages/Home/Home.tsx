@@ -18,7 +18,8 @@ import { redirect_uri } from '../../processes/auth/const'
 
 export const Home = () => {
   const dispatch = useDispatch<AppStoreDispatch>()
-
+  
+  // получение code пользователя Яндекс из url. Формат: http://localhost:3000/?code=4751985
   useEffect(() => {
     if (window.location.search.toString().split('=').length > 1)
       dispatch(
