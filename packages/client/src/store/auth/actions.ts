@@ -61,7 +61,7 @@ export const getYandexServiceId = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >(
   'auth/yandex/service-id',
-  async (redirect_uri, { rejectWithValue, dispatch }) => {
+  async (redirect_uri, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${BASE_URL}/oauth/yandex/service-id/`, {
         params: { redirect_uri: redirect_uri },
