@@ -20,7 +20,7 @@ export const Home = () => {
   const dispatch = useDispatch<AppStoreDispatch>()
 
   useEffect(() => {
-    if (window.location.search.toString().split('=').length) dispatch(
+    if (window.location.search.toString().split('=').length > 1) dispatch(
       postYandexOAuth({
         code: window.location.search.toString().split('=')[1],
         redirect_uri: redirect_uri,
