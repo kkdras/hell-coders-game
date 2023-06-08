@@ -1,10 +1,10 @@
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
-import { Link } from 'react-router-dom'
+import { Link, } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FormProvider, useForm } from 'react-hook-form'
 import { AuthForm } from './types'
 import { getYandexServiceId, postAuth } from '../../store/auth/actions'
@@ -17,9 +17,16 @@ import { authSchema } from '../../shared/utils/formSchema'
 import { getAuthUser } from '../../store/user/actions'
 import Image from '../../image/YandexLogo.png'
 import AuthController from '../../controllers/AuthController'
+import { RootState } from '../../store/rootReducer'
+import { useEffect } from 'react'
 
 export function AuthorizationForm() {
   const dispatch = useDispatch<AppStoreDispatch>()
+
+
+  useEffect(() => {
+    console.log(window.location)
+  }, [window.location])
 
   const methods = useForm<AuthForm>({
     defaultValues,
@@ -28,8 +35,8 @@ export function AuthorizationForm() {
 
   const yandexOAuthRequest = () => {
     dispatch(getYandexServiceId(redirect_uri))
-
   }
+
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {

@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { userState } from '../user/const'
 import { getYandexServiceId, logout, postAuth, postYandexOAuth } from './actions'
-import { initialState } from './const'
+import { authState, initialState } from './const'
 import { RejectReason } from './types'
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
+  reducers: { 
   },
   extraReducers: builder => {
     builder.addCase(postAuth.fulfilled, () => {      
@@ -26,12 +27,8 @@ export const authSlice = createSlice({
     }
     )
 
-    builder.addCase(getYandexServiceId.fulfilled, (state, action) => {
-      state.serviceId = action.payload.data.service_id
-    })
-
-    builder.addCase(postYandexOAuth.fulfilled, () => {
-      
+   
+    builder.addCase(postYandexOAuth.fulfilled, () => {     
         
         localStorage.setItem('auth', "userAuthorized")
       
@@ -56,3 +53,4 @@ export const authSlice = createSlice({
     })
   },
 })
+

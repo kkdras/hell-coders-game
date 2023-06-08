@@ -10,8 +10,24 @@ import { Box } from '@mui/material'
 import { listOptions } from './const'
 import { useNavigate } from 'react-router-dom'
 import { RouteNames } from '../../App'
+import { useEffect } from 'react'
+import { postYandexOAuth } from '../../store/auth/actions'
+import { useDispatch } from 'react-redux'
+import { AppStoreDispatch } from '../../store'
+import { redirect_uri } from '../../processes/auth/const'
 
 export const Home = () => {
+  const dispatch = useDispatch<AppStoreDispatch>()
+
+  useEffect(() => {
+    if (window.location.search.toString().split('=').length) dispatch(
+      postYandexOAuth({
+        code: window.location.search.toString().split('=')[1],
+        redirect_uri: redirect_uri,
+      }))
+  }, [window.location.search])
+
+
   const navigate = useNavigate()
   return (
     <>

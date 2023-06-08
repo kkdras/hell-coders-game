@@ -66,12 +66,8 @@ export const getYandexServiceId = createAsyncThunk<
       const response = await axios.get(`${BASE_URL}/oauth/yandex/service-id/`, {
         params: { redirect_uri: redirect_uri },
       })
-      dispatch(
-        postYandexOAuth({
-          code: response.data.service_id,
-          redirect_uri: redirect_uri,
-        })
-      )
+      
+      window.location.replace(`https://oauth.yandex.ru/authorize?response_type=code&client_id=${response.data.service_id}&redirect_uri=${redirect_uri}`)  
       return response
     } catch (error) {
       return rejectWithValue((error as AxiosError)?.response)
@@ -86,11 +82,7 @@ export const postYandexOAuth = createAsyncThunk<
 >('auth/yandex', async (data, { rejectWithValue, dispatch }) => {
   try {
     const response = await axios.post(`${BASE_URL}/oauth/yandex`, data, {
-      withCredentials: true,
-      headers: {
-        'Content-type': 'application/json',
-        'Cookie': 'COOKIE',
-      },
+      withCredentials: true,    
     })
     dispatch(getAuthUser())
     return response
