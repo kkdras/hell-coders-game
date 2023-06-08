@@ -2,11 +2,9 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
-import createEmotionServer from '@emotion/server/create-instance'
 import express from 'express'
 import * as fs from 'fs'
 import * as path from 'path'
-import createCache from '@emotion/cache'
 
 dotenv.config()
 
@@ -57,33 +55,18 @@ async function startServer() {
         template = await vite!.transformIndexHtml(url, template)
       }
 
-      interface SSRModule {
-        render: (uri: string) => Promise<string>
-        // cache: any
-      }
-
-      let mod: SSRModule
+      let mod
 
       if (isDev()) {
-        mod = (await vite!.ssrLoadModule(
-          path.resolve(srcPath, 'ssr.tsx')
-        )) as SSRModule
+        mod = await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx'))
       } else {
         mod = await import(ssrClientPath)
       }
 
       const { render } = mod
 
-      const appHtml = await render(url)
-
-      const cache = createCache({ key: 'css' })
-
-      const { extractCriticalToChunks, constructStyleTagsFromChunks } =
-        createEmotionServer(cache)
-
-      const emotionChunks = extractCriticalToChunks(appHtml)
-      const emotionCss = constructStyleTagsFromChunks(emotionChunks)
-
+      const { appHtml, emotionCss } = await render(url)
+      console.log(appHtml)
       const html = template
         .replace(`<!--ssr-outlet-->`, appHtml)
         .replace(`<!--css-->`, emotionCss)

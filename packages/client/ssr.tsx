@@ -8,14 +8,18 @@ import App from './src/App'
 import createEmotionCache from './src/utils/createEmotionCache'
 import { CacheProvider } from '@emotion/react'
 import CssBaseline from '@mui/material/CssBaseline'
+import createEmotionServer from '@emotion/server/create-instance'
 
 interface Props {
   path: string
 }
-const cache = createEmotionCache()
 
 export const render = ({ path }: Props) => {
-  return renderToString(
+  const cache = createEmotionCache()
+  const { extractCriticalToChunks, constructStyleTagsFromChunks } =
+    createEmotionServer(cache)
+
+  const appHtml = renderToString(
     <StaticRouter location={path}>
       <Provider store={store}>
         <CacheProvider value={cache}>
@@ -27,4 +31,7 @@ export const render = ({ path }: Props) => {
       </Provider>
     </StaticRouter>
   )
+  const emotionChunks = extractCriticalToChunks(appHtml)
+  const emotionCss = constructStyleTagsFromChunks(emotionChunks)
+  return { appHtml, emotionCss }
 }
