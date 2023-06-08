@@ -1,5 +1,6 @@
 import AuthAPI from '../api/AuthApi/AuthApi';
-import { SigninData } from '../api/AuthApi/types';
+import { SignInRequest } from '../store/auth/types';
+
 
 
 class AuthController {
@@ -9,7 +10,7 @@ class AuthController {
     this.api = new AuthAPI;
   }
 
-  async signin(data: SigninData) {
+  async signin(data: SignInRequest) {
     try {
       await this.api.signin(data);
       localStorage.setItem('auth', "userAuthorized")
@@ -30,9 +31,7 @@ class AuthController {
   async logout() {
     try {
       await this.api.logout();
-    } catch (e: any) {
-      alert(e);
-    }
+    } catch (e: any) { }
   }
 }
 
