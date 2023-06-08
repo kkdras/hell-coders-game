@@ -1,6 +1,5 @@
+import { SignInRequest } from '../../store/auth/types';
 import BaseAPI from '../BaseApi/BaseApi';
-import { SigninData, SignupData, User } from './types';
-
 
 
 
@@ -9,23 +8,15 @@ export default class AuthAPI extends BaseAPI {
     super('/auth');
   }
 
-  signin(data: SigninData) {
+  signin(data: SignInRequest) {
     return this.http.post('/signin', data);
-  }
-
-
-  signup(data: SignupData) {
-    return this.http.post('/signup', data);
-  }
-
-  read(): Promise<User> {
-    return this.http.get('/user');
   }
 
   logout() {
     return this.http.post('/logout');
   }
 
+  read = undefined;
   create = undefined;
   update = undefined;
   delete = undefined;

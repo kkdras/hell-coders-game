@@ -1,7 +1,6 @@
 import AuthAPI from '../api/AuthApi/AuthApi';
-import { SigninData, SignupData } from '../api/AuthApi/types';
-import { getAuthUser } from '../store/user/actions';
-import { store } from '../store';
+import { SigninData } from '../api/AuthApi/types';
+
 
 class AuthController {
   private readonly api: AuthAPI;

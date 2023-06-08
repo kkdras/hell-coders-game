@@ -17,15 +17,10 @@ import { authSchema } from '../../shared/utils/formSchema'
 import { getAuthUser } from '../../store/user/actions'
 import Image from '../../image/YandexLogo.png'
 import AuthController from '../../controllers/AuthController'
-import { useEffect } from 'react'
 
 export function AuthorizationForm() {
   const dispatch = useDispatch<AppStoreDispatch>()
-
-
-  useEffect(() => {
-    console.log(window.location)
-  }, [window.location])
+ 
 
   const methods = useForm<AuthForm>({
     defaultValues,
