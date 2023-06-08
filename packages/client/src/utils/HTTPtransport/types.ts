@@ -1,6 +1,6 @@
-import { Method } from "./const";
+import { Method } from './const'
 
 export type Options = {
-  method: Method;
-  data?: unknown;
-};
+  method: Method
+  data?: unknown
+}

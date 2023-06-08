@@ -25,7 +25,6 @@ export const postAuth = createAsyncThunk<
   try {
     const response = await axios.post(`${BASE_URL}/auth/signin`, data, {
       withCredentials: true,
-
     })
     return response
   } catch (error) {
@@ -43,10 +42,8 @@ export const logout = createAsyncThunk<
       withCredentials: true,
       headers: {
         'Content-type': 'application/json',
-
-
       },
-      crossDomains: true
+      crossDomains: true,
     })
     return response
   } catch (error) {
@@ -54,26 +51,24 @@ export const logout = createAsyncThunk<
   }
 })
 
-
 export const getYandexServiceId = createAsyncThunk<
   AxiosResponse,
   string,
   { rejectValue: AxiosError['response'] }
->(
-  'auth/yandex/service-id',
-  async (redirect_uri, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(`${BASE_URL}/oauth/yandex/service-id/`, {
-        params: { redirect_uri: redirect_uri },
-      })
-      
-      window.location.replace(`https://oauth.yandex.ru/authorize?response_type=code&client_id=${response.data.service_id}&redirect_uri=${redirect_uri}`)  
-      return response
-    } catch (error) {
-      return rejectWithValue((error as AxiosError)?.response)
-    }
+>('auth/yandex/service-id', async (redirect_uri, { rejectWithValue }) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/oauth/yandex/service-id/`, {
+      params: { redirect_uri: redirect_uri },
+    })
+
+    window.location.replace(
+      `https://oauth.yandex.ru/authorize?response_type=code&client_id=${response.data.service_id}&redirect_uri=${redirect_uri}`
+    )
+    return response
+  } catch (error) {
+    return rejectWithValue((error as AxiosError)?.response)
   }
-)
+})
 
 export const postYandexOAuth = createAsyncThunk<
   AxiosResponse,
@@ -82,7 +77,7 @@ export const postYandexOAuth = createAsyncThunk<
 >('auth/yandex', async (data, { rejectWithValue, dispatch }) => {
   try {
     const response = await axios.post(`${BASE_URL}/oauth/yandex`, data, {
-      withCredentials: true,    
+      withCredentials: true,
     })
     dispatch(getAuthUser())
     return response
@@ -90,6 +85,3 @@ export const postYandexOAuth = createAsyncThunk<
     return rejectWithValue((error as AxiosError)?.response)
   }
 })
-function dispatch() {
-  throw new Error('Function not implemented.')
-}

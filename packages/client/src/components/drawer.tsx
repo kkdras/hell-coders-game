@@ -12,7 +12,6 @@ import { RouteNames } from '../App'
 import { RootState } from '../store/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearUser } from '../store/user/slice'
-import { logout } from '../store/auth/actions'
 import { AppStoreDispatch } from '../store'
 import AuthController from '../controllers/AuthController'
 
@@ -24,7 +23,7 @@ export const Drawler = () => {
   const handleLogout = () => {
     AuthController.logout()
     dispatch(clearUser())
-    localStorage.removeItem("auth")
+    localStorage.removeItem('auth')
   }
 
   return (

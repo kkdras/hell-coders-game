@@ -33,7 +33,7 @@ export function ForumAccordeon(forum: IForum) {
             <IconButton
               color="success"
               onClick={e => {
-                console.log('clicked')
+                console.log(e)
               }}>
               <AddIcon />
             </IconButton>
