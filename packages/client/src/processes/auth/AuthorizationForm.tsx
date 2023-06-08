@@ -16,6 +16,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { authSchema } from '../../shared/utils/formSchema'
 import { getAuthUser } from '../../store/user/actions'
 import Image from '../../image/YandexLogo.png'
+import AuthController from '../../controllers/AuthController'
 
 export function AuthorizationForm() {
   const dispatch = useDispatch<AppStoreDispatch>()
@@ -32,7 +33,7 @@ export function AuthorizationForm() {
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
-    dispatch(postAuth(data)).then(() => dispatch(getAuthUser()))
+    AuthController.signin(data).then(() => dispatch(getAuthUser()))
 
   })
 

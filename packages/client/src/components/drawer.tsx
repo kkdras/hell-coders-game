@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { clearUser } from '../store/user/slice'
 import { logout } from '../store/auth/actions'
 import { AppStoreDispatch } from '../store'
+import AuthController from '../controllers/AuthController'
 
 export const Drawler = () => {
   const isUserAuthorized = localStorage.getItem('auth')
@@ -21,7 +22,7 @@ export const Drawler = () => {
   const { isDrawlerOpened } = useSelector((state: RootState) => state.app)
 
   const handleLogout = () => {
-    dispatch(logout())
+    AuthController.logout()
     dispatch(clearUser())
     localStorage.removeItem("auth")
   }
