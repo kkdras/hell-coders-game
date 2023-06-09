@@ -1,8 +1,5 @@
 import { BASE_URL } from '../../shared/consts'
-import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store/rootReducer'
 import { User } from './types'
 import { store } from '../../store'
 

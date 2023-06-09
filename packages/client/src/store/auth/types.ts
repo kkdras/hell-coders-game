@@ -15,3 +15,8 @@ export interface SignInRequest {
 export interface RejectReason {
   reason: string
 }
+
+export interface OauthSignInRequest {
+  code: string
+  redirect_uri: string
+}

@@ -11,16 +11,19 @@ import { Link } from 'react-router-dom'
 import { RouteNames } from '../App'
 import { RootState } from '../store/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../store/auth/slice'
 import { clearUser } from '../store/user/slice'
+import { AppStoreDispatch } from '../store'
+import AuthController from '../controllers/AuthController'
 
 export const Drawler = () => {
-  const dispatch = useDispatch()
+  const isUserAuthorized = localStorage.getItem('auth')
+  const dispatch = useDispatch<AppStoreDispatch>()
   const { isDrawlerOpened } = useSelector((state: RootState) => state.app)
 
   const handleLogout = () => {
-    dispatch(logout())
+    AuthController.logout()
     dispatch(clearUser())
+    localStorage.removeItem('auth')
   }
 
   return (
@@ -67,56 +70,30 @@ export const Drawler = () => {
               <Link to={RouteNames.PROFILE}>
                 <ListItemText
                   sx={{ color: 'text.primary' }}
-                  primary="Profile"
+                  primary={isUserAuthorized ? 'Profile' : 'Войти'}
                 />
               </Link>
             </ListItemButton>
           </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.ERROR_404}>
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="Error 404"
-                />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.ERROR_500}>
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="Error 500"
-                />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.ERROR_COMPONENT}>
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="Error Component"
-                />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.REGISTER}>
-                <ListItemText
-                  sx={{ color: 'text.primary' }}
-                  primary="Register"
-                />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton onClick={handleLogout}>
-              <ListItemText sx={{ color: 'text.primary' }} primary="Выход" />
-            </ListItemButton>
-          </ListItem>
+          {!isUserAuthorized && (
+            <ListItem>
+              <ListItemButton>
+                <Link to={RouteNames.REGISTER}>
+                  <ListItemText
+                    sx={{ color: 'text.primary' }}
+                    primary="Register"
+                  />
+                </Link>
+              </ListItemButton>
+            </ListItem>
+          )}
+          {isUserAuthorized && (
+            <ListItem>
+              <ListItemButton onClick={handleLogout}>
+                <ListItemText sx={{ color: 'text.primary' }} primary="Выход" />
+              </ListItemButton>
+            </ListItem>
+          )}
         </List>
       </Box>
     </Drawer>
