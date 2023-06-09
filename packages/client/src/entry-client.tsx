@@ -8,15 +8,22 @@ import { theme } from './theme'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import { startServiceWorker } from './serviceWorker'
+import { CacheProvider } from '@emotion/react'
+import createEmotionCache from './utils/createEmotionCache'
 
 startServiceWorker()
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+const cache = createEmotionCache()
+
+ReactDOM.hydrateRoot(
+  document.getElementById('root') as HTMLElement,
   <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </ThemeProvider>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ThemeProvider>
+    </CacheProvider>
   </BrowserRouter>
 )

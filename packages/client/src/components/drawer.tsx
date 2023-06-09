@@ -16,7 +16,8 @@ import { AppStoreDispatch } from '../store'
 import AuthController from '../controllers/AuthController'
 
 export const Drawler = () => {
-  const isUserAuthorized = localStorage.getItem('auth')
+  const isUserAuthorized =
+    typeof window !== 'undefined' && localStorage.getItem('auth')
   const dispatch = useDispatch<AppStoreDispatch>()
   const { isDrawlerOpened } = useSelector((state: RootState) => state.app)
 

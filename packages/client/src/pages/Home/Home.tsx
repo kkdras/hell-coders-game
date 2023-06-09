@@ -18,17 +18,17 @@ import { redirect_uri } from '../../processes/auth/const'
 
 export const Home = () => {
   const dispatch = useDispatch<AppStoreDispatch>()
-  
+  const search = typeof window !== 'undefined' && window.location.search
   // получение code пользователя Яндекс из url. Формат: http://localhost:3000/?code=4751985
   useEffect(() => {
-    if (window.location.search.toString().split('=').length > 1)
+    if (search.toString().split('=').length > 1)
       dispatch(
         postYandexOAuth({
-          code: window.location.search.toString().split('=')[1],
+          code: search.toString().split('=')[1],
           redirect_uri: redirect_uri,
         })
       )
-  }, [window.location.search])
+  }, [search])
 
   const navigate = useNavigate()
   return (

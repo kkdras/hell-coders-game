@@ -10,7 +10,8 @@ import { AuthorizationForm } from './AuthorizationForm'
 
 export const Auth: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useDispatch<AppStoreDispatch>()
-  const isUserAuthorized = localStorage.getItem('auth')
+  const isUserAuthorized =
+    typeof window !== 'undefined' && localStorage.getItem('auth')
   const location = useLocation()
   const { user } = useSelector((state: RootState) => state.user)
 
