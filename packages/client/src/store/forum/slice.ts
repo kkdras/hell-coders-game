@@ -8,8 +8,8 @@ export const forumSlice = createSlice({
   initialState,
   reducers: {
   },
-  extraReducers: builder => {
+  /* extraReducers: builder => {
 
-  },
+  }, */
 })
 
