@@ -8,11 +8,11 @@ const mainAxios = axios.create({
   baseURL: YANDEX_BASE_URL
 });
 
-const forumAxios = axios.create({
+const customAxios = axios.create({
   baseURL: CUSTOM_BASE_URL
 });
 
 export {
   mainAxios,
-  forumAxios
+  customAxios
 };
