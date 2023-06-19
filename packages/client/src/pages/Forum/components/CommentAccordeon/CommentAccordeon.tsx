@@ -10,29 +10,25 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import { messages } from '../../const'
-import { ITheme } from '../../types'
+import { IComment } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { MessagesTable } from '../MessagesTable/MessagesTable'
+import { ReplyesTable } from '../ReplyesTable/ReplyesTable'
 import { deepOrange } from '@mui/material/colors'
 
-export function ThemeAccordeon(theme: ITheme) {
+export function CommentAccordeon(comment: IComment) {
   const lightOrange = deepOrange[400]
 
   return (
-    <Accordion sx={{ borderRadius: '5%' }} key={theme.id}>
+    <Accordion sx={{ borderRadius: '5%' }} key={comment.id}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content">
         <Grid container spacing={2} color={'text.primary'}>
           <Grid item xs={9}>
-            <Typography>{theme.title}</Typography>
+            <Typography>{comment.title}</Typography>
           </Grid>
           <Grid item xs={1}>
-            <Typography>{theme.answersCount}</Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Typography pl={2}>{theme.lastAnswer}</Typography>
+            <Typography>{comment.replyes?.length}</Typography>
           </Grid>
         </Grid>
       </AccordionSummary>
@@ -51,20 +47,17 @@ export function ThemeAccordeon(theme: ITheme) {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody sx={{ backgroundColor: lightOrange }}>
-            {messages.map(
-              message =>
-                message.themeId === theme.id && (
-                  <MessagesTable
-                    id={message.id}
-                    themeId={message.themeId}
-                    author={message.author}
-                    time={message.time}
-                    text={message.text}
+          {comment.replyes?.length &&
+            <TableBody sx={{ backgroundColor: lightOrange }}>
+              {comment.replyes.map(
+                reply =>
+                (
+                  <ReplyesTable
+                    {...reply}
                   />
                 )
-            )}
-          </TableBody>
+              )}
+            </TableBody>}
         </Table>
       </AccordionDetails>
     </Accordion>

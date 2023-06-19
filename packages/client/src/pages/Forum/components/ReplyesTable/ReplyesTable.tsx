@@ -1,17 +1,19 @@
 import { TableCell, TableRow } from '@mui/material'
-import { IMessage } from '../../types'
+import { IReply } from '../../../../store/forum/types'
 
-export function MessagesTable(message: IMessage) {
+export function ReplyesTable(reply: IReply) {
+
+
   return (
-    <TableRow key={message.id}>
+    <TableRow key={reply.id}>
       <TableCell align="left" colSpan={2}>
-        {message.text}
+        {reply.text}
       </TableCell>
       <TableCell align="center" colSpan={2}>
-        {message.author}
+        {reply.authorLogin}
       </TableCell>
       <TableCell align="center" colSpan={2}>
-        {message.time}
+        {reply.time}
       </TableCell>
     </TableRow>
   )

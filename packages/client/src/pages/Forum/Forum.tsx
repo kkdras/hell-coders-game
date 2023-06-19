@@ -1,8 +1,8 @@
 import { Grid, Typography, Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { forums } from './const'
+import { topics } from './const'
 import { ArrowBack } from '@mui/icons-material'
-import { ForumAccordeon } from './components/ForumAccordeon/ForumAccordion'
+import { TopicAccordeon } from './components/TopicAccordeon/TopicAccordeon'
 import { useEffect } from 'react'
 
 export function Forum() {
@@ -20,22 +20,18 @@ export function Forum() {
       />
       <Grid container spacing={2} pt={12} pb={4} color={'blue'}>
         <Grid item xs={8}>
-          <Typography pl={2}>ФОРУМЫ</Typography>
+          <Typography pl={2}>ТОПИКИ</Typography>
         </Grid>
         <Grid item xs={2}>
-          <Typography pl={8}>ТЕМЫ</Typography>
+          <Typography pl={8}>КОММЕНТАРИИ</Typography>
         </Grid>
         <Grid item xs={2}>
           <Typography pl={8}>ОТВЕТЫ</Typography>
         </Grid>
       </Grid>
-      {forums.map(forum => (
-        <ForumAccordeon
-          key={forum.id}
-          id={forum.id}
-          themesCount={forum.themesCount}
-          answersCount={forum.answersCount}
-          title={forum.title}
+      {topics.map(topic => (
+        <TopicAccordeon
+          {...topic}
         />
       ))}
     </Box>

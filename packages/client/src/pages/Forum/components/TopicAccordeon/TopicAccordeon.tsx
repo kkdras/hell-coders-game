@@ -6,28 +6,27 @@ import {
   IconButton,
   Typography,
 } from '@mui/material'
-import { themes } from '../../const'
-import { IForum } from '../../types'
+import { ITopic } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import AddIcon from '@mui/icons-material/Add'
-import { ThemeAccordeon } from '../ThemeAccordeon/ThemeAccordeon'
+import { CommentAccordeon } from '../CommentAccordeon/CommentAccordeon'
 import { lightBlue } from '@mui/material/colors'
 
-export function ForumAccordeon(forum: IForum) {
+export function TopicAccordeon(topic: ITopic) {
   const lightLightBlue = lightBlue[50]
   return (
     <Accordion
       sx={{ backgroundColor: lightLightBlue, borderRadius: '5%' }}
-      key={forum.id}>
+      key={topic.id}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content">
         <Grid container spacing={2} color={'text.primary'}>
           <Grid item xs={9}>
-            <Typography pt={1}>{forum.title}</Typography>
+            <Typography pt={1}>{topic.title}</Typography>
           </Grid>
           <Grid item xs={1}>
-            <Typography pt={1}>{forum.themesCount}</Typography>
+            <Typography pt={1}>{topic.comments.length}</Typography>
           </Grid>
           <Grid item xs={1}>
             <IconButton
@@ -37,9 +36,6 @@ export function ForumAccordeon(forum: IForum) {
               }}>
               <AddIcon />
             </IconButton>
-          </Grid>
-          <Grid item xs={1}>
-            <Typography pt={1}>{forum.answersCount}</Typography>
           </Grid>
         </Grid>
       </AccordionSummary>
@@ -52,7 +48,7 @@ export function ForumAccordeon(forum: IForum) {
           fontStyle={'italic'}>
           <Grid item xs={8}>
             <Typography pl={2} variant="body2">
-              Темы
+              Комментарии
             </Typography>
           </Grid>
           <Grid item xs={1}>
@@ -66,19 +62,13 @@ export function ForumAccordeon(forum: IForum) {
             </Typography>
           </Grid>
         </Grid>
-        {themes.map(
-          theme =>
-            theme.forumId === forum.id && (
-              <ThemeAccordeon
-                key={theme.id}
-                id={theme.id}
-                forumId={theme.forumId}
-                title={theme.title}
-                answersCount={theme.answersCount}
-                lastAnswer={theme.lastAnswer}
-              />
-            )
-        )}
+        {topic.comments.map(
+          comment =>
+            <CommentAccordeon
+              {...comment}
+            />
+        )
+        }
       </AccordionDetails>
     </Accordion>
   )

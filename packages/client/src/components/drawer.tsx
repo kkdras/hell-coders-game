@@ -59,13 +59,14 @@ export const Drawler = () => {
               </Link>
             </ListItemButton>
           </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Link to={RouteNames.FORUM}>
-                <ListItemText sx={{ color: 'text.primary' }} primary="Forum" />
-              </Link>
-            </ListItemButton>
-          </ListItem>
+          {isUserAuthorized && (
+            <ListItem>
+              <ListItemButton>
+                <Link to={RouteNames.FORUM}>
+                  <ListItemText sx={{ color: 'text.primary' }} primary="Forum" />
+                </Link>
+              </ListItemButton>
+            </ListItem>)}
           <ListItem>
             <ListItemButton>
               <Link to={RouteNames.PROFILE}>
