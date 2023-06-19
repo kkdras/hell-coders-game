@@ -11,9 +11,19 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import AddIcon from '@mui/icons-material/Add'
 import { CommentAccordeon } from '../CommentAccordeon/CommentAccordeon'
 import { lightBlue } from '@mui/material/colors'
+import { RootState } from '../../../../store/rootReducer'
+import { useSelector } from 'react-redux'
 
 export function TopicAccordeon(topic: ITopic) {
   const lightLightBlue = lightBlue[50]
+  const { topics } = useSelector((state: RootState) => state.forum)
+  // const selectedTopicComments = topics.find((item => item.id === topic.id))?.comments;
+
+  /*  useEffect(() => {
+     getTopic(topic.id);
+  }, []) */
+
+
   return (
     <Accordion
       sx={{ backgroundColor: lightLightBlue, borderRadius: '5%' }}
@@ -65,6 +75,7 @@ export function TopicAccordeon(topic: ITopic) {
         {topic.comments.map(
           comment =>
             <CommentAccordeon
+              key={comment.id}
               {...comment}
             />
         )

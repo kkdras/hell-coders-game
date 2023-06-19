@@ -4,12 +4,21 @@ import { topics } from './const'
 import { ArrowBack } from '@mui/icons-material'
 import { TopicAccordeon } from './components/TopicAccordeon/TopicAccordeon'
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store/rootReducer'
 
 export function Forum() {
   const navigate = useNavigate()
+  // const { topics } = useSelector((state: RootState) => state.forum)
+
+
   useEffect(() => {
     document.title = 'Форум'
   }, [])
+
+  /*  useEffect(() => {
+      getAllTopics();
+   }, []) */
 
   return (
     <Box pt={4}>
@@ -22,15 +31,10 @@ export function Forum() {
         <Grid item xs={8}>
           <Typography pl={2}>ТОПИКИ</Typography>
         </Grid>
-        <Grid item xs={2}>
-          <Typography pl={8}>КОММЕНТАРИИ</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography pl={8}>ОТВЕТЫ</Typography>
-        </Grid>
       </Grid>
       {topics.map(topic => (
         <TopicAccordeon
+          key={topic.id}
           {...topic}
         />
       ))}

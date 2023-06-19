@@ -14,9 +14,18 @@ import { IComment } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { ReplyesTable } from '../ReplyesTable/ReplyesTable'
 import { deepOrange } from '@mui/material/colors'
+import { RootState } from '../../../../store/rootReducer'
+import { useSelector } from 'react-redux'
 
 export function CommentAccordeon(comment: IComment) {
   const lightOrange = deepOrange[400]
+
+  const { topics } = useSelector((state: RootState) => state.forum)
+  //const replyes = topics.find(item => item.id === comment.topicId)?.comments.find(item => item.id === comment.id)?.replyes;
+
+  /*  useEffect(() => {
+     getComment(comment.id);
+  }, []) */
 
   return (
     <Accordion sx={{ borderRadius: '5%' }} key={comment.id}>
@@ -53,6 +62,7 @@ export function CommentAccordeon(comment: IComment) {
                 reply =>
                 (
                   <ReplyesTable
+                    key={reply.id}
                     {...reply}
                   />
                 )
