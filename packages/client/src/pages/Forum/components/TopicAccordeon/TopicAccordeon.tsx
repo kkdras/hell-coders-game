@@ -3,20 +3,18 @@ import {
   AccordionDetails,
   AccordionSummary,
   Grid,
-  IconButton,
   Typography,
 } from '@mui/material'
 import { ITopic } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import AddIcon from '@mui/icons-material/Add'
 import { CommentAccordeon } from '../CommentAccordeon/CommentAccordeon'
 import { lightBlue } from '@mui/material/colors'
-import { RootState } from '../../../../store/rootReducer'
-import { useSelector } from 'react-redux'
+
 
 export function TopicAccordeon(topic: ITopic) {
   const lightLightBlue = lightBlue[50]
-  const { topics } = useSelector((state: RootState) => state.forum)
+  // todo получение данных
+  //const { topics } = useSelector((state: RootState) => state.forum)
   // const selectedTopicComments = topics.find((item => item.id === topic.id))?.comments;
 
   /*  useEffect(() => {
@@ -37,15 +35,6 @@ export function TopicAccordeon(topic: ITopic) {
           </Grid>
           <Grid item xs={1}>
             <Typography pt={1}>{topic.comments.length}</Typography>
-          </Grid>
-          <Grid item xs={1}>
-            <IconButton
-              color="success"
-              onClick={e => {
-                console.log(e)
-              }}>
-              <AddIcon />
-            </IconButton>
           </Grid>
         </Grid>
       </AccordionSummary>
@@ -82,5 +71,7 @@ export function TopicAccordeon(topic: ITopic) {
         }
       </AccordionDetails>
     </Accordion>
+
+
   )
 }

@@ -20,7 +20,7 @@ import { useSelector } from 'react-redux'
 export function CommentAccordeon(comment: IComment) {
   const lightOrange = deepOrange[400]
 
-  const { topics } = useSelector((state: RootState) => state.forum)
+  // const { topics } = useSelector((state: RootState) => state.forum)
   //const replyes = topics.find(item => item.id === comment.topicId)?.comments.find(item => item.id === comment.id)?.replyes;
 
   /*  useEffect(() => {

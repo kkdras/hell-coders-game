@@ -1,7 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { initialState, forumState } from './const'
-import { AxiosResponse } from 'axios'
-import { ITopic } from './types'
+import { createSlice } from '@reduxjs/toolkit'
+import { initialState } from './const'
+
 
 export const forumSlice = createSlice({
   name: 'forum',

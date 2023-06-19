@@ -1,20 +1,20 @@
 export interface IReply {
-  id: number
-  commentId: number
+  id: string
+  commentId: string
   text?: string
   authorLogin: string
   time: string
 }
 
 export interface IComment {
-  id: number
-  topicId: number
+  id: string
+  topicId: string
   title?: string
   replyes?: IReply[]
 }
 
 export interface ITopic {
-  id: number
+  id: string
   title?: string
   comments: IComment[]
 }
