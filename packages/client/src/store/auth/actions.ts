@@ -18,40 +18,6 @@ export const postRegister = createAsyncThunk<
   }
 })
 
-export const postAuth = createAsyncThunk<
-  AxiosResponse,
-  SignInRequest,
-  { rejectValue: AxiosError['response'] }
->('auth/postAuth', async (data, { rejectWithValue }) => {
-  try {
-    const response = await mainAxios.post(`${YANDEX_BASE_URL}/auth/signin`, data, {
-      withCredentials: true,
-    })
-    return response
-  } catch (error) {
-    return rejectWithValue((error as AxiosError)?.response)
-  }
-})
-
-export const logout = createAsyncThunk<
-  AxiosResponse,
-  void,
-  { rejectValue: AxiosError['response'] }
->('auth/logout', async (_, { rejectWithValue }) => {
-  try {
-    const response = await mainAxios.post(`${YANDEX_BASE_URL}/auth/logout`, {
-      withCredentials: true,
-      headers: {
-        'Content-type': 'application/json',
-      },
-      crossDomains: true,
-    })
-    return response
-  } catch (error) {
-    return rejectWithValue((error as AxiosError)?.response)
-  }
-})
-
 export const getYandexServiceId = createAsyncThunk<
   AxiosResponse,
   string,
