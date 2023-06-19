@@ -10,11 +10,9 @@ export interface IComment {
   id: string
   topicId: string
   title?: string
-  replyes?: IReply[]
 }
 
 export interface ITopic {
   id: string
   title?: string
-  comments: IComment[]
 }

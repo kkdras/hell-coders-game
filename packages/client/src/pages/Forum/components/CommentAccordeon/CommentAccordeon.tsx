@@ -20,11 +20,11 @@ import { useSelector } from 'react-redux'
 export function CommentAccordeon(comment: IComment) {
   const lightOrange = deepOrange[400]
 
-  // const { topics } = useSelector((state: RootState) => state.forum)
-  //const replyes = topics.find(item => item.id === comment.topicId)?.comments.find(item => item.id === comment.id)?.replyes;
+  // const { replyes } = useSelector((state: RootState) => state.forum)
+  //const selectedCommentReplyes = replyes.filter(item => item.commentId === comment.id);
 
   /*  useEffect(() => {
-     getComment(comment.id);
+     getRelpyes(comment.id);
   }, []) */
 
   return (
@@ -36,9 +36,9 @@ export function CommentAccordeon(comment: IComment) {
           <Grid item xs={9}>
             <Typography>{comment.title}</Typography>
           </Grid>
-          <Grid item xs={1}>
-            <Typography>{comment.replyes?.length}</Typography>
-          </Grid>
+          {/* <Grid item xs={1}>
+            <Typography>{selectedCommentReplyes?.length}</Typography>
+          </Grid> */}
         </Grid>
       </AccordionSummary>
       <AccordionDetails>
@@ -56,9 +56,9 @@ export function CommentAccordeon(comment: IComment) {
               </TableCell>
             </TableRow>
           </TableHead>
-          {comment.replyes?.length &&
+          {/* {selectedCommentReplyes.length &&
             <TableBody sx={{ backgroundColor: lightOrange }}>
-              {comment.replyes.map(
+              {selectedCommentReplyes.map(
                 reply =>
                 (
                   <ReplyesTable
@@ -67,7 +67,7 @@ export function CommentAccordeon(comment: IComment) {
                   />
                 )
               )}
-            </TableBody>}
+            </TableBody>} */}
         </Table>
       </AccordionDetails>
     </Accordion>

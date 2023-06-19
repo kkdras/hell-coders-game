@@ -18,8 +18,9 @@ export function Forum() {
     document.title = 'Форум'
   }, [])
 
-  /*  todo получаем данные с сервера
+  /*  todo получаем данные с сервера - 
       useEffect(() => {
+      // id и названия топиков в формате ITopic[]
       getAllTopics();
    }, []) */
 

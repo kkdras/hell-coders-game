@@ -14,11 +14,11 @@ import { lightBlue } from '@mui/material/colors'
 export function TopicAccordeon(topic: ITopic) {
   const lightLightBlue = lightBlue[50]
   // todo получение данных
-  //const { topics } = useSelector((state: RootState) => state.forum)
-  // const selectedTopicComments = topics.find((item => item.id === topic.id))?.comments;
+  //const { comments } = useSelector((state: RootState) => state.forum)
+  // const selectedTopicComments = comments.filter((item => item.topicId === topic.id));
 
   /*  useEffect(() => {
-     getTopic(topic.id);
+     getComments();
   }, []) */
 
 
@@ -33,9 +33,9 @@ export function TopicAccordeon(topic: ITopic) {
           <Grid item xs={9}>
             <Typography pt={1}>{topic.title}</Typography>
           </Grid>
-          <Grid item xs={1}>
-            <Typography pt={1}>{topic.comments.length}</Typography>
-          </Grid>
+          {/* <Grid item xs={1}>
+            //<Typography pt={1}>{selectedTopicComments.length}</Typography>
+          </Grid> */}
         </Grid>
       </AccordionSummary>
       <AccordionDetails>
@@ -61,14 +61,14 @@ export function TopicAccordeon(topic: ITopic) {
             </Typography>
           </Grid>
         </Grid>
-        {topic.comments.map(
+        {/*  {selectedTopicComments.map(
           comment =>
             <CommentAccordeon
               key={comment.id}
               {...comment}
             />
         )
-        }
+        } */}
       </AccordionDetails>
     </Accordion>
 
