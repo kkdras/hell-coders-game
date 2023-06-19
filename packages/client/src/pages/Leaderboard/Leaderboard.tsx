@@ -1,4 +1,4 @@
-import { BASE_URL } from '../../shared/consts'
+import { YANDEX_BASE_URL } from '../../shared/consts'
 import { Box } from '@mui/material'
 import { DataGrid, GridCellParams } from '@mui/x-data-grid'
 import { useEffect, useState } from 'react'
@@ -14,7 +14,7 @@ const columns = [
     width: 80,
     renderCell: (params: GridCellParams) => (
       <img
-        src={`${BASE_URL}/resources${params.value}`}
+        src={`${YANDEX_BASE_URL}/resources${params.value}`}
         style={{ width: 37, borderRadius: '50%' }}
       />
     ),
@@ -47,7 +47,7 @@ export const LeaderBoard = () => {
 
   useEffect(() => {
     axios
-      .post(`${BASE_URL}/leaderboard/hell-coders`, data, {
+      .post(`${YANDEX_BASE_URL}/leaderboard/hell-coders`, data, {
         withCredentials: true,
         headers: {
           'Content-type': 'application/json',

@@ -1,7 +1,7 @@
-import { BASE_URL } from '../../shared/consts'
-import axios from 'axios'
+import { YANDEX_BASE_URL } from '../../shared/consts'
 import { User } from './types'
 import { store } from '../../store'
+import { mainAxios } from '../../http-common'
 
 export function saveScore(score: number) {
   const { user } = store.getState().user
@@ -20,8 +20,8 @@ export function saveScore(score: number) {
 
   console.log(data)
 
-  axios
-    .post(`${BASE_URL}/leaderboard`, data, {
+  mainAxios
+    .post(`${YANDEX_BASE_URL}/leaderboard`, data, {
       withCredentials: true,
       headers: {
         'Content-type': 'application/json',
