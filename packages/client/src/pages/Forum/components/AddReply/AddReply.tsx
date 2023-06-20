@@ -5,37 +5,40 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { AddTopicForm, AddTopicProps } from './types'
-import { addTopicSchema } from '../../../../shared/utils/formSchema'
+import { addReplySchema } from '../../../../shared/utils/formSchema'
 import * as uuid from "uuid";
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
+import { AddReplyProps, AddReplyForm } from './types'
 
-export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) => {
-  const methods = useForm<AddTopicForm>({
-    defaultValues: { title: '' },
-    resolver: yupResolver(addTopicSchema),
+
+export const AddReply: FC<AddReplyProps> = ({ showAddReply, setShowAddReply, commentId, authorLogin }) => {
+  const methods = useForm<AddReplyForm>({
+    defaultValues: { text: '' },
+    resolver: yupResolver(addReplySchema),
   })
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
     const requestData = {
       id: uuid.v4(),
-      title: data.title,
-      comments: {}
+      text: data.text,
+      commentId: commentId,
+      authorLogin: authorLogin,
+      time: new Date(),
     }
     // todo метод отправки данных
     //post(requestData)
     console.log(requestData)
-    setShowAddTopic(false)
+    setShowAddReply(false)
 
   })
 
   return (
     <Popover
-      open={showAddTopic}
-      onClose={() => setShowAddTopic(false)}
+      open={showAddReply}
+      onClose={() => setShowAddReply(false)}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'left',
@@ -51,7 +54,7 @@ export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) =
             alignItems: 'center',
           }}>
           <Typography component="h1" variant="h5" mb={2}>
-            Название топика
+            Ваше мнение
           </Typography>
           <FormProvider {...methods}>
             <form onSubmit={formSubmit}>
@@ -61,7 +64,7 @@ export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) =
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}>
-                Добавить
+                Ответить
               </Button>
             </form>
           </FormProvider>

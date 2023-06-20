@@ -5,17 +5,17 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { AddTopicForm, AddTopicProps } from './types'
-import { addTopicSchema } from '../../../../shared/utils/formSchema'
+import { addCommentSchema } from '../../../../shared/utils/formSchema'
 import * as uuid from "uuid";
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
+import { AddCommentForm, AddCommentProps } from './types'
 
-export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) => {
-  const methods = useForm<AddTopicForm>({
+export const AddComment: FC<AddCommentProps> = ({ showAddComment, setShowAddComment, topicId }) => {
+  const methods = useForm<AddCommentForm>({
     defaultValues: { title: '' },
-    resolver: yupResolver(addTopicSchema),
+    resolver: yupResolver(addCommentSchema),
   })
 
   const { handleSubmit } = methods
@@ -23,19 +23,20 @@ export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) =
     const requestData = {
       id: uuid.v4(),
       title: data.title,
-      comments: {}
+      topicId: topicId,
+      replyes: {}
     }
     // todo метод отправки данных
     //post(requestData)
     console.log(requestData)
-    setShowAddTopic(false)
+    setShowAddComment(false)
 
   })
 
   return (
     <Popover
-      open={showAddTopic}
-      onClose={() => setShowAddTopic(false)}
+      open={showAddComment}
+      onClose={() => setShowAddComment(false)}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'left',
@@ -51,7 +52,7 @@ export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) =
             alignItems: 'center',
           }}>
           <Typography component="h1" variant="h5" mb={2}>
-            Название топика
+            Ваш комментарий
           </Typography>
           <FormProvider {...methods}>
             <form onSubmit={formSubmit}>

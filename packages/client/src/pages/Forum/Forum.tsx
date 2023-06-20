@@ -39,7 +39,6 @@ export function Forum() {
           <IconButton
             color="success"
             onClick={e => {
-              e.preventDefault()
               setShowAddTopic(true)
             }}>
             <AddIcon />
