@@ -11,6 +11,7 @@ import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
 import { AddCommentForm, AddCommentProps } from './types'
+import { CommentRequestData } from '../../../../store/forum/types'
 
 export const AddComment: FC<AddCommentProps> = ({ showAddComment, setShowAddComment, topicId }) => {
   const methods = useForm<AddCommentForm>({
@@ -20,7 +21,7 @@ export const AddComment: FC<AddCommentProps> = ({ showAddComment, setShowAddComm
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
-    const requestData = {
+    const requestData: CommentRequestData = {
       id: uuid.v4(),
       title: data.title,
       topicId: topicId,

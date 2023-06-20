@@ -11,6 +11,8 @@ import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
 import { AddReplyProps, AddReplyForm } from './types'
+import { ReplyRequestData } from '../../../../store/forum/types'
+
 
 
 export const AddReply: FC<AddReplyProps> = ({ showAddReply, setShowAddReply, commentId, authorLogin }) => {
@@ -21,12 +23,12 @@ export const AddReply: FC<AddReplyProps> = ({ showAddReply, setShowAddReply, com
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
-    const requestData = {
+    const requestData: ReplyRequestData = {
       id: uuid.v4(),
       text: data.text,
       commentId: commentId,
       authorLogin: authorLogin,
-      time: new Date(),
+      time: `${new Date().getDate()} ${new Date().getTime()}`,
     }
     // todo метод отправки данных
     //post(requestData)

@@ -11,6 +11,7 @@ import * as uuid from "uuid";
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
+import { TopicRequestData } from '../../../../store/forum/types'
 
 export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) => {
   const methods = useForm<AddTopicForm>({
@@ -20,7 +21,7 @@ export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) =
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
-    const requestData = {
+    const requestData: TopicRequestData = {
       id: uuid.v4(),
       title: data.title,
       comments: {}
