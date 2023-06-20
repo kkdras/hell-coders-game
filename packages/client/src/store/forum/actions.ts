@@ -57,6 +57,7 @@ export const postTopic = createAsyncThunk<
 >('forum/posTopic', async (data, { rejectWithValue }) => {
   try {
     const response: AxiosResponse = await customAxios.post(`${CUSTOM_BASE_URL}/forum/posTopic`, data)
+    getAllTopics()
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -70,6 +71,7 @@ export const postComment = createAsyncThunk<
 >('forum/posComment', async (data, { rejectWithValue }) => {
   try {
     const response: AxiosResponse = await customAxios.post(`${CUSTOM_BASE_URL}/forum/posComment`, data)
+    getTopicComments(data.topicId)
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -83,6 +85,7 @@ export const postReply = createAsyncThunk<
 >('forum/posReply', async (data, { rejectWithValue }) => {
   try {
     const response: AxiosResponse = await customAxios.post(`${CUSTOM_BASE_URL}/forum/posReply`, data)
+    getCommentReplyes(data.commentId)
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
