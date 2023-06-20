@@ -9,14 +9,14 @@ import { ITopic } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { CommentAccordeon } from '../CommentAccordeon/CommentAccordeon'
 import { lightBlue } from '@mui/material/colors'
-import { comments } from '../../const'
+import { topicComments } from '../../const'
 
 
 export function TopicAccordeon(topic: ITopic) {
   const lightLightBlue = lightBlue[50]
   // todo получение данных
-  //const { comments } = useSelector((state: RootState) => state.forum)
-
+ /*  const { comments } = useSelector((state: RootState) => state.forum)
+  const topicComments = comments[topic.id] */
 
   /*  useEffect(() => {
      getComments(topicId);
@@ -35,7 +35,7 @@ export function TopicAccordeon(topic: ITopic) {
             <Typography pt={1}>{topic.title}</Typography>
           </Grid>
           <Grid item xs={1}>
-            <Typography pt={1}>{comments.length}</Typography>
+            <Typography pt={1}>{topicComments.length}</Typography>
           </Grid>
         </Grid>
       </AccordionSummary>
@@ -62,7 +62,7 @@ export function TopicAccordeon(topic: ITopic) {
             </Typography>
           </Grid>
         </Grid>
-        {comments.map(
+        {topicComments.map(
           comment =>
             <CommentAccordeon
               key={comment.id}

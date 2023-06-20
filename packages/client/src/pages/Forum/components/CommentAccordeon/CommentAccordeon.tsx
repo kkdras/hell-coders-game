@@ -14,14 +14,13 @@ import { IComment } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { ReplyesTable } from '../ReplyesTable/ReplyesTable'
 import { deepOrange } from '@mui/material/colors'
-import { RootState } from '../../../../store/rootReducer'
-import { useSelector } from 'react-redux'
-import { replyes } from '../../const'
+import { commentReplyes } from '../../const'
 
 export function CommentAccordeon(comment: IComment) {
   const lightOrange = deepOrange[400]
 
   // const { replyes } = useSelector((state: RootState) => state.forum)
+  // const  commentReplyes = replyes[comment.id]
 
 
   /*  useEffect(() => {
@@ -38,7 +37,7 @@ export function CommentAccordeon(comment: IComment) {
             <Typography>{comment.title}</Typography>
           </Grid>
           <Grid item xs={1}>
-            <Typography>{replyes?.length}</Typography>
+            <Typography>{commentReplyes?.length}</Typography>
           </Grid>
         </Grid>
       </AccordionSummary>
@@ -57,9 +56,9 @@ export function CommentAccordeon(comment: IComment) {
               </TableCell>
             </TableRow>
           </TableHead>
-          {replyes.length &&
+          {commentReplyes.length &&
             <TableBody sx={{ backgroundColor: lightOrange }}>
-              {replyes.map(
+              {commentReplyes.map(
                 reply =>
                 (
                   <ReplyesTable

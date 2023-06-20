@@ -1,6 +1,6 @@
 import { ITopic, IComment, IReply } from '../../store/forum/types'
 
-export const replyes: IReply[] = [
+export const commentReplyes: IReply[] = [
   {
     id: '6',
     commentId: '4',
@@ -31,7 +31,7 @@ export const replyes: IReply[] = [
   },
 ]
 
-export const comments: IComment[] = [
+export const topicComments: IComment[] = [
   {
     id: '4',
     topicId: '1',
