@@ -5,6 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { Drawler } from './drawer'
 import { toggleDrawler } from '../store/app/slice'
 import { useDispatch } from 'react-redux'
+import { ThemeSwitcher } from './ThemeSwitcher'
 
 export function Layout() {
   const dispatch = useDispatch()
@@ -22,7 +23,12 @@ export function Layout() {
       }}>
       <Drawler />
       <AppBar position="static">
-        <Container>
+        <Container
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
           <Toolbar sx={{ padding: '0 !important' }}>
             <IconButton
               onClick={handleToggleMenu}
@@ -34,6 +40,7 @@ export function Layout() {
               <MenuIcon />
             </IconButton>
           </Toolbar>
+          <ThemeSwitcher />
         </Container>
       </AppBar>
       <Container sx={{ flex: '1 1 auto' }}>
