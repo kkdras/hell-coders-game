@@ -12,6 +12,10 @@ import { Register } from './pages/Register/Register'
 import { Forum } from './pages/Forum/Forum'
 import { Profile } from './pages/Profile/Profile'
 import { WithAuthorization } from './processes/auth/WithAuthorization'
+import { useSelector } from 'react-redux'
+import { RootState } from './store/rootReducer'
+import { CssBaseline, ThemeProvider } from '@mui/material'
+import { themes } from './themes'
 
 export enum RouteNames {
   MAIN = '/',
@@ -26,6 +30,8 @@ export enum RouteNames {
 }
 
 function App() {
+  const { theme } = useSelector((state: RootState) => state.theme)
+
   useEffect(() => {
     const fetchServerData = async () => {
       const url = `http://localhost:${__SERVER_PORT__}`
@@ -38,24 +44,27 @@ function App() {
   }, [])
 
   return (
-    <WithAuthorization>
-      <Routes>
-        <Route path={RouteNames.MAIN} element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path={RouteNames.LEADERBOARD} element={<LeaderBoard />} />
-          <Route path={RouteNames.GAME} element={<Game />} />
-          <Route path={RouteNames.REGISTER} element={<Register />} />
-          <Route path={RouteNames.FORUM} element={<Forum />} />
-          <Route path={RouteNames.ERROR_500} element={<Error500 />} />
-          <Route
-            path={RouteNames.ERROR_COMPONENT}
-            element={<ErrorComponent />}
-          />
-          <Route path="*" element={<Error404 />} />
-          <Route path={RouteNames.PROFILE} element={<Profile />} />
-        </Route>
-      </Routes>
-    </WithAuthorization>
+    <ThemeProvider theme={themes[theme]}>
+      <CssBaseline />
+      <WithAuthorization>
+        <Routes>
+          <Route path={RouteNames.MAIN} element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path={RouteNames.LEADERBOARD} element={<LeaderBoard />} />
+            <Route path={RouteNames.GAME} element={<Game />} />
+            <Route path={RouteNames.REGISTER} element={<Register />} />
+            <Route path={RouteNames.FORUM} element={<Forum />} />
+            <Route path={RouteNames.ERROR_500} element={<Error500 />} />
+            <Route
+              path={RouteNames.ERROR_COMPONENT}
+              element={<ErrorComponent />}
+            />
+            <Route path="*" element={<Error404 />} />
+            <Route path={RouteNames.PROFILE} element={<Profile />} />
+          </Route>
+        </Routes>
+      </WithAuthorization>
+    </ThemeProvider>
   )
 }
 
