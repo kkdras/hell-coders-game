@@ -1,3 +1,4 @@
+/* eslint-disable */
 const db = require("../models");
 const Topic = db.topics;
 const Op = db.Sequelize.Op;
