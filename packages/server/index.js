@@ -15,11 +15,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 const port = Number(process.env.SERVER_PORT) || 3001
+
 const db = require("./models")
 db.sequelize.sync().then(() => {
   console.log("Synced db.");
 })
-  .catch((err: any) => {
+  .catch((err) => {
     console.log("Failed to sync db: " + err.message);
   });
 
