@@ -1,4 +1,6 @@
 import { MutableRefObject, RefObject, useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
+import { AppStoreDispatch } from '../../store'
 import { saveScore } from '../../store/leaderboard/actions'
 import { GameConstructor } from './core'
 import { throttle } from './utils'
@@ -82,7 +84,7 @@ export const useGame = (canvasRef: RefObject<HTMLCanvasElement>) => {
       canvas: canvasRef.current as HTMLCanvasElement,
       cellSize: 34,
       // двигаем фигуру каждые 800 милисекунд
-      movesBoundary: 800,
+      movesBoundary: 50,
     })
   }, [])
 
@@ -119,11 +121,13 @@ export const useGame = (canvasRef: RefObject<HTMLCanvasElement>) => {
 }
 
 export const useWatchGame = (game: MutableRefObject<GameConstructor | null>) => {
+  const dispatch = useDispatch<AppStoreDispatch>()
+
   useEffect(() => {
     // assume that game exist
     game.current!.on('gameOver', (score: number) => {
       // dispatch thunk that will save game points
-      saveScore(score)
+      dispatch(saveScore(score))
     })
   }, [])
 }
