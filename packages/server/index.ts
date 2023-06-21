@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const port = Number(process.env.SERVER_PORT) || 3001
 
+/* eslint-disable */
 const db = require("./models")
 db.sequelize.sync().then(() => {
   console.log("Synced db.");
@@ -25,6 +26,7 @@ db.sequelize.sync().then(() => {
   });
 
 createClientAndConnect()
+/* eslint-disable */
 require("./routes/topic.routes")(app);
 
 app.get('/', (_, res) => {
