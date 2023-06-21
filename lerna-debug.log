@@ -1,0 +1,18 @@
+0 silly argv {
+0 silly argv   _: [ 'run' ],
+0 silly argv   lernaVersion: '5.4.3',
+0 silly argv   '$0': 'node_modules/.bin/lerna',
+0 silly argv   script: 'dev'
+0 silly argv }
+1 notice cli v5.4.3
+2 verbose rootPath /home/stepanenko_o/hell-coders-game
+3 error Error: EACCES: permission denied, scandir '/home/stepanenko_o/hell-coders-game/tmp/pgdata'
+3 error     at Object.readdirSync (node:fs:1451:3)
+3 error     at readdirWithFileTypes (/home/stepanenko_o/hell-coders-game/node_modules/@nodelib/fs.scandir/out/providers/sync.js:16:33)
+3 error     at Object.read (/home/stepanenko_o/hell-coders-game/node_modules/@nodelib/fs.scandir/out/providers/sync.js:10:16)
+3 error     at SyncReader.scandirSync [as _scandir] (/home/stepanenko_o/hell-coders-game/node_modules/@nodelib/fs.scandir/out/index.js:18:17)
+3 error     at SyncReader._handleDirectory (/home/stepanenko_o/hell-coders-game/node_modules/@nodelib/fs.walk/out/readers/sync.js:28:34)
+3 error     at SyncReader._handleQueue (/home/stepanenko_o/hell-coders-game/node_modules/@nodelib/fs.walk/out/readers/sync.js:23:18)
+3 error     at SyncReader.read (/home/stepanenko_o/hell-coders-game/node_modules/@nodelib/fs.walk/out/readers/sync.js:15:14)
+3 error     at SyncProvider.read (/home/stepanenko_o/hell-coders-game/node_modules/@nodelib/fs.walk/out/providers/sync.js:11:29)
+3 error     at ReaderSync.walkSync [as _walkSync] (/home/stepanenko_o/hell-coders-game/node_modules/@nodelib/fs.walk/out/index.js:20:21)
