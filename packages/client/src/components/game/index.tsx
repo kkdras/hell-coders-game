@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import { Box, Button } from '@mui/material'
 import { useRef } from 'react'
-import { useGame } from './hooks'
+import { useGame, useWatchGame } from './hooks'
 import FullscreenButton from '../FullscreenButton'
 
 const StyledCanvas = styled.canvas`
@@ -14,6 +14,8 @@ const StyledCanvas = styled.canvas`
 export const GameContainer = () => {
   const refGame = useRef<HTMLCanvasElement>(null)
   const game = useGame(refGame)
+
+  useWatchGame(game)
 
   return (
     <Box

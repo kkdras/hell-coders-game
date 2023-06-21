@@ -1,4 +1,5 @@
 import { MutableRefObject, RefObject, useEffect, useRef } from 'react'
+import { saveScore } from '../../store/leaderboard/actions'
 import { GameConstructor } from './core'
 import { throttle } from './utils'
 
@@ -115,4 +116,14 @@ export const useGame = (canvasRef: RefObject<HTMLCanvasElement>) => {
   }, [])
 
   return refGameInstance
+}
+
+export const useWatchGame = (game: MutableRefObject<GameConstructor | null>) => {
+  useEffect(() => {
+    // assume that game exist
+    game.current!.on('gameOver', (score: number) => {
+      // dispatch thunk that will save game points
+      saveScore(score)
+    })
+  }, [])
 }
