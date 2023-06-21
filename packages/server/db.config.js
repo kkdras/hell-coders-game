@@ -1,8 +1,5 @@
-const { POSTGRES_PORT } =
-  process.env
-  
 module.exports = {
-  HOST: POSTGRES_PORT|| "localhost",
+  HOST: "postgres",
   USER: "postgres",
   PASSWORD: "postgres",
   DB: "postgres",

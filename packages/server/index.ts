@@ -17,14 +17,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const port = Number(process.env.SERVER_PORT) || 3001
 
 /* eslint-disable */
-// ВОТ ЭТО ИЗ ИНСТРУКЦИИ!!!!! 
-/* const db = require("server/models")
+const db = require("server/models")
 db.sequelize.sync().then(() => {
   console.log("Synced db.");
 })
   .catch((err: any) => {
     console.log("Failed to sync db: " + err.message);
-  }); */
+  });
 
 createClientAndConnect()
 /* eslint-disable */
