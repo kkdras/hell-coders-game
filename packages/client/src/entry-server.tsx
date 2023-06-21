@@ -3,9 +3,6 @@ import createEmotionServer from '@emotion/server/create-instance'
 
 import ReactDOMServer from 'react-dom/server'
 import { Provider } from 'react-redux'
-import { ThemeProvider } from '@mui/material/styles'
-import { theme } from './theme'
-import { Location } from 'react-router-dom'
 import { StaticRouter } from 'react-router-dom/server'
 import createEmotionCache from './utils/createEmotionCache'
 import { store } from './store'
@@ -21,9 +18,7 @@ export function render(url: string) {
     <StaticRouter location={url}>
       <Provider store={store}>
         <CacheProvider value={cache}>
-          <ThemeProvider theme={theme}>
-            <App />
-          </ThemeProvider>
+          <App />
         </CacheProvider>
       </Provider>
     </StaticRouter>
