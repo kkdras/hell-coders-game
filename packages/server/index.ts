@@ -20,7 +20,7 @@ const db = require("./models")
 db.sequelize.sync().then(() => {
   console.log("Synced db.");
 })
-  .catch((err) => {
+  .catch((err: any) => {
     console.log("Failed to sync db: " + err.message);
   });
 
