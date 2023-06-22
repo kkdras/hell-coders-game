@@ -1,5 +1,7 @@
 module.exports = app => {
+  /* eslint-disable */
   const topics = require("server/controllers/topic.controller.js");
+  /* eslint-disable */
   const router = require("express").Router();
 
   // Create a new Tutorial
