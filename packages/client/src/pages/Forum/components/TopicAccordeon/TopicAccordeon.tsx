@@ -11,22 +11,24 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { CommentAccordeon } from '../CommentAccordeon/CommentAccordeon'
 import { lightBlue } from '@mui/material/colors'
 import AddIcon from '@mui/icons-material/Add'
-import { topicComments } from '../../const'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AddComment } from '../AddComment/AddComment'
-
-
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../../../store/rootReducer'
+import { AppStoreDispatch } from '../../../../store'
+import { getTopicComments } from '../../../../store/forum/actions'
 
 export function TopicAccordeon(topic: ITopic) {
   const lightLightBlue = lightBlue[50]
-  const [showAddComment, setShowAddComment] = useState<boolean>(false);
-  // todo получение данных
-  /*  const { comments } = useSelector((state: RootState) => state.forum)
-   const topicComments = comments[topic.id] */
+  const [showAddComment, setShowAddComment] = useState<boolean>(false)
+  const dispatch = useDispatch<AppStoreDispatch>()
 
-  /*  useEffect(() => {
-     getComments(topicId);
-  }, []) */
+  const { comments } = useSelector((state: RootState) => state.forum)
+  const topicComments = comments[topic.id]
+
+  useEffect(() => {
+    dispatch(getTopicComments(topic.id))
+  }, [])
 
 
   return (

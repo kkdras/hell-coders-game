@@ -15,26 +15,28 @@ import { IComment } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { ReplyesTable } from '../ReplyesTable/ReplyesTable'
 import { deepOrange } from '@mui/material/colors'
-import { commentReplyes } from '../../const'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import { AddReply } from '../AddReply/AddReply'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../store/rootReducer'
+import { AppStoreDispatch } from '../../../../store'
+import { getCommentReplyes } from '../../../../store/forum/actions'
 
 export function CommentAccordeon(comment: IComment) {
   const lightOrange = deepOrange[400]
   const [showAddReply, setShowAddReply] = useState<boolean>(false)
+  const dispatch = useDispatch<AppStoreDispatch>()
+  
   const { user } = useSelector((state: RootState) => state.user)
 
-  // const { replyes } = useSelector((state: RootState) => state.forum)
-  // const  commentReplyes = replyes[comment.id]
+  const { replyes } = useSelector((state: RootState) => state.forum)
+  const  commentReplyes = replyes[comment.id]
 
 
-  /*  useEffect(() => {
-     getRelpyes(comment.id);  
-     
-  }, []) */
+  useEffect(() => {
+    dispatch(getCommentReplyes(comment.id));       
+  }, []) 
 
   return (
     <>

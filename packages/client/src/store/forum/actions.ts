@@ -62,9 +62,9 @@ export const postComment = createAsyncThunk<
   AxiosResponse,
   CommentRequestData,
   { rejectValue: AxiosError['response'] }
->('forum/posComment', async (data, { rejectWithValue, dispatch }) => {
+>('forum/postComment', async (data, { rejectWithValue, dispatch }) => {
   try {
-    const response: AxiosResponse = await customAxios.post(`${CUSTOM_BASE_URL}/forum/posComment`, data)
+    const response: AxiosResponse = await customAxios.post(`${CUSTOM_BASE_URL}/forum/postComment`, data)
     dispatch(getTopicComments(data.topicId))
     return response
   } catch (error) {
@@ -76,9 +76,9 @@ export const postReply = createAsyncThunk<
   AxiosResponse,
   ReplyRequestData,
   { rejectValue: AxiosError['response'] }
->('forum/posReply', async (data, { rejectWithValue, dispatch }) => {
+>('forum/postReply', async (data, { rejectWithValue, dispatch }) => {
   try {
-    const response: AxiosResponse = await customAxios.post(`${CUSTOM_BASE_URL}/forum/posReply`, data)
+    const response: AxiosResponse = await customAxios.post(`${CUSTOM_BASE_URL}/forum/postReply`, data)
     dispatch(getCommentReplyes(data.commentId))
     return response
   } catch (error) {

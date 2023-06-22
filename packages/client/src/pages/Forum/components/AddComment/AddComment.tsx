@@ -5,18 +5,23 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { addCommentSchema } from '../../../../shared/utils/formSchema'
+import { addForumItemSchema } from '../../../../shared/utils/formSchema'
 import * as uuid from "uuid";
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
 import { AddCommentForm, AddCommentProps } from './types'
 import { CommentRequestData } from '../../../../store/forum/types'
+import { useDispatch } from 'react-redux'
+import { AppStoreDispatch } from '../../../../store'
+import { postComment } from '../../../../store/forum/actions'
 
 export const AddComment: FC<AddCommentProps> = ({ showAddComment, setShowAddComment, topicId }) => {
+  const dispatch = useDispatch<AppStoreDispatch>()
+  
   const methods = useForm<AddCommentForm>({
     defaultValues: { title: '' },
-    resolver: yupResolver(addCommentSchema),
+    resolver: yupResolver(addForumItemSchema),
   })
 
   const { handleSubmit } = methods
@@ -27,9 +32,8 @@ export const AddComment: FC<AddCommentProps> = ({ showAddComment, setShowAddComm
       topicId: topicId,
       replyes: {}
     }
-    // todo метод отправки данных
-    //post(requestData)
-    console.log(requestData)
+    
+    dispatch(postComment(requestData))
     setShowAddComment(false)
 
   })

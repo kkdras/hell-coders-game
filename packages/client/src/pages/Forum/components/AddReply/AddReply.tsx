@@ -5,20 +5,25 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { addReplySchema } from '../../../../shared/utils/formSchema'
+import { addForumItemSchema } from '../../../../shared/utils/formSchema'
 import * as uuid from "uuid";
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
 import { AddReplyProps, AddReplyForm } from './types'
 import { ReplyRequestData } from '../../../../store/forum/types'
+import { useDispatch } from 'react-redux'
+import { AppStoreDispatch } from '../../../../store'
+import { postReply } from '../../../../store/forum/actions'
 
 
 
 export const AddReply: FC<AddReplyProps> = ({ showAddReply, setShowAddReply, commentId, authorLogin }) => {
+  const dispatch = useDispatch<AppStoreDispatch>()
+  
   const methods = useForm<AddReplyForm>({
     defaultValues: { text: '' },
-    resolver: yupResolver(addReplySchema),
+    resolver: yupResolver(addForumItemSchema),
   })
 
   const { handleSubmit } = methods
@@ -30,9 +35,7 @@ export const AddReply: FC<AddReplyProps> = ({ showAddReply, setShowAddReply, com
       authorLogin: authorLogin,
       time: `${new Date().getDate()} ${new Date().getTime()}`,
     }
-    // todo метод отправки данных
-    //post(requestData)
-    console.log(requestData)
+    dispatch(postReply(requestData))
     setShowAddReply(false)
 
   })

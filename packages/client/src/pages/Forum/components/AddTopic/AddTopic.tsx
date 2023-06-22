@@ -6,7 +6,7 @@ import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { AddTopicForm, AddTopicProps } from './types'
-import { addTopicSchema } from '../../../../shared/utils/formSchema'
+import { addForumItemSchema } from '../../../../shared/utils/formSchema'
 import * as uuid from "uuid";
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
@@ -21,7 +21,7 @@ export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) =
 
   const methods = useForm<AddTopicForm>({
     defaultValues: { title: '' },
-    resolver: yupResolver(addTopicSchema),
+    resolver: yupResolver(addForumItemSchema),
   })
 
   const { handleSubmit } = methods
