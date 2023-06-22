@@ -21,7 +21,7 @@ export function Forum() {
     dispatch(getAllTopics());
   }, [])
 
-
+  
   return (
     <Box pt={4}>
       <ArrowBack

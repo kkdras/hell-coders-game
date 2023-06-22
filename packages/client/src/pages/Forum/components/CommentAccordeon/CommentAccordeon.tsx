@@ -24,20 +24,24 @@ import { AppStoreDispatch } from '../../../../store'
 import { getCommentReplyes } from '../../../../store/forum/actions'
 import { commentReplyes } from '../../const'
 
-export function CommentAccordeon(comment: IComment) {
+export function CommentAccordeon(comment?: IComment) {
   const lightOrange = deepOrange[400]
   const [showAddReply, setShowAddReply] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
 
   const { user } = useSelector((state: RootState) => state.user)
 
-  /* const { replyes } = useSelector((state: RootState) => state.forum)
-  const  commentReplyes = replyes[comment.id]
+  const { replyes } = useSelector((state: RootState) => state.forum)
+  const commentReplyes = comment && comment?.id && replyes[comment?.id] ? replyes[comment?.id] : []
 
 
   useEffect(() => {
-    dispatch(getCommentReplyes(comment.id));       
-  }, [])  */
+    if (comment && comment?.id)
+      dispatch(getCommentReplyes(comment.id))
+  }, [])
+
+
+  if (!comment || !comment?.id) return null;
 
   return (
     <>
@@ -48,12 +52,15 @@ export function CommentAccordeon(comment: IComment) {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content">
               <Grid container spacing={2} color={'text.primary'}>
-                <Grid item xs={9}>
+                <Grid item xs={10}>
                   <Typography>{comment.title}</Typography>
                 </Grid>
-                <Grid item xs={1}>
-                  <Typography>{commentReplyes?.length}</Typography>
-                </Grid>
+                {
+                  commentReplyes.length &&
+                  <Grid item xs={2}>
+                    <Typography>{commentReplyes.length}</Typography>
+                  </Grid>
+                }
               </Grid>
             </AccordionSummary>
             <AccordionDetails>

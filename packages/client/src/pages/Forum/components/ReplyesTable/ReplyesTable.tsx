@@ -1,8 +1,9 @@
 import { TableCell, TableRow } from '@mui/material'
 import { IReply } from '../../../../store/forum/types'
 
-export function ReplyesTable(reply: IReply) {
+export function ReplyesTable(reply?: IReply) {
 
+  if (!reply) return null
 
   return (
     <TableRow key={reply.id}>

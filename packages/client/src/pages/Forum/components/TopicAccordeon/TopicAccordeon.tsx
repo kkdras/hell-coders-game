@@ -19,18 +19,20 @@ import { AppStoreDispatch } from '../../../../store'
 import { getTopicComments } from '../../../../store/forum/actions'
 import { topicComments } from '../../const'
 
-export function TopicAccordeon(topic: ITopic) {
+export function TopicAccordeon(topic?: ITopic) {
   const lightLightBlue = lightBlue[50]
   const [showAddComment, setShowAddComment] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
 
-  /*  const { comments } = useSelector((state: RootState) => state.forum)
-   const topicComments = comments[topic.id]
- 
-   useEffect(() => {
-     dispatch(getTopicComments(topic.id))
-   }, []) */
+  const { comments } = useSelector((state: RootState) => state.forum)
+  const topicComments = topic && topic.id && comments[topic.id]? comments[topic.id] : []
 
+  useEffect(() => {
+    if (topic && topic.id)
+      dispatch(getTopicComments(topic.id))
+  }, [])
+
+  if (!(topic && topic.id)) return null
 
   return (
     <>
@@ -47,7 +49,7 @@ export function TopicAccordeon(topic: ITopic) {
                   <Typography pt={1}>{topic.title}</Typography>
                 </Grid>
                 <Grid item xs={1}>
-                  <Typography pt={1}>{topicComments.length}</Typography>
+                  {topicComments.length &&  <Typography pt={1}>{topicComments.length}</Typography>}                 
                 </Grid>
               </Grid>
             </AccordionSummary>
@@ -58,23 +60,18 @@ export function TopicAccordeon(topic: ITopic) {
                 pb={2}
                 color={'text.secondary'}
                 fontStyle={'italic'}>
-                <Grid item xs={8}>
+                <Grid item xs={10}>
                   <Typography pl={2} variant="body2">
                     Комментарии
                   </Typography>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                   <Typography pl={8} variant="body2">
                     Ответы
                   </Typography>
-                </Grid>
-                <Grid item xs={2}>
-                  <Typography pl={10} variant="body2">
-                    Последний
-                  </Typography>
-                </Grid>
+                </Grid>                
               </Grid>
-              {topicComments.map(
+              {topicComments && topicComments.map(
                 comment =>
                   <CommentAccordeon
                     key={comment.id}
