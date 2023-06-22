@@ -1,28 +1,26 @@
 import { Grid, Typography, Box, IconButton } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { topics } from './const'
 import { ArrowBack } from '@mui/icons-material'
 import { TopicAccordeon } from './components/TopicAccordeon/TopicAccordeon'
 import { useEffect, useState } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import { AddTopic } from './components/AddTopic/AddTopic'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../store/rootReducer'
+import { getAllTopics } from '../../store/forum/actions'
+import { AppStoreDispatch } from '../../store'
 
 export function Forum() {
   const navigate = useNavigate()
-  // todo получаем данные из state
-  // const { topics } = useSelector((state: RootState) => state.forum)
+  const { topics } = useSelector((state: RootState) => state.forum)
   const [showAddTopic, setShowAddTopic] = useState<boolean>(false);
-
+  const dispatch = useDispatch<AppStoreDispatch>()
 
   useEffect(() => {
     document.title = 'Форум'
+    dispatch(getAllTopics());
   }, [])
 
-  /*  todo получаем данные с сервера - 
-      useEffect(() => {
-      // id и названия топиков в формате ITopic[]
-      getAllTopics();
-   }, []) */
 
   return (
     <Box pt={4}>

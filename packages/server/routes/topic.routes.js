@@ -1,14 +1,12 @@
 module.exports = app => {
-  /* eslint-disable */
   const topics = require("server/controllers/topic.controller.js");
-  /* eslint-disable */
-  var router = require("express").Router();
+  const router = require("express").Router();
 
   // Create a new Tutorial
-  router.post("/", topics.create);
+  router.post("/postTopic", topics.create);
 
   // Retrieve all Tutorials
-  router.get("/", topics.findAll);
+  router.get("/topics", topics.findAll);
 
-  app.use('/api/topics', router);
+  app.use('/api/forum', router);
 };

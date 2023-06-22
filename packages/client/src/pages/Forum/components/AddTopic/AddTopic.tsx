@@ -12,8 +12,13 @@ import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
 import { TopicRequestData } from '../../../../store/forum/types'
+import { postTopic } from '../../../../store/forum/actions'
+import { AppStoreDispatch } from '../../../../store'
+import { useDispatch } from 'react-redux'
 
 export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) => {
+  const dispatch = useDispatch<AppStoreDispatch>()
+
   const methods = useForm<AddTopicForm>({
     defaultValues: { title: '' },
     resolver: yupResolver(addTopicSchema),
@@ -26,9 +31,7 @@ export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) =
       title: data.title,
       comments: {}
     }
-    // todo метод отправки данных
-    //post(requestData)
-    console.log(requestData)
+    dispatch(postTopic(requestData))
     setShowAddTopic(false)
 
   })
