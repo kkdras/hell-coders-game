@@ -1,9 +1,7 @@
-import { Themes } from '../../themes'
-
 export interface ThemeState {
-  theme: string
+  theme: string |null
 }
 
 export const initialState: ThemeState = {
-  theme: Themes.LightTheme,
+  theme: null,
 }

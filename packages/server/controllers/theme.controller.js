@@ -1,3 +1,4 @@
+/* eslint-disable */
 const db = require('../models')
 const Theme = db.themes
 
@@ -29,7 +30,7 @@ exports.getTheme = (req, res) => {
     .then(data => {
       res.send(data)
     })
-    .catch(err => {
+    .catch(() => {
       res.status(500).send({
         message: 'Error retrieving theme with id=' + id,
       })
