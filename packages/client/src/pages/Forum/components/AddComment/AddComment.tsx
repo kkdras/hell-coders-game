@@ -6,7 +6,6 @@ import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { addForumItemSchema } from '../../../../shared/utils/formSchema'
-import * as uuid from 'uuid'
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
@@ -30,7 +29,7 @@ export const AddComment: FC<AddCommentProps> = ({
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
-    const requestData: CommentRequestData = {
+    const requestData: CommentRequestData = {     
       title: data.title,
       topicId: topicId,
       replyes: {},

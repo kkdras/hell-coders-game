@@ -5,6 +5,8 @@ dotenv.config()
 
 import express from 'express'
 import { createClientAndConnect } from './db'
+import { topicRouter } from './routes/topic.routes'
+import { db } from './models'
 
 const app = express()
 
@@ -16,18 +18,17 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const port = Number(process.env.SERVER_PORT) || 3001
 
-/* eslint-disable */
-const db = require("server/models")
-db.sequelize.sync().then(() => {
-  console.log("Synced db.");
-})
+db.sequelize
+  .sync()
+  .then(() => {
+    console.log('Synced db.')
+  })
   .catch((err: any) => {
-    console.log("Failed to sync db: " + err.message);
-  });
+    console.log('Failed to sync db: ' + err.message)
+  })
 
 createClientAndConnect()
-/* eslint-disable */
-require("server/routes/topic.routes")(app);
+app.use('/api/forum', topicRouter)
 
 app.get('/', (_, res) => {
   res.json('👋 Howdy from the server :)')
@@ -36,4 +37,3 @@ app.get('/', (_, res) => {
 app.listen(port, () => {
   console.log(`  ➜ 🎸 Server is listening on port: ${port}`)
 })
-
