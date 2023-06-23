@@ -32,7 +32,6 @@ export const AddReply: FC<AddReplyProps> = ({
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
     const requestData: ReplyRequestData = {
-      id: uuid.v4(),
       text: data.text,
       commentId: commentId,
       authorLogin: authorLogin,

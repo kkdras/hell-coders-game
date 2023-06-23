@@ -20,20 +20,17 @@ export interface ITopic {
 }
 
 export interface TopicRequestData {
-  id: string
   title: string
   comments: Record<string, IComment[]>
 }
 
 export interface CommentRequestData {
-  id: string
   title: string
   topicId: string
   replyes: Record<string, IReply[]>
 }
 
 export interface ReplyRequestData {
-  id: string
   text: string
   commentId: string
   authorLogin: string

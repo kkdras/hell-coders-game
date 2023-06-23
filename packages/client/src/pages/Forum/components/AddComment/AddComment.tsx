@@ -31,7 +31,6 @@ export const AddComment: FC<AddCommentProps> = ({
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
     const requestData: CommentRequestData = {
-      id: uuid.v4(),
       title: data.title,
       topicId: topicId,
       replyes: {},
