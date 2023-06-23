@@ -10,6 +10,7 @@ import { RootState } from '../../store/rootReducer'
 import { getAllTopics } from '../../store/forum/actions'
 import { AppStoreDispatch } from '../../store'
 
+
 export function Forum() {
   const navigate = useNavigate()
   const { topics } = useSelector((state: RootState) => state.forum)
@@ -21,7 +22,7 @@ export function Forum() {
     dispatch(getAllTopics());
   }, [])
 
-  
+
   return (
     <Box pt={4}>
       <ArrowBack
@@ -43,6 +44,16 @@ export function Forum() {
           </IconButton>
         </Grid>
       </Grid>
+      {topics.length > 0 &&
+        <Grid container spacing={2} pb={4} color={'red'}>
+          <Grid item xs={7}>
+            <Typography pl={2}>Название</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography pl={5}>Комментарии</Typography>
+          </Grid>
+        </Grid>
+      }
       {topics.map(topic => (
         <TopicAccordeon
           key={topic.id}

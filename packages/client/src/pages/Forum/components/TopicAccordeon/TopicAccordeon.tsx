@@ -17,9 +17,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../store/rootReducer'
 import { AppStoreDispatch } from '../../../../store'
 import { getTopicComments } from '../../../../store/forum/actions'
-import { topicComments } from '../../const'
+
 
 export function TopicAccordeon(topic?: ITopic) {
+  
   const lightLightBlue = lightBlue[50]
   const [showAddComment, setShowAddComment] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
@@ -49,7 +50,7 @@ export function TopicAccordeon(topic?: ITopic) {
                   <Typography pt={1}>{topic.title}</Typography>
                 </Grid>
                 <Grid item xs={1}>
-                  {topicComments.length &&  <Typography pt={1}>{topicComments.length}</Typography>}                 
+                  {topicComments.length && <Typography pt={2}>{topicComments.length}</Typography>}
                 </Grid>
               </Grid>
             </AccordionSummary>
@@ -60,16 +61,16 @@ export function TopicAccordeon(topic?: ITopic) {
                 pb={2}
                 color={'text.secondary'}
                 fontStyle={'italic'}>
-                <Grid item xs={10}>
+                <Grid item xs={8}>
                   <Typography pl={2} variant="body2">
                     Комментарии
                   </Typography>
                 </Grid>
-                <Grid item xs={2}>
-                  <Typography pl={8} variant="body2">
+                <Grid item xs={4}>
+                  <Typography pl={4} variant="body2">
                     Ответы
                   </Typography>
-                </Grid>                
+                </Grid>
               </Grid>
               {topicComments && topicComments.map(
                 comment =>

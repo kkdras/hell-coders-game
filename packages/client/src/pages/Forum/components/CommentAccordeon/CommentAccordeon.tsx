@@ -22,7 +22,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../store/rootReducer'
 import { AppStoreDispatch } from '../../../../store'
 import { getCommentReplyes } from '../../../../store/forum/actions'
-import { commentReplyes } from '../../const'
 
 export function CommentAccordeon(comment?: IComment) {
   const lightOrange = deepOrange[400]
@@ -55,12 +54,13 @@ export function CommentAccordeon(comment?: IComment) {
                 <Grid item xs={10}>
                   <Typography>{comment.title}</Typography>
                 </Grid>
-                {
+                
+                  <Grid item xs={2} >
+                  {
                   commentReplyes.length &&
-                  <Grid item xs={2}>
-                    <Typography>{commentReplyes.length}</Typography>
+                    <Typography pt={2}>{commentReplyes.length}</Typography>}
                   </Grid>
-                }
+                
               </Grid>
             </AccordionSummary>
             <AccordionDetails>
