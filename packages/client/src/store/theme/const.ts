@@ -1,7 +1,7 @@
 import { Themes } from '../../themes'
 
 export interface ThemeState {
-  theme: Themes
+  theme: string
 }
 
 export const initialState: ThemeState = {
