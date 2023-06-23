@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { initialState } from './const'
+import { initialState, ThemeState } from './const'
 import { getTheme, postTheme } from './actions'
 import { AxiosResponse } from 'axios'
 import { ThemeResponse } from './types'
@@ -7,7 +7,11 @@ import { ThemeResponse } from './types'
 export const themeSlice = createSlice({
   name: 'theme',
   initialState,
-  reducers: {},
+  reducers: {
+    setTheme: (state: ThemeState, { payload }: PayloadAction<string>) => {
+      state.theme = payload
+    },
+  },
   extraReducers: builder => {
     builder.addCase(
       getTheme.fulfilled,
@@ -23,3 +27,5 @@ export const themeSlice = createSlice({
     )
   },
 })
+
+export const { setTheme } = themeSlice.actions

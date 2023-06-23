@@ -5,6 +5,7 @@ import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import { RootState } from '../store/rootReducer'
 import { postTheme } from '../store/theme/actions'
+import { setTheme } from '../store/theme/slice'
 
 export const ThemeSwitcher = () => {
   const { theme } = useSelector((state: RootState) => state.theme)
@@ -16,6 +17,8 @@ export const ThemeSwitcher = () => {
       theme === Themes.LightTheme ? Themes.DarkTheme : Themes.LightTheme
     if (user) {
       dispatch(postTheme({ userId: String(user.id), theme: newTheme }))
+    } else {
+      dispatch(setTheme(newTheme))
     }
   }
 
