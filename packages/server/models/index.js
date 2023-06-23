@@ -1,6 +1,6 @@
-
+/* eslint-disable */
 const dbConfig = require("server/db.config");
-
+/* eslint-disable */
 const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
@@ -20,7 +20,7 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-
+/* eslint-disable */
 db.topics = require("./topic.model.js")(sequelize, Sequelize)
 
 
