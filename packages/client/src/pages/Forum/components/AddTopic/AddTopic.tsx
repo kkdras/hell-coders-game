@@ -7,7 +7,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { AddTopicForm, AddTopicProps } from './types'
 import { addForumItemSchema } from '../../../../shared/utils/formSchema'
-import * as uuid from "uuid";
+import * as uuid from 'uuid'
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
@@ -16,7 +16,10 @@ import { postTopic } from '../../../../store/forum/actions'
 import { AppStoreDispatch } from '../../../../store'
 import { useDispatch } from 'react-redux'
 
-export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) => {
+export const AddTopic: FC<AddTopicProps> = ({
+  showAddTopic,
+  setShowAddTopic,
+}) => {
   const dispatch = useDispatch<AppStoreDispatch>()
 
   const methods = useForm<AddTopicForm>({
@@ -29,11 +32,10 @@ export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) =
     const requestData: TopicRequestData = {
       id: uuid.v4(),
       title: data.title,
-      comments: {}
+      comments: {},
     }
     dispatch(postTopic(requestData))
     setShowAddTopic(false)
-
   })
 
   return (
@@ -43,8 +45,7 @@ export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) =
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'left',
-      }}
-    >
+      }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -70,6 +71,7 @@ export const AddTopic: FC<AddTopicProps> = ({ showAddTopic, setShowAddTopic }) =
             </form>
           </FormProvider>
         </Box>
-      </Container></Popover>
+      </Container>
+    </Popover>
   )
 }

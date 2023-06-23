@@ -4,12 +4,10 @@ import { getAllTopics, getTopicComments, getCommentReplyes } from './actions'
 import { initialState } from './const'
 import { IComment, IReply, ITopic } from './types'
 
-
 export const forumSlice = createSlice({
   name: 'forum',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: builder => {
     builder.addCase(
       getAllTopics.fulfilled,
@@ -31,7 +29,5 @@ export const forumSlice = createSlice({
         state.replyes[payload.data[0].commentId] = payload.data
       }
     )
-
   },
 })
-

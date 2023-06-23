@@ -6,7 +6,7 @@ import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { addForumItemSchema } from '../../../../shared/utils/formSchema'
-import * as uuid from "uuid";
+import * as uuid from 'uuid'
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
@@ -16,9 +16,13 @@ import { useDispatch } from 'react-redux'
 import { AppStoreDispatch } from '../../../../store'
 import { postComment } from '../../../../store/forum/actions'
 
-export const AddComment: FC<AddCommentProps> = ({ showAddComment, setShowAddComment, topicId }) => {
+export const AddComment: FC<AddCommentProps> = ({
+  showAddComment,
+  setShowAddComment,
+  topicId,
+}) => {
   const dispatch = useDispatch<AppStoreDispatch>()
-  
+
   const methods = useForm<AddCommentForm>({
     defaultValues: { title: '' },
     resolver: yupResolver(addForumItemSchema),
@@ -30,12 +34,11 @@ export const AddComment: FC<AddCommentProps> = ({ showAddComment, setShowAddComm
       id: uuid.v4(),
       title: data.title,
       topicId: topicId,
-      replyes: {}
+      replyes: {},
     }
-    
+
     dispatch(postComment(requestData))
     setShowAddComment(false)
-
   })
 
   return (
@@ -45,8 +48,7 @@ export const AddComment: FC<AddCommentProps> = ({ showAddComment, setShowAddComm
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'left',
-      }}
-    >
+      }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -72,6 +74,7 @@ export const AddComment: FC<AddCommentProps> = ({ showAddComment, setShowAddComm
             </form>
           </FormProvider>
         </Box>
-      </Container></Popover>
+      </Container>
+    </Popover>
   )
 }

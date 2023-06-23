@@ -6,7 +6,7 @@ import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { addForumItemSchema } from '../../../../shared/utils/formSchema'
-import * as uuid from "uuid";
+import * as uuid from 'uuid'
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
@@ -16,11 +16,14 @@ import { useDispatch } from 'react-redux'
 import { AppStoreDispatch } from '../../../../store'
 import { postReply } from '../../../../store/forum/actions'
 
-
-
-export const AddReply: FC<AddReplyProps> = ({ showAddReply, setShowAddReply, commentId, authorLogin }) => {
+export const AddReply: FC<AddReplyProps> = ({
+  showAddReply,
+  setShowAddReply,
+  commentId,
+  authorLogin,
+}) => {
   const dispatch = useDispatch<AppStoreDispatch>()
-  
+
   const methods = useForm<AddReplyForm>({
     defaultValues: { text: '' },
     resolver: yupResolver(addForumItemSchema),
@@ -37,7 +40,6 @@ export const AddReply: FC<AddReplyProps> = ({ showAddReply, setShowAddReply, com
     }
     dispatch(postReply(requestData))
     setShowAddReply(false)
-
   })
 
   return (
@@ -47,8 +49,7 @@ export const AddReply: FC<AddReplyProps> = ({ showAddReply, setShowAddReply, com
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'left',
-      }}
-    >
+      }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -74,6 +75,7 @@ export const AddReply: FC<AddReplyProps> = ({ showAddReply, setShowAddReply, com
             </form>
           </FormProvider>
         </Box>
-      </Container></Popover>
+      </Container>
+    </Popover>
   )
 }

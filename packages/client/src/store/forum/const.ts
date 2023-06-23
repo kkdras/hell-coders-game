@@ -9,6 +9,5 @@ export interface forumState {
 export const initialState: forumState = {
   topics: [],
   comments: {},
-  replyes: {}
+  replyes: {},
 }
-

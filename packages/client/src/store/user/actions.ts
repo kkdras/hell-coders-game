@@ -28,12 +28,16 @@ export const putUser = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('user/putUser', async (data, { rejectWithValue }) => {
   try {
-    const response = await mainAxios.put(`${YANDEX_BASE_URL}/user/profile`, data, {
-      withCredentials: true,
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
+    const response = await mainAxios.put(
+      `${YANDEX_BASE_URL}/user/profile`,
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    )
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -46,12 +50,16 @@ export const putAvatar = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('user/putAvatar', async (data, { rejectWithValue }) => {
   try {
-    const response = await mainAxios.put(`${YANDEX_BASE_URL}/user/profile/avatar`, data, {
-      withCredentials: true,
-      headers: {
-        'Content-type': 'multipart/form-data',
-      },
-    })
+    const response = await mainAxios.put(
+      `${YANDEX_BASE_URL}/user/profile/avatar`,
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      }
+    )
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -64,12 +72,16 @@ export const putPassword = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('user/putPassword', async (data, { rejectWithValue }) => {
   try {
-    const response = await mainAxios.put(`${YANDEX_BASE_URL}/user/password`, data, {
-      withCredentials: true,
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
+    const response = await mainAxios.put(
+      `${YANDEX_BASE_URL}/user/password`,
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    )
     return response
   } catch (error) {
     // @ts-ignore

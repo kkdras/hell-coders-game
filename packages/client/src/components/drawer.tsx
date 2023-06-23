@@ -63,10 +63,14 @@ export const Drawler = () => {
             <ListItem>
               <ListItemButton>
                 <Link to={RouteNames.FORUM}>
-                  <ListItemText sx={{ color: 'text.primary' }} primary="Forum" />
+                  <ListItemText
+                    sx={{ color: 'text.primary' }}
+                    primary="Forum"
+                  />
                 </Link>
               </ListItemButton>
-            </ListItem>)}
+            </ListItem>
+          )}
           <ListItem>
             <ListItemButton>
               <Link to={RouteNames.PROFILE}>

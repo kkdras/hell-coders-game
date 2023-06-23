@@ -31,16 +31,14 @@ export function CommentAccordeon(comment?: IComment) {
   const { user } = useSelector((state: RootState) => state.user)
 
   const { replyes } = useSelector((state: RootState) => state.forum)
-  const commentReplyes = comment && comment?.id && replyes[comment?.id] ? replyes[comment?.id] : []
-
+  const commentReplyes =
+    comment && comment?.id && replyes[comment?.id] ? replyes[comment?.id] : []
 
   useEffect(() => {
-    if (comment && comment?.id)
-      dispatch(getCommentReplyes(comment.id))
+    if (comment && comment?.id) dispatch(getCommentReplyes(comment.id))
   }, [])
 
-
-  if (!comment || !comment?.id) return null;
+  if (!comment || !comment?.id) return null
 
   return (
     <>
@@ -54,45 +52,49 @@ export function CommentAccordeon(comment?: IComment) {
                 <Grid item xs={10}>
                   <Typography>{comment.title}</Typography>
                 </Grid>
-                
-                  <Grid item xs={2} >
-                  {
-                  commentReplyes.length &&
-                    <Typography pt={2}>{commentReplyes.length}</Typography>}
-                  </Grid>
-                
+
+                <Grid item xs={2}>
+                  {commentReplyes.length && (
+                    <Typography pt={2}>{commentReplyes.length}</Typography>
+                  )}
+                </Grid>
               </Grid>
             </AccordionSummary>
             <AccordionDetails>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center" colSpan={2} sx={{ color: 'blue' }}>
+                    <TableCell
+                      align="center"
+                      colSpan={2}
+                      sx={{ color: 'blue' }}>
                       Сообщение
                     </TableCell>
-                    <TableCell align="center" colSpan={2} sx={{ color: 'blue' }}>
+                    <TableCell
+                      align="center"
+                      colSpan={2}
+                      sx={{ color: 'blue' }}>
                       Автор
                     </TableCell>
-                    <TableCell align="center" colSpan={2} sx={{ color: 'blue' }}>
+                    <TableCell
+                      align="center"
+                      colSpan={2}
+                      sx={{ color: 'blue' }}>
                       Время
                     </TableCell>
                   </TableRow>
                 </TableHead>
-                {commentReplyes.length &&
+                {commentReplyes.length && (
                   <TableBody sx={{ backgroundColor: lightOrange }}>
-                    {commentReplyes.map(
-                      reply =>
-                      (
-                        <ReplyesTable
-                          key={reply.id}
-                          {...reply}
-                        />
-                      )
-                    )}
-                  </TableBody>}
+                    {commentReplyes.map(reply => (
+                      <ReplyesTable key={reply.id} {...reply} />
+                    ))}
+                  </TableBody>
+                )}
               </Table>
             </AccordionDetails>
-          </Accordion></Grid>
+          </Accordion>
+        </Grid>
         <Grid item xs={1}>
           <IconButton
             color="success"
@@ -102,8 +104,16 @@ export function CommentAccordeon(comment?: IComment) {
             }}>
             <AddIcon />
           </IconButton>
-        </Grid></Grid>
-      {showAddReply && user && <AddReply showAddReply={showAddReply} setShowAddReply={setShowAddReply} commentId={comment.id} authorLogin={user?.login} />}
+        </Grid>
+      </Grid>
+      {showAddReply && user && (
+        <AddReply
+          showAddReply={showAddReply}
+          setShowAddReply={setShowAddReply}
+          commentId={comment.id}
+          authorLogin={user?.login}
+        />
+      )}
     </>
   )
 }

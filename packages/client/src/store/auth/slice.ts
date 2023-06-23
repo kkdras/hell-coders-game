@@ -8,7 +8,6 @@ export const authSlice = createSlice({
   initialState: {},
   reducers: {},
   extraReducers: builder => {
-
     builder.addCase(postYandexOAuth.fulfilled, () => {
       localStorage.setItem('auth', 'userAuthorized')
     })
@@ -23,6 +22,5 @@ export const authSlice = createSlice({
         alert('Аккаунт Яндекс не подтвержден')
       }
     })
-
   },
 })

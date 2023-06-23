@@ -2,7 +2,6 @@ import { TableCell, TableRow } from '@mui/material'
 import { IReply } from '../../../../store/forum/types'
 
 export function ReplyesTable(reply?: IReply) {
-
   if (!reply) return null
 
   return (

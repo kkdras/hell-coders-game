@@ -45,28 +45,21 @@ export const topicComments: IComment[] = [
   {
     id: '6',
     topicId: '1',
-    title: 'Древнеегипетский тетрис'
-  }
+    title: 'Древнеегипетский тетрис',
+  },
 ]
-
 
 export const topics: ITopic[] = [
   {
     id: '1',
     title: 'Тетрисы мира',
-
   },
   {
     id: '2',
     title: 'Технологии',
-
   },
   {
     id: '3',
     title: 'Флудилка',
-  }
-
+  },
 ]
-
-
-

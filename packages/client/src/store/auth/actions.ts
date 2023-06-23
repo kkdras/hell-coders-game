@@ -11,7 +11,10 @@ export const postRegister = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('auth/postRegister', async (data, { rejectWithValue }) => {
   try {
-    const response: AxiosResponse = await mainAxios.post(`${YANDEX_BASE_URL}/auth/signup`, data)
+    const response: AxiosResponse = await mainAxios.post(
+      `${YANDEX_BASE_URL}/auth/signup`,
+      data
+    )
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -24,9 +27,12 @@ export const getYandexServiceId = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('auth/yandex/service-id', async (redirect_uri, { rejectWithValue }) => {
   try {
-    const response = await mainAxios.get(`${YANDEX_BASE_URL}/oauth/yandex/service-id/`, {
-      params: { redirect_uri: redirect_uri },
-    })
+    const response = await mainAxios.get(
+      `${YANDEX_BASE_URL}/oauth/yandex/service-id/`,
+      {
+        params: { redirect_uri: redirect_uri },
+      }
+    )
 
     window.location.replace(
       `https://oauth.yandex.ru/authorize?response_type=code&client_id=${response.data.service_id}&redirect_uri=${redirect_uri}`
@@ -43,9 +49,13 @@ export const postYandexOAuth = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('auth/yandex', async (data, { rejectWithValue, dispatch }) => {
   try {
-    const response = await mainAxios.post(`${YANDEX_BASE_URL}/oauth/yandex`, data, {
-      withCredentials: true,
-    })
+    const response = await mainAxios.post(
+      `${YANDEX_BASE_URL}/oauth/yandex`,
+      data,
+      {
+        withCredentials: true,
+      }
+    )
     dispatch(getAuthUser())
     return response
   } catch (error) {

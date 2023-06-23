@@ -10,18 +10,16 @@ import { RootState } from '../../store/rootReducer'
 import { getAllTopics } from '../../store/forum/actions'
 import { AppStoreDispatch } from '../../store'
 
-
 export function Forum() {
   const navigate = useNavigate()
   const { topics } = useSelector((state: RootState) => state.forum)
-  const [showAddTopic, setShowAddTopic] = useState<boolean>(false);
+  const [showAddTopic, setShowAddTopic] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
 
   useEffect(() => {
     document.title = 'Форум'
-    dispatch(getAllTopics());
+    dispatch(getAllTopics())
   }, [])
-
 
   return (
     <Box pt={4}>
@@ -44,7 +42,7 @@ export function Forum() {
           </IconButton>
         </Grid>
       </Grid>
-      {topics.length > 0 &&
+      {topics.length > 0 && (
         <Grid container spacing={2} pb={4} color={'red'}>
           <Grid item xs={7}>
             <Typography pl={2}>Название</Typography>
@@ -53,14 +51,16 @@ export function Forum() {
             <Typography pl={5}>Комментарии</Typography>
           </Grid>
         </Grid>
-      }
+      )}
       {topics.map(topic => (
-        <TopicAccordeon
-          key={topic.id}
-          {...topic}
-        />
+        <TopicAccordeon key={topic.id} {...topic} />
       ))}
-      {showAddTopic && <AddTopic showAddTopic={showAddTopic} setShowAddTopic={setShowAddTopic} />}
+      {showAddTopic && (
+        <AddTopic
+          showAddTopic={showAddTopic}
+          setShowAddTopic={setShowAddTopic}
+        />
+      )}
     </Box>
   )
 }

@@ -18,19 +18,17 @@ import { RootState } from '../../../../store/rootReducer'
 import { AppStoreDispatch } from '../../../../store'
 import { getTopicComments } from '../../../../store/forum/actions'
 
-
 export function TopicAccordeon(topic?: ITopic) {
-  
   const lightLightBlue = lightBlue[50]
   const [showAddComment, setShowAddComment] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
 
   const { comments } = useSelector((state: RootState) => state.forum)
-  const topicComments = topic && topic.id && comments[topic.id]? comments[topic.id] : []
+  const topicComments =
+    topic && topic.id && comments[topic.id] ? comments[topic.id] : []
 
   useEffect(() => {
-    if (topic && topic.id)
-      dispatch(getTopicComments(topic.id))
+    if (topic && topic.id) dispatch(getTopicComments(topic.id))
   }, [])
 
   if (!(topic && topic.id)) return null
@@ -50,7 +48,9 @@ export function TopicAccordeon(topic?: ITopic) {
                   <Typography pt={1}>{topic.title}</Typography>
                 </Grid>
                 <Grid item xs={1}>
-                  {topicComments.length && <Typography pt={2}>{topicComments.length}</Typography>}
+                  {topicComments.length && (
+                    <Typography pt={2}>{topicComments.length}</Typography>
+                  )}
                 </Grid>
               </Grid>
             </AccordionSummary>
@@ -72,14 +72,10 @@ export function TopicAccordeon(topic?: ITopic) {
                   </Typography>
                 </Grid>
               </Grid>
-              {topicComments && topicComments.map(
-                comment =>
-                  <CommentAccordeon
-                    key={comment.id}
-                    {...comment}
-                  />
-              )
-              }
+              {topicComments &&
+                topicComments.map(comment => (
+                  <CommentAccordeon key={comment.id} {...comment} />
+                ))}
             </AccordionDetails>
           </Accordion>
         </Grid>
@@ -92,8 +88,15 @@ export function TopicAccordeon(topic?: ITopic) {
             }}>
             <AddIcon />
           </IconButton>
-        </Grid></Grid>
-      {showAddComment && <AddComment showAddComment={showAddComment} setShowAddComment={setShowAddComment} topicId={topic.id} />}
+        </Grid>
+      </Grid>
+      {showAddComment && (
+        <AddComment
+          showAddComment={showAddComment}
+          setShowAddComment={setShowAddComment}
+          topicId={topic.id}
+        />
+      )}
     </>
   )
 }
