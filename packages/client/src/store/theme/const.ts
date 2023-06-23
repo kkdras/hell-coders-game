@@ -1,5 +1,5 @@
 export interface ThemeState {
-  theme: string |null
+  theme: string | null
 }
 
 export const initialState: ThemeState = {

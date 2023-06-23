@@ -1,11 +1,12 @@
 import dotenv from 'dotenv'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-dotenv.config()
-
 import express from 'express'
 import { createClientAndConnect } from './db'
+import { db } from './models'
+import { themeRoutes } from './routes/theme.routes'
 
+dotenv.config()
 const app = express()
 app.use(cors())
 
@@ -15,8 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const port = Number(process.env.SERVER_PORT) || 3001
 
-/* eslint-disable */
-const db = require('server/models')
 db.sequelize
   .sync()
   .then(() => {
@@ -27,7 +26,7 @@ db.sequelize
   })
 
 createClientAndConnect()
-require('server/routes/theme.routes')(app)
+themeRoutes(app)
 
 app.get('/', (_, res) => {
   res.json('👋 Howdy from the server :)')

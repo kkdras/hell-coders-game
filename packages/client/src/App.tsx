@@ -37,9 +37,9 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      dispatch(getTheme(user.id))}
+      dispatch(getTheme(user.id))
+    }
   }, [dispatch, user])
-
 
   return (
     <ThemeProvider theme={themes[theme || Themes.LightTheme]}>

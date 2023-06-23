@@ -1,8 +1,9 @@
-/* eslint-disable */
-const db = require('../models')
+import type { Request, Response } from 'express'
+import { db } from '../models'
+
 const Theme = db.themes
 
-exports.postTheme = async (req, res) => {
+export const postTheme = async (req: Request, res: Response) => {
   const { userId, theme } = req.body
 
   const user = await Theme.findOne({ where: { userId } })
@@ -14,6 +15,7 @@ exports.postTheme = async (req, res) => {
     )
 
     if (data) {
+      // @ts-ignore
       res.status(200).json({ theme: data[1][0].theme })
     }
   } else {
@@ -23,7 +25,7 @@ exports.postTheme = async (req, res) => {
   }
 }
 
-exports.getTheme = (req, res) => {
+export const getTheme = (req: Request, res: Response) => {
   const id = req.params.id
 
   Theme.findByPk(id)

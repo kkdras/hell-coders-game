@@ -26,7 +26,11 @@ export const ThemeSwitcher = () => {
         alignItems: 'center',
       }}>
       <LightModeIcon />
-      <Switch onChange={handleChange} checked={theme === Themes.DarkTheme}  color="default" />
+      <Switch
+        onChange={handleChange}
+        checked={theme === Themes.DarkTheme}
+        color="default"
+      />
       <DarkModeIcon />
     </Box>
   )
