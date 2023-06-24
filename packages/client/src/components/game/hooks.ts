@@ -84,7 +84,7 @@ export const useGame = (canvasRef: RefObject<HTMLCanvasElement>) => {
       canvas: canvasRef.current as HTMLCanvasElement,
       cellSize: 34,
       // двигаем фигуру каждые 800 милисекунд
-      movesBoundary: 50,
+      movesBoundary: 800,
     })
   }, [])
 
