@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import { createClientAndConnect } from './db'
 import { db } from './models'
-import { themeRoutes } from './routes/theme.routes'
+import { themeRouter } from './routes/theme.routes'
 
 dotenv.config()
 const app = express()
@@ -26,7 +26,8 @@ db.sequelize
   })
 
 createClientAndConnect()
-themeRoutes(app)
+
+app.use('/api/theme', themeRouter)
 
 app.get('/', (_, res) => {
   res.json('👋 Howdy from the server :)')

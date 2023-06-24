@@ -1,9 +1,10 @@
-import type { Request, Response } from 'express'
+import type { Response } from 'express'
 import { db } from '../models'
+import type { IRequestGetTheme, IRequestPostTheme } from './types'
 
 const Theme = db.themes
 
-export const postTheme = async (req: Request, res: Response) => {
+export const postTheme = async (req: IRequestPostTheme, res: Response) => {
   const { userId, theme } = req.body
 
   const user = await Theme.findOne({ where: { userId } })
@@ -25,7 +26,7 @@ export const postTheme = async (req: Request, res: Response) => {
   }
 }
 
-export const getTheme = (req: Request, res: Response) => {
+export const getTheme = (req: IRequestGetTheme, res: Response) => {
   const id = req.params.id
 
   Theme.findByPk(id)
