@@ -1,6 +1,7 @@
 import * as uuid from 'uuid'
 import { db } from '../models'
-import type { Request, Response } from 'express'
+import type { Response } from 'express'
+import type { Request } from './types'
 const Topic = db.topics
 
 export class TopicController {
@@ -16,7 +17,7 @@ export class TopicController {
     // Create a Topic
     const topic = {
       id: uuid.v4(),
-      title: req.body.title,
+      title: req.body.title,    
     }
 
     // Save Topic in the database
