@@ -17,7 +17,7 @@ const lightTheme = createTheme({
   },
 })
 
-export const themes: Record<Themes, Theme> = {
+export const themes: Record<string, Theme> = {
   darkTheme,
   lightTheme,
 }

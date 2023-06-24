@@ -4,18 +4,22 @@ import { Box, Switch } from '@mui/material'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import { RootState } from '../store/rootReducer'
+import { postTheme } from '../store/theme/actions'
 import { setTheme } from '../store/theme/slice'
 
 export const ThemeSwitcher = () => {
   const { theme } = useSelector((state: RootState) => state.theme)
+  const { user } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
 
   const handleChange = () => {
-    dispatch(
-      setTheme(
-        theme === Themes.LightTheme ? Themes.DarkTheme : Themes.LightTheme
-      )
-    )
+    const newTheme =
+      theme === Themes.LightTheme ? Themes.DarkTheme : Themes.LightTheme
+    if (user) {
+      dispatch(postTheme({ userId: String(user.id), theme: newTheme }))
+    } else {
+      dispatch(setTheme(newTheme))
+    }
   }
 
   return (
@@ -25,7 +29,11 @@ export const ThemeSwitcher = () => {
         alignItems: 'center',
       }}>
       <LightModeIcon />
-      <Switch onChange={handleChange} value={theme} color="default" />
+      <Switch
+        onChange={handleChange}
+        checked={theme === Themes.DarkTheme}
+        color="default"
+      />
       <DarkModeIcon />
     </Box>
   )
