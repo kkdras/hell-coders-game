@@ -40,7 +40,7 @@ export const throttle = <T extends []>(fn: (...args: T) => void, t: number) => {
 
   const execute = () => {
     if (lastArgs && needStartExecute) {
-      fn.apply(this, lastArgs)
+      fn(...lastArgs)
       needStartExecute = false
       lastArgs = null
 

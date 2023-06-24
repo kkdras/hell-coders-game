@@ -38,3 +38,9 @@ declare module '@reduxjs/toolkit' {
     options?: unknown
   ): AsyncThunk<Returned, ThunkArg, ThunkApiConfig>
 }
+
+declare global {
+  interface Window {
+    __PRELOADED_STATE__?: object
+  }
+}

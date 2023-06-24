@@ -1,17 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { rootReducer } from './rootReducer'
+import { rootReducer, RootState } from './rootReducer'
+export type { RootState } from './rootReducer'
 
-let preloadedState
-if (typeof window !== 'undefined') {
-  preloadedState = window.__PRELOADED_STATE__
-  delete window.__PRELOADED_STATE__
+const isClient = typeof window !== 'undefined'
+
+export const initStore = (initialState: Partial<RootState> = {}) => {
+  let preloadedState = initialState
+  if (isClient) {
+    preloadedState = window.__PRELOADED_STATE__ as RootState
+    delete window.__PRELOADED_STATE__
+  }
+
+  return configureStore({
+    preloadedState,
+    devTools: process.env.NODE_ENV === 'development',
+    reducer: rootReducer,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({ serializableCheck: false }),
+  })
 }
-export const store = configureStore({
-  preloadedState,
-  devTools: process.env.NODE_ENV === 'development',
-  reducer: rootReducer,
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({ serializableCheck: false }),
-})
 
-export type AppStoreDispatch = typeof store.dispatch
+export type AppStoreDispatch = ReturnType<typeof initStore>['dispatch']
