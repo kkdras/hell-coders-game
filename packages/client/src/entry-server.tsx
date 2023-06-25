@@ -5,15 +5,16 @@ import ReactDOMServer from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom/server'
 import createEmotionCache from './utils/createEmotionCache'
-import { store } from './store'
+import { initStore, RootState } from './store'
 import App from './App'
 
-export function render(url: string) {
+export function render(url: string, preloadedState: Partial<RootState>) {
   const cache = createEmotionCache()
   const { extractCriticalToChunks, constructStyleTagsFromChunks } =
     createEmotionServer(cache)
 
-  const initialState = store.getState()
+  const store = initStore(preloadedState)
+
   const appHtml = ReactDOMServer.renderToString(
     <StaticRouter location={url}>
       <Provider store={store}>
@@ -27,5 +28,5 @@ export function render(url: string) {
   const emotionChunks = extractCriticalToChunks(appHtml)
   const emotionCss = constructStyleTagsFromChunks(emotionChunks)
 
-  return { appHtml, emotionCss, initialState }
+  return { appHtml, emotionCss, store }
 }

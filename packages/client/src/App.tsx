@@ -12,10 +12,11 @@ import { Register } from './pages/Register/Register'
 import { Forum } from './pages/Forum/Forum'
 import { Profile } from './pages/Profile/Profile'
 import { WithAuthorization } from './processes/auth/WithAuthorization'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from './store/rootReducer'
 import { CssBaseline, ThemeProvider } from '@mui/material'
-import { themes } from './themes'
+import { Themes, themes } from './themes'
+import { getTheme } from './store/theme/actions'
 
 export enum RouteNames {
   MAIN = '/',
@@ -31,20 +32,17 @@ export enum RouteNames {
 
 function App() {
   const { theme } = useSelector((state: RootState) => state.theme)
+  const { user } = useSelector((state: RootState) => state.user)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}`
-      const response = await fetch(url)
-      const data = await response.json()
-      console.log(data)
+    if (user) {
+      dispatch(getTheme(user.id))
     }
-
-    fetchServerData()
-  }, [])
+  }, [dispatch, user])
 
   return (
-    <ThemeProvider theme={themes[theme]}>
+    <ThemeProvider theme={themes[theme || Themes.LightTheme]}>
       <CssBaseline />
       <WithAuthorization>
         <Routes>

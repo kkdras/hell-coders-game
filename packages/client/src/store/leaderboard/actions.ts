@@ -1,10 +1,21 @@
+import { createAsyncThunk } from '@reduxjs/toolkit'
 import { YANDEX_BASE_URL } from '../../shared/consts'
 import { User } from './types'
-import { store } from '../../store'
+import { RootState } from '../../store'
+
+type AsyncThunkConfig = {
+  state: RootState
+}
+
+type ResponseData = { data: unknown }
 import { mainAxios } from '../../http-common'
 
-export function saveScore(score: number) {
-  const { user } = store.getState().user
+export const saveScore = createAsyncThunk<
+  ResponseData['data'],
+  number,
+  AsyncThunkConfig
+>('leaderBoard/saveScore', async (score: number, { getState }) => {
+  const { user } = getState().user
 
   const userData: User = {
     avatar: user?.avatar,
@@ -12,25 +23,26 @@ export function saveScore(score: number) {
     score: score,
   }
 
-  const data = {
+  const body = {
     data: userData,
     ratingFieldName: 'score',
     teamName: 'hell-coders',
   }
 
-  console.log(data)
+  try {
+    const { data } = await axios.post<ResponseData>(
+      `${BASE_URL}/leaderboard`,
+      body,
+      {
+        withCredentials: true,
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    )
 
-  mainAxios
-    .post(`${YANDEX_BASE_URL}/leaderboard`, data, {
-      withCredentials: true,
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
-    .then(response => {
-      return response.data
-    })
-    .catch(error => {
-      console.error(error)
-    })
-}
+    return data
+  } catch (e) {
+    console.error(e)
+  }
+})

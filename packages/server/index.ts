@@ -3,14 +3,22 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 dotenv.config()
 
+import bodyParser from 'body-parser'
 import express from 'express'
 import { createClientAndConnect } from './db'
 import { topicRouter } from './routes/topic.routes'
 import { db } from './models'
+import { themeRouter } from './routes/theme.routes'
 
+dotenv.config()
 const app = express()
 
 app.use(cors())
+
+// parse requests of content-type - application/json
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
@@ -27,8 +35,19 @@ db.sequelize
     console.log('Failed to sync db: ' + err.message)
   })
 
+db.sequelize
+  .sync()
+  .then(() => {
+    console.log('Synced db.')
+  })
+  .catch((err: any) => {
+    console.log('Failed to sync db: ' + err.message)
+  })
+
 createClientAndConnect()
 app.use('/api/forum', topicRouter)
+
+app.use('/api/theme', themeRouter)
 
 app.get('/', (_, res) => {
   res.json('👋 Howdy from the server :)')

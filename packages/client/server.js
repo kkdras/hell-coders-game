@@ -18,9 +18,8 @@ export async function startServer() {
    */
   let vite
   if (!isProd) {
-    vite = await (
-      await import('vite')
-    ).createServer({
+    vite = await import('vite')
+    vite = await vite.createServer({
       root,
       server: { middlewareMode: true },
       appType: 'custom',
@@ -50,14 +49,19 @@ export async function startServer() {
         render = (await import('./dist/server/entry-server.cjs')).render
       }
 
-      const { appHtml, emotionCss, initialState } = render(url)
+      const { appHtml, emotionCss, store } = render(url, {})
+
+      // here we can dispatch actions to fill store
+
+      const state = store.getState()
+
       const html = template
         .replace(`<!--app-html-->`, appHtml)
         .replace(`<!--emotionCss-->`, emotionCss)
         .replace(
           `<!--app-state-->`,
           `<script>window.__PRELOADED_STATE__=${serialize(
-            initialState
+            state
           )}</script>`
         )
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)

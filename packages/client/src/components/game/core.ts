@@ -8,7 +8,6 @@ import {
 } from './const'
 import { EventBus, getRandomInt, rotateMatrix } from './utils'
 import Image from '../../image/gameover.png'
-import { saveScore } from '../../store/leaderboard/actions'
 
 interface FigureParameters {
   name: FigureNames
@@ -198,8 +197,7 @@ export class GameConstructor extends EventBus {
         if (figure.row + row <= 0) {
           this.showGameOver()
           const score = Math.floor(Math.random() * 100000) // TODO replace to real score
-          saveScore(score)
-          return
+          this.emit('gameOver', score);
         }
 
         this.gameField[figure.row + row][figure.column + col] = figure.name
