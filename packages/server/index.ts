@@ -1,12 +1,12 @@
 import dotenv from 'dotenv'
 import cors from 'cors'
+dotenv.config()
 import bodyParser from 'body-parser'
 import express from 'express'
-import { createClientAndConnect } from './db'
 import { db } from './models'
 import { themeRouter } from './routes/theme.routes'
+import { topicRouter } from './routes/topic.routes'
 
-dotenv.config()
 const app = express()
 app.use(cors())
 
@@ -25,8 +25,7 @@ db.sequelize
     console.log('Failed to sync db: ' + err.message)
   })
 
-createClientAndConnect()
-
+app.use('/api/forum', topicRouter)
 app.use('/api/theme', themeRouter)
 
 app.get('/', (_, res) => {

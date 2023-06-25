@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { BASE_URL } from '../../shared/consts'
-import axios from 'axios'
 import { User } from './types'
 import { RootState } from '../../store'
 
@@ -9,6 +8,7 @@ type AsyncThunkConfig = {
 }
 
 type ResponseData = { data: unknown }
+import { mainAxios } from '../../http-common'
 
 export const saveScore = createAsyncThunk<
   ResponseData['data'],
@@ -30,7 +30,7 @@ export const saveScore = createAsyncThunk<
   }
 
   try {
-    const { data } = await axios.post<ResponseData>(
+    const { data } = await mainAxios.post<ResponseData>(
       `${BASE_URL}/leaderboard`,
       body,
       {

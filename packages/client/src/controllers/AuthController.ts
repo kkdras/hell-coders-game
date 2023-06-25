@@ -25,6 +25,7 @@ class AuthController {
   async logout() {
     try {
       await this.api.logout()
+      localStorage.removeItem('auth')
     } catch (e: unknown) {
       console.log(e)
     }

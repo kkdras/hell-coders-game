@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
+import { mainAxios } from '../../http-common'
 import { BASE_URL } from '../../shared/consts'
 import { ChangePasswordRequest, User, UserUpdateRequest } from './types'
 
@@ -9,7 +10,7 @@ export const getAuthUser = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('user/getAuthUser', async (_, { rejectWithValue }) => {
   try {
-    const response = await axios.get(`${BASE_URL}/auth/user`, {
+    const response = await mainAxios.get(`${BASE_URL}/auth/user`, {
       withCredentials: true,
       headers: {
         'Content-type': 'application/json',
@@ -27,12 +28,16 @@ export const putUser = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('user/putUser', async (data, { rejectWithValue }) => {
   try {
-    const response = await axios.put(`${BASE_URL}/user/profile`, data, {
-      withCredentials: true,
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
+    const response = await mainAxios.put(
+      `${BASE_URL}/user/profile`,
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    )
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -45,12 +50,16 @@ export const putAvatar = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('user/putAvatar', async (data, { rejectWithValue }) => {
   try {
-    const response = await axios.put(`${BASE_URL}/user/profile/avatar`, data, {
-      withCredentials: true,
-      headers: {
-        'Content-type': 'multipart/form-data',
-      },
-    })
+    const response = await mainAxios.put(
+      `${BASE_URL}/user/profile/avatar`,
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      }
+    )
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -63,12 +72,16 @@ export const putPassword = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('user/putPassword', async (data, { rejectWithValue }) => {
   try {
-    const response = await axios.put(`${BASE_URL}/user/password`, data, {
-      withCredentials: true,
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
+    const response = await mainAxios.put(
+      `${BASE_URL}/user/password`,
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    )
     return response
   } catch (error) {
     // @ts-ignore

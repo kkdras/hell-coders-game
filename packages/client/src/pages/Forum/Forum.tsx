@@ -1,14 +1,24 @@
-import { Grid, Typography, Box } from '@mui/material'
+import { Grid, Typography, Box, IconButton } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { forums } from './const'
 import { ArrowBack } from '@mui/icons-material'
-import { ForumAccordeon } from './components/ForumAccordeon/ForumAccordion'
-import { useEffect } from 'react'
+import { TopicAccordeon } from './components/TopicAccordeon/TopicAccordeon'
+import { useEffect, useState } from 'react'
+import AddIcon from '@mui/icons-material/Add'
+import { AddTopic } from './components/AddTopic/AddTopic'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../store/rootReducer'
+import { getAllTopics } from '../../store/forum/actions'
+import { AppStoreDispatch } from '../../store'
 
 export function Forum() {
   const navigate = useNavigate()
+  const { topics } = useSelector((state: RootState) => state.forum)
+  const [showAddTopic, setShowAddTopic] = useState<boolean>(false)
+  const dispatch = useDispatch<AppStoreDispatch>()
+
   useEffect(() => {
     document.title = 'Форум'
+    dispatch(getAllTopics())
   }, [])
 
   return (
@@ -19,25 +29,38 @@ export function Forum() {
         }}
       />
       <Grid container spacing={2} pt={12} pb={4} color={'blue'}>
-        <Grid item xs={8}>
-          <Typography pl={2}>ФОРУМЫ</Typography>
+        <Grid item xs={11}>
+          <Typography pl={2}>ТОПИКИ</Typography>
         </Grid>
-        <Grid item xs={2}>
-          <Typography pl={8}>ТЕМЫ</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography pl={8}>ОТВЕТЫ</Typography>
+        <Grid item xs={1}>
+          <IconButton
+            color="success"
+            onClick={e => {
+              setShowAddTopic(true)
+            }}>
+            <AddIcon />
+          </IconButton>
         </Grid>
       </Grid>
-      {forums.map(forum => (
-        <ForumAccordeon
-          key={forum.id}
-          id={forum.id}
-          themesCount={forum.themesCount}
-          answersCount={forum.answersCount}
-          title={forum.title}
-        />
+      {topics.length > 0 && (
+        <Grid container spacing={2} pb={4} color={'red'}>
+          <Grid item xs={7}>
+            <Typography pl={2}>Название</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography pl={5}>Комментарии</Typography>
+          </Grid>
+        </Grid>
+      )}
+      {topics.map(topic => (
+        <TopicAccordeon key={topic.id} {...topic} />
       ))}
+      {showAddTopic && (
+        <AddTopic
+          showAddTopic={showAddTopic}
+          setShowAddTopic={setShowAddTopic}
+        />
+      )}
     </Box>
   )
 }

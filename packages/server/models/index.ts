@@ -5,12 +5,15 @@ import {
   OperatorsAliases,
   Sequelize,
 } from 'sequelize'
-import { themeModel } from './theme.model'
+
 import { dbConfig } from '../db.config'
+import { topicModel } from './topic.model'
+import { themeModel } from './theme.model'
 
 interface IDb {
   Sequelize: typeof Sequelize
   sequelize: Sequelize
+  topics: ModelCtor<Model<any, any>>
   themes: ModelCtor<Model<any, any>>
 }
 
@@ -30,10 +33,12 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 export const db: IDb = {
   Sequelize,
   sequelize,
+  topics: topicModel(sequelize, DataTypes),
   themes: themeModel(sequelize, DataTypes),
 }
 
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
+db.topics = topicModel(sequelize, DataTypes)
 db.themes = themeModel(sequelize, DataTypes)
