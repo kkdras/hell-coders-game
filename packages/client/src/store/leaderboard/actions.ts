@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { YANDEX_BASE_URL } from '../../shared/consts'
+import { BASE_URL } from '../../shared/consts'
 import { User } from './types'
 import { RootState } from '../../store'
 
@@ -30,7 +30,7 @@ export const saveScore = createAsyncThunk<
   }
 
   try {
-    const { data } = await axios.post<ResponseData>(
+    const { data } = await mainAxios.post<ResponseData>(
       `${BASE_URL}/leaderboard`,
       body,
       {

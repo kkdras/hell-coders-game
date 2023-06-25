@@ -8,7 +8,7 @@ import { FormInput } from '../../components/FormInput'
 import { ProfileForm } from './types'
 import { UserUpdateRequest } from '../../store/user/types'
 import { putUser } from '../../store/user/actions'
-import { YANDEX_BASE_URL } from '../../shared/consts'
+import { BASE_URL } from '../../shared/consts'
 import { AvatarPopup } from './AvatarPopup/AvatarPopup'
 import { defaultValues } from './const'
 import {
@@ -52,7 +52,7 @@ export const Profile = () => {
         phone: user.phone,
         login: user.login,
       })
-      setAvatar(`${YANDEX_BASE_URL}/resources${user.avatar}`)
+      setAvatar(`${BASE_URL}/resources${user.avatar}`)
     }
   }, [user])
 

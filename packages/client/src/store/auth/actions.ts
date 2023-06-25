@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AxiosError, AxiosResponse } from 'axios'
 import { mainAxios } from '../../http-common'
-import { YANDEX_BASE_URL } from '../../shared/consts'
+import { BASE_URL } from '../../shared/consts'
 import { getAuthUser } from '../user/actions'
 import { OauthSignInRequest, SignInRequest, SignUpRequest } from './types'
 
@@ -12,7 +12,7 @@ export const postRegister = createAsyncThunk<
 >('auth/postRegister', async (data, { rejectWithValue }) => {
   try {
     const response: AxiosResponse = await mainAxios.post(
-      `${YANDEX_BASE_URL}/auth/signup`,
+      `${BASE_URL}/auth/signup`,
       data
     )
     return response
@@ -28,7 +28,7 @@ export const getYandexServiceId = createAsyncThunk<
 >('auth/yandex/service-id', async (redirect_uri, { rejectWithValue }) => {
   try {
     const response = await mainAxios.get(
-      `${YANDEX_BASE_URL}/oauth/yandex/service-id/`,
+      `${BASE_URL}/oauth/yandex/service-id/`,
       {
         params: { redirect_uri: redirect_uri },
       }
@@ -50,7 +50,7 @@ export const postYandexOAuth = createAsyncThunk<
 >('auth/yandex', async (data, { rejectWithValue, dispatch }) => {
   try {
     const response = await mainAxios.post(
-      `${YANDEX_BASE_URL}/oauth/yandex`,
+      `${BASE_URL}/oauth/yandex`,
       data,
       {
         withCredentials: true,
