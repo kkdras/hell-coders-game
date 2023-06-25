@@ -1,11 +1,11 @@
 import type { Request as ExpressRequest } from 'express';
 
-interface TopicRequestData {
+export interface TopicRequestData {
   title: string
 }
 
 export type Request<
-  ReqBody = TopicRequestData,
+  ReqBody = never,
   ResBody = never,
   ReqQuery = import('express-serve-static-core').Query
 > = ExpressRequest<

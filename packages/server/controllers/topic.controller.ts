@@ -1,11 +1,11 @@
 import * as uuid from 'uuid'
 import { db } from '../models'
 import type { Response } from 'express'
-import type { Request } from './types'
+import type { Request, TopicRequestData } from './types'
 const Topic = db.topics
 
 export class TopicController {
-  static create(req: Request, res: Response) {
+  static create(req: Request<TopicRequestData>, res: Response) {
     // Validate request
     if (!req.body.title) {
       res.status(400).send({
@@ -17,7 +17,7 @@ export class TopicController {
     // Create a Topic
     const topic = {
       id: uuid.v4(),
-      title: req.body.title,    
+      title: req.body.title,
     }
 
     // Save Topic in the database
