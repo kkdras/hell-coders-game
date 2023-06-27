@@ -12,6 +12,7 @@
     "start": "lerna run start",
     "test": "lerna run test",
     "lint": "lerna run lint",
+    "lint:fix": "lerna run lint:fix",
     "format": "lerna run format"
   },
   "license": "MIT",
