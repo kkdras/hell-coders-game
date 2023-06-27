@@ -3,6 +3,8 @@ import { IComment, IReaction, ReactionType, WithId } from './types'
 
 type CommentsWithReaction = (IComment & { Reactions: WithId<IReaction>[] })[]
 
+// нужна чтобы вычислить количество реакций (лайков и дизлайков)
+// и оставлял ли текущий пользователь реакцию
 export const transformComments = (
   rawComments: CommentsWithReaction,
   userId: number
@@ -15,7 +17,7 @@ export const transformComments = (
     )
 
     comments.push({
-      ...pick(['commentId', 'userId', 'type', 'id'], comment),
+      ...pick(['content', 'userId', 'topicId', 'parentId', 'id'], comment),
       userReaction: !!curUserReaction,
       userReactionType: curUserReaction?.type ?? null,
       likes: comment.Reactions.reduce(
