@@ -7,8 +7,8 @@ export const appSlice = createSlice({
   reducers: {
     toggleDrawler: state => {
       state.isDrawlerOpened = !state.isDrawlerOpened
-    },
-  },
+    }
+  }
 })
 
 export const { toggleDrawler } = appSlice.actions

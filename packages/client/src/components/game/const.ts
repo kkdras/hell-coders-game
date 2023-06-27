@@ -8,38 +8,38 @@ export const figures: Record<FigureNames, Matrix> = {
   J: [
     [1, 0, 0],
     [1, 1, 1],
-    [0, 0, 0],
+    [0, 0, 0]
   ],
   I: [
     [0, 0, 0, 0],
     [1, 1, 1, 1],
     [0, 0, 0, 0],
-    [0, 0, 0, 0],
+    [0, 0, 0, 0]
   ],
   T: [
     [0, 1, 0],
     [1, 1, 1],
-    [0, 0, 0],
+    [0, 0, 0]
   ],
   S: [
     [0, 1, 1],
     [1, 1, 0],
-    [0, 0, 0],
+    [0, 0, 0]
   ],
   Z: [
     [1, 1, 0],
     [0, 1, 1],
-    [0, 0, 0],
+    [0, 0, 0]
   ],
   L: [
     [0, 0, 1],
     [1, 1, 1],
-    [0, 0, 0],
+    [0, 0, 0]
   ],
   O: [
     [1, 1],
-    [1, 1],
-  ],
+    [1, 1]
+  ]
 }
 
 export enum Colors {
@@ -59,5 +59,5 @@ export const figuresColors: Record<FigureNames, Colors> = {
   O: Colors.GREEN,
   S: Colors.ORANGE,
   T: Colors.YELLOW,
-  Z: Colors.PINK,
+  Z: Colors.PINK
 }

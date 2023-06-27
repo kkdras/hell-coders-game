@@ -3,7 +3,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
+  DialogTitle
 } from '@mui/material'
 import { FC } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -26,7 +26,7 @@ export const PasswordPopup: FC<PasswordPopupProps> = ({ open, onClose }) => {
 
   const methods = useForm<PasswordForm>({
     defaultValues,
-    resolver: yupResolver(passwordSchema),
+    resolver: yupResolver(passwordSchema)
   })
 
   const { handleSubmit, reset } = methods

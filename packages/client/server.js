@@ -22,7 +22,7 @@ export async function startServer() {
     vite = await vite.createServer({
       root,
       server: { middlewareMode: true },
-      appType: 'custom',
+      appType: 'custom'
     })
 
     app.use(vite.middlewares)
@@ -30,7 +30,7 @@ export async function startServer() {
     app.use((await import('compression')).default())
     app.use(
       (await import('serve-static')).default(path.resolve('dist/client'), {
-        index: false,
+        index: false
       })
     )
   }

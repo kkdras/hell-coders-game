@@ -29,5 +29,5 @@ export const forumSlice = createSlice({
         state.replyes[payload.data[0].commentId] = payload.data
       }
     )
-  },
+  }
 })

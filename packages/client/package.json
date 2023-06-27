@@ -9,7 +9,7 @@
     "build:server": "rm -rf  dist/server && vite build --outDir dist/server --ssr src/entry-server.tsx",
     "start": "NODE_ENV=production node server",
     "lint": "eslint .",
-    "list:fix": "eslint . --fix",
+    "list:fix": "eslint --fix .",
     "format": "prettier --write .",
     "test": "jest ./ --maxWorkers 1"
   },

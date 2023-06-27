@@ -22,5 +22,5 @@ export const authSlice = createSlice({
         alert('Аккаунт Яндекс не подтвержден')
       }
     })
-  },
+  }
 })

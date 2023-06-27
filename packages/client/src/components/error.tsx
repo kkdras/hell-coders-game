@@ -15,7 +15,7 @@ export default function Error(props: Props) {
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
-        margin: 10,
+        margin: 10
       }}>
       <Box sx={{ color: 'error.main', margin: 2 }}>
         <h1>{props.title}</h1>

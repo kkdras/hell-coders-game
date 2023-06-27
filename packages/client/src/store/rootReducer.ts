@@ -10,7 +10,7 @@ export const rootReducer = combineReducers({
   [authSlice.name]: authSlice.reducer,
   [userSlice.name]: userSlice.reducer,
   [themeSlice.name]: themeSlice.reducer,
-  [forumSlice.name]: forumSlice.reducer,
+  [forumSlice.name]: forumSlice.reducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

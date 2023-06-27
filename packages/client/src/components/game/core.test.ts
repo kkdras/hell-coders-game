@@ -11,7 +11,7 @@ describe('GameConstructor class', () => {
   const game = new GameConstructor({
     canvas,
     cellSize: 34,
-    movesBoundary: 50,
+    movesBoundary: 50
   })
   let figureSequence: [Figure, Figure]
   beforeEach(() => {
@@ -21,21 +21,21 @@ describe('GameConstructor class', () => {
         matrix: [
           [1, 0, 0],
           [1, 1, 1],
-          [0, 0, 0],
+          [0, 0, 0]
         ],
         column: 4,
-        row: 16,
+        row: 16
       },
       {
         name: 'J',
         matrix: [
           [1, 0, 0],
           [1, 1, 1],
-          [0, 0, 0],
+          [0, 0, 0]
         ],
         column: 4,
-        row: 16,
-      },
+        row: 16
+      }
     ]
   })
 
@@ -53,7 +53,7 @@ describe('GameConstructor class', () => {
     expect(game.figureSequence[0].matrix).toEqual([
       [0, 1, 1],
       [0, 1, 0],
-      [0, 1, 0],
+      [0, 1, 0]
     ])
   })
 
@@ -63,7 +63,7 @@ describe('GameConstructor class', () => {
     expect(game.figureSequence[0].matrix).toEqual([
       [0, 1, 0],
       [0, 1, 0],
-      [0, 1, 1],
+      [0, 1, 1]
     ])
   })
 

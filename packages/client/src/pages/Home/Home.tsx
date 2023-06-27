@@ -4,7 +4,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Typography,
+  Typography
 } from '@mui/material'
 import { Box } from '@mui/material'
 import { listOptions } from './const'
@@ -25,7 +25,7 @@ export const Home = () => {
       dispatch(
         postYandexOAuth({
           code: search.toString().split('=')[1],
-          redirect_uri: redirect_uri,
+          redirect_uri: redirect_uri
         })
       )
   }, [search])
@@ -42,7 +42,7 @@ export const Home = () => {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}>
           <Typography>
             Суть игры в тетрис состоит в том, что случайные фигурки (каждая из

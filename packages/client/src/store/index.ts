@@ -16,7 +16,7 @@ export const initStore = (initialState: Partial<RootState> = {}) => {
     devTools: process.env.NODE_ENV === 'development',
     reducer: rootReducer,
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware({ serializableCheck: false }),
+      getDefaultMiddleware({ serializableCheck: false })
   })
 }
 
