@@ -1,44 +1,20 @@
-import {
-  DataTypes,
-  Model,
-  ModelCtor,
-  OperatorsAliases,
-  Sequelize,
-} from 'sequelize'
+import { sequelize } from './init'
+import { Topic } from './topic.model'
+import { Comment } from './comment.model'
+import { Reaction } from './reaction.model'
+import { User } from './user.model'
+import { Theme } from './theme.model'
 
-import { dbConfig } from '../db.config'
-import { topicModel } from './topic.model'
-import { themeModel } from './theme.model'
+Comment.belongsTo(Comment, { as: 'parent', foreignKey: 'parentId' })
+Comment.hasMany(Comment, { as: 'replies', foreignKey: 'parentId' })
+Comment.belongsTo(Topic, { as: 'main theme', foreignKey: 'topicId' })
+Comment.belongsTo(User, { as: 'comment author', foreignKey: 'userId' })
+Comment.hasMany(Reaction, { foreignKey: 'commentId' })
 
-interface IDb {
-  Sequelize: typeof Sequelize
-  sequelize: Sequelize
-  topics: ModelCtor<Model<any, any>>
-  themes: ModelCtor<Model<any, any>>
-}
-
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-  host: dbConfig.HOST,
-  dialect: dbConfig.dialect,
-  operatorsAliases: 0 as unknown as OperatorsAliases,
-
-  pool: {
-    max: dbConfig.pool.max,
-    min: dbConfig.pool.min,
-    acquire: dbConfig.pool.acquire,
-    idle: dbConfig.pool.idle,
-  },
+Reaction.belongsTo(Comment, {
+  as: 'reaction on specific comment',
+  foreignKey: 'commentId'
 })
+Reaction.belongsTo(User, { as: 'reaction author', foreignKey: 'userId' })
 
-export const db: IDb = {
-  Sequelize,
-  sequelize,
-  topics: topicModel(sequelize, DataTypes),
-  themes: themeModel(sequelize, DataTypes),
-}
-
-db.Sequelize = Sequelize
-db.sequelize = sequelize
-
-db.topics = topicModel(sequelize, DataTypes)
-db.themes = themeModel(sequelize, DataTypes)
+export { sequelize, Topic, Comment, Reaction, User, Theme }
