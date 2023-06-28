@@ -5,15 +5,10 @@ import type { IReaction, Request, WithId } from './types'
 
 export class ReactionController {
   static async createCommentReaction(req: Request<IReaction>, res: Response) {
-    const commentId = Number(req.params.id)
-    const userId = Number(req.body.userId)
+    const commentId = Number(req.params.commentId)
+    const userId = Number(req.query.userId)
 
     try {
-      if (isNaN(commentId) || isNaN(userId)) {
-        res.status(400).send({ message: 'Invalid data' })
-        return
-      }
-
       const rawNewReaction = {
         type: req.body.type,
         userId,
@@ -36,15 +31,16 @@ export class ReactionController {
   }
 
   static async deleteReaction(req: Request, res: Response) {
-    const reactionId = Number(req.query.id)
+    const commentId = Number(req.params.commentId)
+    const userId = Number(req.query.userId)
 
     try {
-      if (isNaN(reactionId)) {
-        res.status(400).send({ message: 'Invalid id' })
-        return
-      }
-
-      const reaction = await Reaction.findByPk(reactionId)
+      const reaction = await Reaction.findOne({
+        where: {
+          commentId,
+          userId
+        }
+      })
 
       if (!reaction) {
         res.status(400).send({ message: 'Reaction doesn\'t exist' })
@@ -62,24 +58,25 @@ export class ReactionController {
   }
 
   static async updateReaction(req: Request<WithId<IReaction>>, res: Response) {
-    try {
-      const id = Number(req.body.id)
+    const commentId = Number(req.params.commentId)
+    const userId = Number(req.query.userId)
 
+    try {
       const rawReaction = {
         commentId: req.body.commentId,
         userId: req.body.userId,
         type: req.body.type
       }
 
-      if (isNaN(id)) {
-        res.status(400).send({ message: 'Bad id format' })
-        return
-      }
-
-      const reaction = await Reaction.findByPk(id)
+      const reaction = await Reaction.findOne({
+        where: {
+          commentId,
+          userId
+        }
+      })
 
       if (!reaction) {
-        res.status(400).send({ message: 'Not found reaction' })
+        res.status(400).send({ message: 'Reaction doesn\'t exist' })
         return
       }
 
