@@ -10,34 +10,38 @@ import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
 import { AddReplyProps, AddReplyForm } from './types'
-import { ReplyRequestData } from '../../../../store/forum/types'
-import { useDispatch } from 'react-redux'
-import { AppStoreDispatch } from '../../../../store'
+import { CommentAndReplyRequestData } from '../../../../store/forum/types'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppStoreDispatch, RootState } from '../../../../store'
 import { postReply } from '../../../../store/forum/actions'
 
 export const AddReply: FC<AddReplyProps> = ({
   showAddReply,
   setShowAddReply,
-  commentId,
-  authorLogin,
+  comment,
 }) => {
   const dispatch = useDispatch<AppStoreDispatch>()
 
+  const { user } = useSelector((state: RootState) => state.user)
+
   const methods = useForm<AddReplyForm>({
-    defaultValues: { text: '' },
+    defaultValues: { content: '' },
     resolver: yupResolver(addForumItemSchema),
   })
 
   const { handleSubmit } = methods
+
   const formSubmit = handleSubmit(data => {
-    const requestData: ReplyRequestData = {
-      text: data.text,
-      commentId: commentId,
-      authorLogin: authorLogin,
-      time: `${new Date().getDate()} ${new Date().getTime()}`,
+    if (user) {
+      const requestData: CommentAndReplyRequestData = {
+        content: data.content,
+        parentId: comment.id,
+        userId: user?.id,
+        topicId: comment.topicId
+      }
+      dispatch(postReply(requestData))
+      setShowAddReply(false)
     }
-    dispatch(postReply(requestData))
-    setShowAddReply(false)
   })
 
   return (

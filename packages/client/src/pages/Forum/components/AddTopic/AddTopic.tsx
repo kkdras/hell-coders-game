@@ -29,8 +29,7 @@ export const AddTopic: FC<AddTopicProps> = ({
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
     const requestData: TopicRequestData = {  
-      title: data.title,
-      comments: {},
+      title: data.title,      
     }
     dispatch(postTopic(requestData))
     setShowAddTopic(false)

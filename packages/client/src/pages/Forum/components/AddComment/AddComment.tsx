@@ -10,9 +10,9 @@ import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
 import { AddCommentForm, AddCommentProps } from './types'
-import { CommentRequestData } from '../../../../store/forum/types'
-import { useDispatch } from 'react-redux'
-import { AppStoreDispatch } from '../../../../store'
+import { CommentAndReplyRequestData } from '../../../../store/forum/types'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppStoreDispatch, RootState } from '../../../../store'
 import { postComment } from '../../../../store/forum/actions'
 
 export const AddComment: FC<AddCommentProps> = ({
@@ -20,23 +20,25 @@ export const AddComment: FC<AddCommentProps> = ({
   setShowAddComment,
   topicId,
 }) => {
+
   const dispatch = useDispatch<AppStoreDispatch>()
+  const { user } = useSelector((state: RootState) => state.user)
 
   const methods = useForm<AddCommentForm>({
-    defaultValues: { title: '' },
+    defaultValues: { content: '' },
     resolver: yupResolver(addForumItemSchema),
   })
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
-    const requestData: CommentRequestData = {     
-      title: data.title,
+  if (user) {
+    const requestData: CommentAndReplyRequestData = {     
+      content: data.content,
       topicId: topicId,
-      replyes: {},
-    }
-
+      userId: user?.id
+    }   
     dispatch(postComment(requestData))
-    setShowAddComment(false)
+    setShowAddComment(false)}
   })
 
   return (

@@ -16,7 +16,7 @@ import { AddComment } from '../AddComment/AddComment'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../store/rootReducer'
 import { AppStoreDispatch } from '../../../../store'
-import { getTopicComments } from '../../../../store/forum/actions'
+import { getAllComments } from '../../../../store/forum/actions'
 
 export function TopicAccordeon(topic?: ITopic) {
   const lightLightBlue = lightBlue[50]
@@ -28,7 +28,7 @@ export function TopicAccordeon(topic?: ITopic) {
     topic && topic.id && comments[topic.id] ? comments[topic.id] : []
 
   useEffect(() => {
-    if (topic && topic.id) dispatch(getTopicComments(topic.id))
+    if (topic && topic.id) dispatch(getAllComments(topic.id))
   }, [])
 
   if (!(topic && topic.id)) return null
