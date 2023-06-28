@@ -22,28 +22,28 @@ export default class HTTPTransport {
   ): Promise<Response> {
     return this.request<Response>(this.endpoint + path, {
       method: Method.Post,
-      data,
+      data
     })
   }
 
   public put: HTTPMethod<Response> = (path: string, data?: unknown) => {
     return this.request<Response>(this.endpoint + path, {
       method: Method.Put,
-      data,
+      data
     })
   }
 
   public patch: HTTPMethod<Response> = (path: string, data?: unknown) => {
     return this.request<Response>(this.endpoint + path, {
       method: Method.Patch,
-      data,
+      data
     })
   }
 
   public delete: HTTPMethod<Response> = (path: string, data?: unknown) => {
     return this.request<Response>(this.endpoint + path, {
       method: Method.Delete,
-      data,
+      data
     })
   }
 

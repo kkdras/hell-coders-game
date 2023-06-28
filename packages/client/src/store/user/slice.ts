@@ -10,7 +10,7 @@ export const userSlice = createSlice({
   reducers: {
     clearUser: (state: userState) => {
       state.user = null
-    },
+    }
   },
   extraReducers: builder => {
     builder.addCase(
@@ -31,6 +31,6 @@ export const userSlice = createSlice({
         state.user = payload.data
       }
     )
-  },
+  }
 })
 export const { clearUser } = userSlice.actions

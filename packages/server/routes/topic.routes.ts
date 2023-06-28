@@ -1,8 +1,11 @@
 import { TopicController } from '../controllers/topic.controller'
 import { Router } from 'express'
 
-export const topicRouter = Router()
-  .post('/postTopic', TopicController.create)
-  .get('/topics', TopicController.findAll)
+const routes = Router()
+  .get('/', TopicController.findAll)
+  .post('/create', TopicController.create)
+  .get('/:id/comments', TopicController.getAllComments)
 
-export default topicRouter
+const router = Router().use('/topics', routes)
+
+export { router as topicRouter }

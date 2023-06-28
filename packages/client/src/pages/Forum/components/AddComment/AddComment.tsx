@@ -18,13 +18,13 @@ import { postComment } from '../../../../store/forum/actions'
 export const AddComment: FC<AddCommentProps> = ({
   showAddComment,
   setShowAddComment,
-  topicId,
+  topicId
 }) => {
   const dispatch = useDispatch<AppStoreDispatch>()
 
   const methods = useForm<AddCommentForm>({
     defaultValues: { title: '' },
-    resolver: yupResolver(addForumItemSchema),
+    resolver: yupResolver(addForumItemSchema)
   })
 
   const { handleSubmit } = methods
@@ -32,7 +32,7 @@ export const AddComment: FC<AddCommentProps> = ({
     const requestData: CommentRequestData = {     
       title: data.title,
       topicId: topicId,
-      replyes: {},
+      replyes: {}
     }
 
     dispatch(postComment(requestData))
@@ -45,7 +45,7 @@ export const AddComment: FC<AddCommentProps> = ({
       onClose={() => setShowAddComment(false)}
       anchorOrigin={{
         vertical: 'bottom',
-        horizontal: 'left',
+        horizontal: 'left'
       }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -54,7 +54,7 @@ export const AddComment: FC<AddCommentProps> = ({
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}>
           <Typography component="h1" variant="h5" mb={2}>
             Ваш комментарий

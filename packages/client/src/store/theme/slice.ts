@@ -10,7 +10,7 @@ export const themeSlice = createSlice({
   reducers: {
     setTheme: (state: ThemeState, { payload }: PayloadAction<string>) => {
       state.theme = payload
-    },
+    }
   },
   extraReducers: builder => {
     builder.addCase(
@@ -25,7 +25,7 @@ export const themeSlice = createSlice({
         state.theme = payload.data.theme
       }
     )
-  },
+  }
 })
 
 export const { setTheme } = themeSlice.actions

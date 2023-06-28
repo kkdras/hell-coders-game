@@ -4,7 +4,7 @@ import {
   AccordionSummary,
   Grid,
   IconButton,
-  Typography,
+  Typography
 } from '@mui/material'
 import { ITopic } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'

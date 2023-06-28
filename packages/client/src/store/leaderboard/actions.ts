@@ -20,13 +20,13 @@ export const saveScore = createAsyncThunk<
   const userData: User = {
     avatar: user?.avatar,
     name: user?.login,
-    score: score,
+    score: score
   }
 
   const body = {
     data: userData,
     ratingFieldName: 'score',
-    teamName: 'hell-coders',
+    teamName: 'hell-coders'
   }
 
   try {
@@ -36,8 +36,8 @@ export const saveScore = createAsyncThunk<
       {
         withCredentials: true,
         headers: {
-          'Content-type': 'application/json',
-        },
+          'Content-type': 'application/json'
+        }
       }
     )
 

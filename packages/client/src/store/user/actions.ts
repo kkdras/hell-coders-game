@@ -13,8 +13,8 @@ export const getAuthUser = createAsyncThunk<
     const response = await mainAxios.get(`${BASE_URL}/auth/user`, {
       withCredentials: true,
       headers: {
-        'Content-type': 'application/json',
-      },
+        'Content-type': 'application/json'
+      }
     })
     return response
   } catch (error) {
@@ -34,8 +34,8 @@ export const putUser = createAsyncThunk<
       {
         withCredentials: true,
         headers: {
-          'Content-type': 'application/json',
-        },
+          'Content-type': 'application/json'
+        }
       }
     )
     return response
@@ -56,8 +56,8 @@ export const putAvatar = createAsyncThunk<
       {
         withCredentials: true,
         headers: {
-          'Content-type': 'multipart/form-data',
-        },
+          'Content-type': 'multipart/form-data'
+        }
       }
     )
     return response
@@ -78,8 +78,8 @@ export const putPassword = createAsyncThunk<
       {
         withCredentials: true,
         headers: {
-          'Content-type': 'application/json',
-        },
+          'Content-type': 'application/json'
+        }
       }
     )
     return response

@@ -15,7 +15,7 @@ export const Register = () => {
 
   const methods = useForm<RegisterForm>({
     defaultValues,
-    resolver: yupResolver(registerSchema),
+    resolver: yupResolver(registerSchema)
   })
 
   const { handleSubmit } = methods
@@ -26,7 +26,7 @@ export const Register = () => {
       email: data.email,
       login: data.login,
       phone: data.phone,
-      password: data.password,
+      password: data.password
     }
     console.log(requestData)
     dispatch(postRegister(requestData))

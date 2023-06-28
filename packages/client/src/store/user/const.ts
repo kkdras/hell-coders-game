@@ -5,5 +5,5 @@ export interface userState {
 }
 
 export const initialState: userState = {
-  user: null,
+  user: null
 }

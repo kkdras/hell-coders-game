@@ -8,7 +8,7 @@ import {
   IReply,
   ITopic,
   ReplyRequestData,
-  TopicRequestData,
+  TopicRequestData
 } from './types'
 
 export const getAllTopics = createAsyncThunk<

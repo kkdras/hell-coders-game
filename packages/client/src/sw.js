@@ -14,7 +14,7 @@ const URLS = [
   '/src/image/avatar1.png',
   '/src/image/gameover.png',
   '/tetris.jpeg',
-  '/src/image/YandexLogo.png',
+  '/src/image/YandexLogo.png'
 ]
 
 this.addEventListener('install', event => {

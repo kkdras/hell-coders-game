@@ -30,7 +30,7 @@ export const getYandexServiceId = createAsyncThunk<
     const response = await mainAxios.get(
       `${BASE_URL}/oauth/yandex/service-id/`,
       {
-        params: { redirect_uri: redirect_uri },
+        params: { redirect_uri: redirect_uri }
       }
     )
 
@@ -53,7 +53,7 @@ export const postYandexOAuth = createAsyncThunk<
       `${BASE_URL}/oauth/yandex`,
       data,
       {
-        withCredentials: true,
+        withCredentials: true
       }
     )
     dispatch(getAuthUser())

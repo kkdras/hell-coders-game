@@ -4,7 +4,7 @@ import {
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
+  ListItemText
 } from '@mui/material'
 import { toggleDrawler } from '../store/app/slice'
 import { Link } from 'react-router-dom'

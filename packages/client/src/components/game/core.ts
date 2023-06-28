@@ -4,7 +4,7 @@ import {
   FigureNames,
   figures,
   figuresColors,
-  Matrix,
+  Matrix
 } from './const'
 import { EventBus, getRandomInt, rotateMatrix } from './utils'
 import Image from '../../image/gameover.png'
@@ -77,7 +77,7 @@ export class GameConstructor extends EventBus {
       name: name,
       column: startColumn,
       row: startRow,
-      matrix,
+      matrix
     })
 
     return newFigure
@@ -124,7 +124,7 @@ export class GameConstructor extends EventBus {
         this.drawSquare({
           color: figuresColors[name],
           column: col,
-          row,
+          row
         })
       }
     }
@@ -154,7 +154,7 @@ export class GameConstructor extends EventBus {
           this.drawSquare({
             color: figuresColors[currentFigure.name],
             column: currentFigure.column + col,
-            row: currentFigure.row + row,
+            row: currentFigure.row + row
           })
         }
       }
@@ -197,7 +197,7 @@ export class GameConstructor extends EventBus {
         if (figure.row + row <= 0) {
           this.showGameOver()
           const score = Math.floor(Math.random() * 100000) // TODO replace to real score
-          this.emit('gameOver', score);
+          this.emit('gameOver', score)
         }
 
         this.gameField[figure.row + row][figure.column + col] = figure.name
@@ -310,7 +310,7 @@ export class GameConstructor extends EventBus {
   }
 
   public pause() {
-    throw new Error("method doesn't implement")
+    throw new Error('method doesn\'t implement')
   }
 
   public rotateFigureRight() {
@@ -342,12 +342,12 @@ export class GameConstructor extends EventBus {
   }
 
   public toggleDropHint() {
-    throw new Error("method doesn't implement")
+    throw new Error('method doesn\'t implement')
   }
 }
 
 function assertFigure(figure: Figure | undefined): asserts figure is Figure {
   if (!figure) {
-    throw new Error("current figure doesn't defined")
+    throw new Error('current figure doesn\'t defined')
   }
 }

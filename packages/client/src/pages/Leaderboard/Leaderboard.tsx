@@ -17,26 +17,26 @@ const columns = [
         src={`${BASE_URL}/resources${params.value}`}
         style={{ width: 37, borderRadius: '50%' }}
       />
-    ),
+    )
   },
   {
     field: 'name',
     headerName: 'Name',
-    width: 150,
+    width: 150
   },
   {
     field: 'score',
     headerName: 'Score',
     type: 'number',
-    width: 100,
-  },
+    width: 100
+  }
 ]
 
 export const LeaderBoard = () => {
   const data = {
     ratingFieldName: 'score',
     cursor: 0,
-    limit: 100,
+    limit: 100
   }
 
   const [users, setUsers] = useState<User[]>([])
@@ -50,15 +50,15 @@ export const LeaderBoard = () => {
       .post(`${BASE_URL}/leaderboard/hell-coders`, data, {
         withCredentials: true,
         headers: {
-          'Content-type': 'application/json',
-        },
+          'Content-type': 'application/json'
+        }
       })
       .then(response => {
         const formattedData = response.data.map((item: any, index: number) => ({
           id: index + 1,
           name: item.data.name,
           score: parseInt(item.data.score),
-          avatar: item.data.avatar,
+          avatar: item.data.avatar
         }))
         setUsers(formattedData)
       })
@@ -74,7 +74,7 @@ export const LeaderBoard = () => {
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
-        m: 1,
+        m: 1
       }}>
       <Box sx={{ m: 1, mt: 3 }}>
         <h1>Leaderboard</h1>
@@ -86,9 +86,9 @@ export const LeaderBoard = () => {
           initialState={{
             pagination: {
               paginationModel: {
-                pageSize: 10,
-              },
-            },
+                pageSize: 10
+              }
+            }
           }}
           pageSizeOptions={[5, 10, 25]}
           disableRowSelectionOnClick

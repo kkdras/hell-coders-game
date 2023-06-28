@@ -1,8 +1,6 @@
 import type { Response } from 'express'
-import { db } from '../models'
 import type { IRequestGetTheme, Request, ITheme } from './types'
-
-const Theme = db.themes
+import { Theme } from '../models'
 
 export const postTheme = async (req:  Request<ITheme>, res: Response) => {
   const { userId, theme } = req.body
@@ -33,9 +31,11 @@ export const getTheme = (req: IRequestGetTheme, res: Response) => {
     .then(data => {
       res.send(data)
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err)
+
       res.status(500).send({
-        message: 'Error retrieving theme with id=' + id,
+        message: 'Error retrieving theme with id=' + id
       })
     })
 }

@@ -1,7 +1,7 @@
 export const pageStyles = {
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'center'
 }
 export const cardStyles = {
   p: 4,
@@ -10,18 +10,18 @@ export const cardStyles = {
   maxWidth: 500,
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
+  alignItems: 'center'
 }
 
 export const buttonContainerStyles = {
   display: 'flex',
   justifyContent: 'space-between',
   width: '100%',
-  mb: 2,
+  mb: 2
 }
 
 export const avatarStyles = {
   width: 100,
   height: 100,
-  mb: 4,
+  mb: 4
 }

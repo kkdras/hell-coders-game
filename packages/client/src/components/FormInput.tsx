@@ -11,11 +11,11 @@ export interface FormInputProps {
 export const FormInput: FC<FormInputProps> = ({
   name,
   type = 'text',
-  placeholder,
+  placeholder
 }) => {
   const {
     control,
-    formState: { errors },
+    formState: { errors }
   } = useFormContext()
   return (
     <Controller

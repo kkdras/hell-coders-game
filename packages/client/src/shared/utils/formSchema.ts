@@ -14,7 +14,7 @@ const ERROR_MESSAGE = {
   password:
     'От 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.',
   phone: 'От 10 до 15 символов, состоит из цифр, может начинается с плюса.',
-  isRequired: 'Поле обязательно для заполнения ',
+  isRequired: 'Поле обязательно для заполнения '
 }
 export const registerSchema = yup.object().shape({
   name: yup
@@ -26,7 +26,7 @@ export const registerSchema = yup.object().shape({
   email: yup.string().matches(email, ERROR_MESSAGE.email),
   password: yup.string().matches(password, ERROR_MESSAGE.password),
   phone: yup.string().matches(phone, ERROR_MESSAGE.phone),
-  login: yup.string().matches(login, ERROR_MESSAGE.login),
+  login: yup.string().matches(login, ERROR_MESSAGE.login)
 })
 
 export const profileSchema = yup.object().shape({
@@ -38,19 +38,19 @@ export const profileSchema = yup.object().shape({
     .matches(/^[A-ZЁА-Я][A-Za-zЁёА-Яа-я-]*$/, ERROR_MESSAGE.name),
   email: yup.string().matches(email, ERROR_MESSAGE.email),
   phone: yup.string().matches(phone, ERROR_MESSAGE.phone),
-  login: yup.string().matches(login, ERROR_MESSAGE.login),
+  login: yup.string().matches(login, ERROR_MESSAGE.login)
 })
 
 export const passwordSchema = yup.object().shape({
   oldPassword: yup.string().required(ERROR_MESSAGE.isRequired),
-  newPassword: yup.string().matches(password, ERROR_MESSAGE.password),
+  newPassword: yup.string().matches(password, ERROR_MESSAGE.password)
 })
 
 export const authSchema = yup.object().shape({
   password: yup.string().required(ERROR_MESSAGE.isRequired),
-  login: yup.string().required(ERROR_MESSAGE.isRequired),
+  login: yup.string().required(ERROR_MESSAGE.isRequired)
 })
 
 export const addForumItemSchema = yup.object().shape({
-  title: yup.string().required(ERROR_MESSAGE.isRequired),
+  title: yup.string().required(ERROR_MESSAGE.isRequired)
 })
