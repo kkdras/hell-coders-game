@@ -1,5 +1,7 @@
 import { UserController } from '../controllers/user.controller'
 import { Router } from 'express'
 
-export const userRouter = Router()
-  .post('/', UserController.create)
+const routes = Router()
+  .post('/create', UserController.create)
+
+export const userRouter = Router().use('/user', routes)

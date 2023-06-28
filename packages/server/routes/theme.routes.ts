@@ -1,4 +1,6 @@
 import { Router } from 'express'
 import { getTheme, postTheme } from '../controllers/theme.controller'
 
-export const themeRouter = Router().post('/', postTheme).get('/:id', getTheme)
+const routes = Router().post('/create', postTheme).get('/:id', getTheme)
+
+export const themeRouter = Router().use('/theme', routes)
