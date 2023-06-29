@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FormProvider, useForm } from 'react-hook-form'
 import { AuthForm } from './types'
 import { getYandexServiceId } from '../../store/auth/actions'
-import { AppStoreDispatch } from '../../store'
+import { AppStoreDispatch, RootState } from '../../store'
 import { FormInput } from '../../components/FormInput'
 import { RouteNames } from '../../App'
 import { defaultValues, redirect_uri } from './const'
@@ -31,8 +31,11 @@ export function AuthorizationForm() {
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
-    AuthController.signin(data).then(() => dispatch(getAuthUser()))
+    AuthController.signin(data).then(() => {
+      dispatch(getAuthUser())
+    })
   })
+
 
   return (
     <Container component="main" maxWidth="xs">

@@ -42,10 +42,10 @@ export const postTopic = createAsyncThunk<
   AxiosResponse,
   TopicRequestData,
   { rejectValue: AxiosError['response'] }
->('forum/postTopic', async (data, { rejectWithValue, dispatch }) => {
+>('forum/topics/create', async (data, { rejectWithValue, dispatch }) => {
   try {
     const response: AxiosResponse = await customAxios.post(
-      `${CUSTOM_BASE_URL}/forum/postTopic`,
+      `${CUSTOM_BASE_URL}/forum/topics/create`,
       data
     )
     dispatch(getAllTopics())

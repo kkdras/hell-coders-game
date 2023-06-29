@@ -20,3 +20,4 @@ export interface OauthSignInRequest {
   code: string
   redirect_uri: string
 }
+
