@@ -6,7 +6,7 @@ import {
   CommentAndReplyRequestData,
   ICommentAndReply,  
   ITopic,  
-  TopicRequestData,
+  TopicRequestData
 } from './types'
 
 export const getAllTopics = createAsyncThunk<

@@ -18,7 +18,7 @@ import { postReply } from '../../../../store/forum/actions'
 export const AddReply: FC<AddReplyProps> = ({
   showAddReply,
   setShowAddReply,
-  comment,
+  comment
 }) => {
   const dispatch = useDispatch<AppStoreDispatch>()
 
@@ -26,7 +26,7 @@ export const AddReply: FC<AddReplyProps> = ({
 
   const methods = useForm<AddReplyForm>({
     defaultValues: { content: '' },
-    resolver: yupResolver(addForumItemSchema),
+    resolver: yupResolver(addForumItemSchema)
   })
 
   const { handleSubmit } = methods

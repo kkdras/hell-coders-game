@@ -26,7 +26,7 @@ export const AddComment: FC<AddCommentProps> = ({
 
   const methods = useForm<AddCommentForm>({
     defaultValues: { content: '' },
-    resolver: yupResolver(addForumItemSchema),
+    resolver: yupResolver(addForumItemSchema)
   })
 
   const { handleSubmit } = methods
@@ -37,7 +37,7 @@ export const AddComment: FC<AddCommentProps> = ({
         topicId: topicId,
         userId: user?.id
       }
-      console.log(requestData);
+      console.log(requestData)
       dispatch(postComment(requestData))
       setShowAddComment(false)
     }
