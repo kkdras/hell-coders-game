@@ -1,9 +1,9 @@
-import { IComment, IReply, ITopic } from './types'
+import { ICommentAndReply, ITopic } from './types'
 
 export interface forumState {
   topics: ITopic[]
-  comments: Record<string, IComment[]>
-  replyes: Record<string, IReply[]>
+  comments: Record<number, ICommentAndReply[]>
+  replyes: Record<number, ICommentAndReply[]>
 }
 
 export const initialState: forumState = {

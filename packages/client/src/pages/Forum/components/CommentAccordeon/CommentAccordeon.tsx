@@ -11,7 +11,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material'
-import { IComment } from '../../../../store/forum/types'
+import { ICommentAndReply } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { ReplyesTable } from '../ReplyesTable/ReplyesTable'
 import { deepOrange } from '@mui/material/colors'
@@ -21,21 +21,23 @@ import { AddReply } from '../AddReply/AddReply'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../store/rootReducer'
 import { AppStoreDispatch } from '../../../../store'
-import { getCommentReplyes } from '../../../../store/forum/actions'
+import { getCommentsReply } from '../../../../store/forum/actions'
 
-export function CommentAccordeon(comment?: IComment) {
+export function CommentAccordeon(comment?: ICommentAndReply) {
   const lightOrange = deepOrange[400]
   const [showAddReply, setShowAddReply] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
 
-  const { user } = useSelector((state: RootState) => state.user)
-
+  const { localUser } = useSelector((state: RootState) => state.user)
   const { replyes } = useSelector((state: RootState) => state.forum)
+
   const commentReplyes =
     comment && comment?.id && replyes[comment?.id] ? replyes[comment?.id] : []
+    
+  console.log(commentReplyes)
 
   useEffect(() => {
-    if (comment && comment?.id) dispatch(getCommentReplyes(comment.id))
+    if (comment && comment?.id && localUser?.id) dispatch(getCommentsReply({ commentId: comment.id, userId: localUser.id }))
   }, [])
 
   if (!comment || !comment?.id) return null
@@ -50,7 +52,7 @@ export function CommentAccordeon(comment?: IComment) {
               aria-controls="panel1a-content">
               <Grid container spacing={2} color={'text.primary'}>
                 <Grid item xs={10}>
-                  <Typography>{comment.title}</Typography>
+                  <Typography>{comment.content}</Typography>
                 </Grid>
 
                 <Grid item xs={2}>
@@ -106,12 +108,11 @@ export function CommentAccordeon(comment?: IComment) {
           </IconButton>
         </Grid>
       </Grid>
-      {showAddReply && user && (
+      {showAddReply && localUser && (
         <AddReply
           showAddReply={showAddReply}
           setShowAddReply={setShowAddReply}
-          commentId={comment.id}
-          authorLogin={user?.login}
+          comment={comment}
         />
       )}
     </>

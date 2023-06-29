@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getAuthUser, putAvatar, putUser } from './actions'
+import { createLocalUser, getAuthUser, putAvatar, putUser } from './actions'
 import { initialState, userState } from './const'
 import { AxiosResponse } from 'axios'
 import { User } from './types'
@@ -29,6 +29,12 @@ export const userSlice = createSlice({
       putAvatar.fulfilled,
       (state, { payload }: PayloadAction<AxiosResponse<User>>) => {
         state.user = payload.data
+      }
+    )
+    builder.addCase(
+      createLocalUser.fulfilled,
+      (state, { payload }: PayloadAction<AxiosResponse<User>>) => {
+        state.localUser = payload.data
       }
     )
   }
