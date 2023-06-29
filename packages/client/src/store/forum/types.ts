@@ -24,3 +24,13 @@ export interface CommentAndReplyRequestData {
   parentId?: number
 }
 
+export interface GetCommentRequest {
+  id: number
+  userId: number  
+}
+
+export interface GetReliesRequest {
+  commentId: number
+  userId: number  
+}
+

@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { addForumItemSchema } from '../../../../shared/utils/formSchema'
+import { addCommentSchema, addForumItemSchema } from '../../../../shared/utils/formSchema'
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
@@ -13,7 +13,7 @@ import { AddReplyProps, AddReplyForm } from './types'
 import { CommentAndReplyRequestData } from '../../../../store/forum/types'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppStoreDispatch, RootState } from '../../../../store'
-import { postReply } from '../../../../store/forum/actions'
+import { createReply } from '../../../../store/forum/actions'
 
 export const AddReply: FC<AddReplyProps> = ({
   showAddReply,
@@ -22,24 +22,24 @@ export const AddReply: FC<AddReplyProps> = ({
 }) => {
   const dispatch = useDispatch<AppStoreDispatch>()
 
-  const { user } = useSelector((state: RootState) => state.user)
+  const { localUser } = useSelector((state: RootState) => state.user)
 
   const methods = useForm<AddReplyForm>({
     defaultValues: { content: '' },
-    resolver: yupResolver(addForumItemSchema)
+    resolver: yupResolver(addCommentSchema)
   })
 
   const { handleSubmit } = methods
 
   const formSubmit = handleSubmit(data => {
-    if (user) {
+    if (localUser) {
       const requestData: CommentAndReplyRequestData = {
         content: data.content,
         parentId: comment.id,
-        userId: user?.id,
+        userId: localUser?.id,
         topicId: comment.topicId
       }
-      dispatch(postReply(requestData))
+      dispatch(createReply(requestData))
       setShowAddReply(false)
     }
   })
@@ -66,7 +66,7 @@ export const AddReply: FC<AddReplyProps> = ({
           </Typography>
           <FormProvider {...methods}>
             <form onSubmit={formSubmit}>
-              <FormInput placeholder="Название" type="text" name="title" />
+              <FormInput placeholder="Название" type="text" name="content" />
               <Button
                 type="submit"
                 fullWidth
