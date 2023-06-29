@@ -19,12 +19,12 @@ export const getAuthUser = createAsyncThunk<
     console.log(response)
     if (response) {
       dispatch(createLocalUser({
-        "first_name": response.data.first_name,
-        "second_name": response.data.second_name,
-        "password": "", // что сюдат вставлять и зачем нужен?????
-        "phone": response.data.phone,
-        "login": response.data.login,
-        "email": response.data.email
+        'first_name': response.data.first_name,
+        'second_name': response.data.second_name,
+        'password': '', // что сюдат вставлять и зачем нужен?????
+        'phone': response.data.phone,
+        'login': response.data.login,
+        'email': response.data.email
       }))
     }
     return response
@@ -109,7 +109,7 @@ export const createLocalUser = createAsyncThunk<
   CreateLocalUserRequest,
   { rejectValue: AxiosError['response'] }
 >('user/create', async (data, { rejectWithValue, dispatch }) => {
-  console.log("action")
+  console.log('action')
   try {
     const response = await mainAxios.post(
       `${CUSTOM_BASE_URL}/user/create`,
