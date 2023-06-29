@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from 'axios'
 import { mainAxios } from '../../http-common'
 import { BASE_URL } from '../../shared/consts'
 import { getAuthUser } from '../user/actions'
-import { OauthSignInRequest, SignInRequest, SignUpRequest } from './types'
+import { OauthSignInRequest, SignUpRequest } from './types'
 
 export const postRegister = createAsyncThunk<
   AxiosResponse,
@@ -62,3 +62,5 @@ export const postYandexOAuth = createAsyncThunk<
     return rejectWithValue((error as AxiosError)?.response)
   }
 })
+
+

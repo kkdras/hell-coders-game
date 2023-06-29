@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AxiosResponse } from 'axios'
-import { getAllTopics, getTopicComments, getCommentReplyes } from './actions'
+import { getAllTopics, getAllComments, getCommentsReply } from './actions'
 import { initialState } from './const'
-import { IComment, IReply, ITopic } from './types'
+import { ICommentAndReply, ITopic } from './types'
 
 export const forumSlice = createSlice({
   name: 'forum',
@@ -17,16 +17,16 @@ export const forumSlice = createSlice({
     )
 
     builder.addCase(
-      getTopicComments.fulfilled,
-      (state, { payload }: PayloadAction<AxiosResponse<IComment[]>>) => {
+      getAllComments.fulfilled,
+      (state, { payload }: PayloadAction<AxiosResponse<ICommentAndReply[]>>) => {
         state.comments[payload.data[0].topicId] = payload.data
       }
     )
 
     builder.addCase(
-      getCommentReplyes.fulfilled,
-      (state, { payload }: PayloadAction<AxiosResponse<IReply[]>>) => {
-        state.replyes[payload.data[0].commentId] = payload.data
+      getCommentsReply.fulfilled,
+      (state, { payload }: PayloadAction<AxiosResponse<ICommentAndReply[]>>) => {
+        if(payload.data[0].parentId) state.replyes[payload.data[0].parentId] = payload.data
       }
     )
   }

@@ -28,7 +28,7 @@ export const Register = () => {
       phone: data.phone,
       password: data.password
     }
-    console.log(requestData)
+
     dispatch(postRegister(requestData))
   })
 

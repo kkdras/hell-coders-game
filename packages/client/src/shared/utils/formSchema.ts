@@ -54,3 +54,6 @@ export const authSchema = yup.object().shape({
 export const addForumItemSchema = yup.object().shape({
   title: yup.string().required(ERROR_MESSAGE.isRequired)
 })
+export const addCommentSchema = yup.object().shape({
+  content: yup.string().required(ERROR_MESSAGE.isRequired)
+})

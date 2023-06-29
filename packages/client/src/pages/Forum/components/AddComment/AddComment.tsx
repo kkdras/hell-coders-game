@@ -5,38 +5,43 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { addForumItemSchema } from '../../../../shared/utils/formSchema'
+import { addCommentSchema, addForumItemSchema } from '../../../../shared/utils/formSchema'
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
 import { AddCommentForm, AddCommentProps } from './types'
-import { CommentRequestData } from '../../../../store/forum/types'
-import { useDispatch } from 'react-redux'
-import { AppStoreDispatch } from '../../../../store'
-import { postComment } from '../../../../store/forum/actions'
+import { CommentAndReplyRequestData } from '../../../../store/forum/types'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppStoreDispatch, RootState } from '../../../../store'
+import { createComment } from '../../../../store/forum/actions'
 
 export const AddComment: FC<AddCommentProps> = ({
   showAddComment,
   setShowAddComment,
   topicId
 }) => {
+
   const dispatch = useDispatch<AppStoreDispatch>()
+  const { localUser } = useSelector((state: RootState) => state.user)
 
   const methods = useForm<AddCommentForm>({
-    defaultValues: { title: '' },
-    resolver: yupResolver(addForumItemSchema)
+    defaultValues: { content: '' },
+    resolver: yupResolver(addCommentSchema)
   })
-
+  console.log(localUser)
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
-    const requestData: CommentRequestData = {     
-      title: data.title,
-      topicId: topicId,
-      replyes: {}
-    }
 
-    dispatch(postComment(requestData))
-    setShowAddComment(false)
+    console.log('subit')
+    if (localUser) {
+      const requestData: CommentAndReplyRequestData = {
+        content: data.content,
+        topicId: topicId,
+        userId: localUser?.id
+      }
+      dispatch(createComment(requestData))
+      setShowAddComment(false)
+    }
   })
 
   return (
@@ -61,7 +66,7 @@ export const AddComment: FC<AddCommentProps> = ({
           </Typography>
           <FormProvider {...methods}>
             <form onSubmit={formSubmit}>
-              <FormInput placeholder="Название" type="text" name="title" />
+              <FormInput placeholder="Название" type="text" name="content" />
               <Button
                 type="submit"
                 fullWidth

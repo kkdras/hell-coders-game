@@ -1,12 +1,12 @@
 import { Dispatch, SetStateAction } from 'react'
+import { ICommentAndReply } from '../../../../store/forum/types'
 
 export interface AddReplyForm {
-  text: string
+  content: string
 }
 
 export interface AddReplyProps {
   showAddReply: boolean
   setShowAddReply: Dispatch<SetStateAction<boolean>>
-  commentId: string
-  authorLogin: string
+  comment: ICommentAndReply
 }

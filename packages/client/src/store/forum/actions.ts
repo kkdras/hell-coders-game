@@ -3,11 +3,11 @@ import { AxiosError, AxiosResponse } from 'axios'
 import { customAxios } from '../../http-common'
 import { CUSTOM_BASE_URL } from '../../shared/consts'
 import {
-  CommentRequestData,
-  IComment,
-  IReply,
+  CommentAndReplyRequestData,
+  GetCommentRequest,
+  GetReliesRequest,
+  ICommentAndReply,
   ITopic,
-  ReplyRequestData,
   TopicRequestData
 } from './types'
 
@@ -24,30 +24,16 @@ export const getAllTopics = createAsyncThunk<
   }
 })
 
-export const getTopicComments = createAsyncThunk<
-  AxiosResponse<IComment[]>,
-  string,
+export const getAllComments = createAsyncThunk<
+  AxiosResponse<ICommentAndReply[]>,
+  GetCommentRequest,
   { rejectValue: AxiosError['response'] }
->('forum/getTopicComments', async (forumId: string, { rejectWithValue }) => {
+>('forum/topics/getTopicComments', async (data, { rejectWithValue }) => {
   try {
-    const response = await customAxios.get(
-      `${CUSTOM_BASE_URL}/forum/comments/${forumId}`
+    const response: AxiosResponse<ICommentAndReply[]> = await customAxios.get(
+      `${CUSTOM_BASE_URL}/forum/topics/${data.id}/comments?userId=${data.userId}`
     )
-    return response
-  } catch (error) {
-    return rejectWithValue((error as AxiosError)?.response)
-  }
-})
 
-export const getCommentReplyes = createAsyncThunk<
-  AxiosResponse<IReply[]>,
-  string,
-  { rejectValue: AxiosError['response'] }
->('forum/getCommentReplyes', async (commentId: string, { rejectWithValue }) => {
-  try {
-    const response = await customAxios.get(
-      `${CUSTOM_BASE_URL}/forum/replyes/${commentId}`
-    )
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -58,10 +44,10 @@ export const postTopic = createAsyncThunk<
   AxiosResponse,
   TopicRequestData,
   { rejectValue: AxiosError['response'] }
->('forum/postTopic', async (data, { rejectWithValue, dispatch }) => {
+>('forum/topics/create', async (data, { rejectWithValue, dispatch }) => {
   try {
     const response: AxiosResponse = await customAxios.post(
-      `${CUSTOM_BASE_URL}/forum/postTopic`,
+      `${CUSTOM_BASE_URL}/forum/topics/create`,
       data
     )
     dispatch(getAllTopics())
@@ -71,34 +57,49 @@ export const postTopic = createAsyncThunk<
   }
 })
 
-export const postComment = createAsyncThunk<
-  AxiosResponse,
-  CommentRequestData,
+export const getCommentsReply = createAsyncThunk<
+  AxiosResponse<ICommentAndReply[]>,
+  GetReliesRequest,
   { rejectValue: AxiosError['response'] }
->('forum/postComment', async (data, { rejectWithValue, dispatch }) => {
+>('forum/comments/replies', async (data, { rejectWithValue }) => {
   try {
-    const response: AxiosResponse = await customAxios.post(
-      `${CUSTOM_BASE_URL}/forum/postComment`,
-      data
+    const response = await customAxios.get(
+      `${CUSTOM_BASE_URL}/forum/comments/${data.commentId}/replies?userId=${data.userId}`
     )
-    dispatch(getTopicComments(data.topicId))
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
   }
 })
 
-export const postReply = createAsyncThunk<
+export const createComment = createAsyncThunk<
   AxiosResponse,
-  ReplyRequestData,
+  CommentAndReplyRequestData,
   { rejectValue: AxiosError['response'] }
->('forum/postReply', async (data, { rejectWithValue, dispatch }) => {
+>('forum/comments/create', async (data, { rejectWithValue, dispatch }) => {
   try {
     const response: AxiosResponse = await customAxios.post(
-      `${CUSTOM_BASE_URL}/forum/postReply`,
+      `${CUSTOM_BASE_URL}/forum/comments/`,
       data
     )
-    dispatch(getCommentReplyes(data.commentId))
+    dispatch(getAllComments({ id: data.topicId, userId: data.userId }))
+    return response
+  } catch (error) {
+    return rejectWithValue((error as AxiosError)?.response)
+  }
+})
+
+export const createReply = createAsyncThunk<
+  AxiosResponse,
+  CommentAndReplyRequestData,
+  { rejectValue: AxiosError['response'] }
+>('forum/comments/create', async (data, { rejectWithValue, dispatch }) => {
+  try {
+    const response: AxiosResponse = await customAxios.post(
+      `${CUSTOM_BASE_URL}/forum/comments/`,
+      data
+    )
+    if (data.parentId) dispatch(getCommentsReply({ commentId: data.parentId, userId: data.userId }))
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)

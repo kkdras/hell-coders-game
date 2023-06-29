@@ -5,39 +5,43 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { addForumItemSchema } from '../../../../shared/utils/formSchema'
+import { addCommentSchema, addForumItemSchema } from '../../../../shared/utils/formSchema'
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
 import { AddReplyProps, AddReplyForm } from './types'
-import { ReplyRequestData } from '../../../../store/forum/types'
-import { useDispatch } from 'react-redux'
-import { AppStoreDispatch } from '../../../../store'
-import { postReply } from '../../../../store/forum/actions'
+import { CommentAndReplyRequestData } from '../../../../store/forum/types'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppStoreDispatch, RootState } from '../../../../store'
+import { createReply } from '../../../../store/forum/actions'
 
 export const AddReply: FC<AddReplyProps> = ({
   showAddReply,
   setShowAddReply,
-  commentId,
-  authorLogin
+  comment
 }) => {
   const dispatch = useDispatch<AppStoreDispatch>()
 
+  const { localUser } = useSelector((state: RootState) => state.user)
+
   const methods = useForm<AddReplyForm>({
-    defaultValues: { text: '' },
-    resolver: yupResolver(addForumItemSchema)
+    defaultValues: { content: '' },
+    resolver: yupResolver(addCommentSchema)
   })
 
   const { handleSubmit } = methods
+
   const formSubmit = handleSubmit(data => {
-    const requestData: ReplyRequestData = {
-      text: data.text,
-      commentId: commentId,
-      authorLogin: authorLogin,
-      time: `${new Date().getDate()} ${new Date().getTime()}`
+    if (localUser) {
+      const requestData: CommentAndReplyRequestData = {
+        content: data.content,
+        parentId: comment.id,
+        userId: localUser?.id,
+        topicId: comment.topicId
+      }
+      dispatch(createReply(requestData))
+      setShowAddReply(false)
     }
-    dispatch(postReply(requestData))
-    setShowAddReply(false)
   })
 
   return (
@@ -62,7 +66,7 @@ export const AddReply: FC<AddReplyProps> = ({
           </Typography>
           <FormProvider {...methods}>
             <form onSubmit={formSubmit}>
-              <FormInput placeholder="Название" type="text" name="title" />
+              <FormInput placeholder="Название" type="text" name="content" />
               <Button
                 type="submit"
                 fullWidth
