@@ -15,7 +15,7 @@ import {
   avatarStyles,
   buttonContainerStyles,
   cardStyles,
-  pageStyles,
+  pageStyles
 } from './styles'
 import { PasswordPopup } from './PasswordPopup/PasswordPopup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -32,7 +32,7 @@ export const Profile = () => {
 
   const methods = useForm<ProfileForm>({
     defaultValues,
-    resolver: yupResolver(profileSchema),
+    resolver: yupResolver(profileSchema)
   })
 
   const { handleSubmit, reset } = methods
@@ -50,7 +50,7 @@ export const Profile = () => {
         displayName: user.display_name,
         email: user.email,
         phone: user.phone,
-        login: user.login,
+        login: user.login
       })
       setAvatar(`${BASE_URL}/resources${user.avatar}`)
     }
@@ -63,7 +63,7 @@ export const Profile = () => {
       display_name: data.displayName,
       login: data.login,
       email: data.email,
-      phone: data.phone,
+      phone: data.phone
     }
     dispatch(putUser(requestData))
   })

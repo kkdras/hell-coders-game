@@ -4,5 +4,5 @@ export const defaultValues = {
   displayName: '',
   email: '',
   phone: '',
-  login: '',
+  login: ''
 }

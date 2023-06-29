@@ -19,7 +19,7 @@ export function Layout() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100%',
+        height: '100%'
       }}>
       <Drawler />
       <AppBar position="static">
@@ -27,7 +27,7 @@ export function Layout() {
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center',
+            alignItems: 'center'
           }}>
           <Toolbar sx={{ padding: '0 !important' }}>
             <IconButton

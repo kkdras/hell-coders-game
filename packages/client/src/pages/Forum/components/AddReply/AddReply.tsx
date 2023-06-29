@@ -50,7 +50,7 @@ export const AddReply: FC<AddReplyProps> = ({
       onClose={() => setShowAddReply(false)}
       anchorOrigin={{
         vertical: 'bottom',
-        horizontal: 'left',
+        horizontal: 'left'
       }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -59,7 +59,7 @@ export const AddReply: FC<AddReplyProps> = ({
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}>
           <Typography component="h1" variant="h5" mb={2}>
             Ваше мнение

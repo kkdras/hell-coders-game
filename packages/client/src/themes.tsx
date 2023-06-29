@@ -7,17 +7,17 @@ export enum Themes {
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
-  },
+    mode: 'dark'
+  }
 })
 
 const lightTheme = createTheme({
   palette: {
-    mode: 'light',
-  },
+    mode: 'light'
+  }
 })
 
 export const themes: Record<string, Theme> = {
   darkTheme,
-  lightTheme,
+  lightTheme
 }

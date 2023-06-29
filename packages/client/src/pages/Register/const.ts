@@ -4,5 +4,5 @@ export const defaultValues = {
   login: '',
   email: '',
   password: '',
-  phone: '',
+  phone: ''
 }

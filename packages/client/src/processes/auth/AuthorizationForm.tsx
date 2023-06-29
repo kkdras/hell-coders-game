@@ -22,7 +22,7 @@ export function AuthorizationForm() {
 
   const methods = useForm<AuthForm>({
     defaultValues,
-    resolver: yupResolver(authSchema),
+    resolver: yupResolver(authSchema)
   })
 
   const yandexOAuthRequest = () => {
@@ -41,7 +41,7 @@ export function AuthorizationForm() {
           marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'center'
         }}>
         <Typography component="h1" variant="h5" mb={2}>
           Вход

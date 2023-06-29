@@ -2,7 +2,7 @@ import type { Response } from 'express'
 import type { IRequestGetTheme, Request, ITheme } from './types'
 import { Theme } from '../models'
 
-export const postTheme = async (req: Request<ITheme>, res: Response) => {
+export const postTheme = async (req:  Request<ITheme>, res: Response) => {
   const { userId, theme } = req.body
 
   const user = await Theme.findOne({ where: { userId } })

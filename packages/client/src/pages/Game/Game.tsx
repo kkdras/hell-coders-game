@@ -9,7 +9,7 @@ export const Game = () => {
         justifyContent: 'center',
         minHeight: '100%',
         alignItems: 'center',
-        padding: 3,
+        padding: 3
       }}>
       <GameContainer />
     </Box>

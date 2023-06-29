@@ -21,7 +21,7 @@ export const GameContainer = () => {
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'start',
+        alignItems: 'start'
       }}>
       <StyledCanvas width={340} height={680} ref={refGame} />
       <Box
@@ -30,7 +30,7 @@ export const GameContainer = () => {
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'column',
-          m: 1,
+          m: 1
         }}>
         <Button onClick={() => game.current?.start()} variant="contained">
           Начать игру

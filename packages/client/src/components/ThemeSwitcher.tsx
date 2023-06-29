@@ -26,7 +26,7 @@ export const ThemeSwitcher = () => {
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'center'
       }}>
       <LightModeIcon />
       <Switch

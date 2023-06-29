@@ -56,11 +56,22 @@ export class TopicController {
   static async getAllComments(req: Request, res: Response) {
     const topicId = Number(req.params.id)
     const userId = Number(req.query.userId)
-    console.log(req.params.id)
 
     try {
       if (isNaN(topicId)) {
-        res.status(400).send()
+        res.status(400).send({ message: 'Invalid topicId' })
+        return
+      }
+
+      if (isNaN(userId)) {
+        res.send(400).send({ message: 'Invalid userId' })
+        return
+      }
+
+      const topic = Topic.findByPk(topicId)
+
+      if (!topic) {
+        res.send(400).send({ message: 'Topic with specified PK doesn\'t exist' })
         return
       }
 
@@ -75,12 +86,11 @@ export class TopicController {
         }
       })) as unknown as (IComment & { Reactions: WithId<IReaction>[] })[]
 
-      console.log(rawComments)
       const comments = transformComments(rawComments, userId)
 
       res.send(comments)
     } catch (e) {
-      console.log(e)
+      console.error(e)
 
       res.status(500).json({ message: 'Internal server error' })
     }

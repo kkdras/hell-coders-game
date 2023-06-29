@@ -1,9 +1,9 @@
 import { sequelize } from './init'
 import { Topic } from './topic.model'
 import { Comment } from './comment.model'
-import { Theme } from './theme.model'
 import { Reaction } from './reaction.model'
 import { User } from './user.model'
+import { Theme } from './theme.model'
 
 Comment.belongsTo(Comment, { as: 'parent', foreignKey: 'parentId' })
 Comment.hasMany(Comment, { as: 'replies', foreignKey: 'parentId' })

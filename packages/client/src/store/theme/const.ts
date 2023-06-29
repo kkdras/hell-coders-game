@@ -3,5 +3,5 @@ export interface ThemeState {
 }
 
 export const initialState: ThemeState = {
-  theme: null,
+  theme: null
 }

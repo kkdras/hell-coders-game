@@ -16,7 +16,7 @@ export function ErrorComponent() {
         justifyContent: 'center',
         flexDirection: 'column',
         m: 1,
-        mt: 5,
+        mt: 5
       }}>
       <ErrorBoundary>
         <TestError />

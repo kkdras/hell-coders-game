@@ -4,7 +4,6 @@ import { Comment, Reaction } from '../models'
 import type { IComment, IReaction, Request, WithId } from './types'
 import { transformComments } from './utils'
 
-
 export class CommentController {
   static async create(req: Request<IComment>, res: Response) {
     try {
@@ -29,18 +28,18 @@ export class CommentController {
   }
 
   static async getCommentsReply(req: Request, res: Response) {
-    const parentCommentId = Number(req.params.id)
+    const commentId = Number(req.params.commentId)
     const userId = Number(req.query.userId)
 
     try {
-      if (isNaN(parentCommentId)) {
-        res.status(400).send()
+      if (isNaN(commentId)) {
+        res.status(400).send({ message: 'Invalid comment id' })
         return
       }
 
       const rawComments = await (Comment.findAll({
         where: {
-          parentId: parentCommentId
+          parentId: commentId
         },
         include: {
           model: Reaction,

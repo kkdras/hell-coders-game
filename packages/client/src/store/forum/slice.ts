@@ -29,5 +29,5 @@ export const forumSlice = createSlice({
         if(payload.data[0].parentId) state.replyes[payload.data[0].parentId] = payload.data
       }
     )
-  },
+  }
 })

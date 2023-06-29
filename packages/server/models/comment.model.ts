@@ -1,7 +1,6 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from './init'
 
-
 export const Comment = sequelize.define(
   'Comment',
   {

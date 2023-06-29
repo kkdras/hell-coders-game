@@ -17,13 +17,13 @@ import { useDispatch } from 'react-redux'
 
 export const AddTopic: FC<AddTopicProps> = ({
   showAddTopic,
-  setShowAddTopic,
+  setShowAddTopic
 }) => {
   const dispatch = useDispatch<AppStoreDispatch>()
 
   const methods = useForm<AddTopicForm>({
     defaultValues: { title: '' },
-    resolver: yupResolver(addForumItemSchema),
+    resolver: yupResolver(addForumItemSchema)
   })
 
   const { handleSubmit } = methods
@@ -41,7 +41,7 @@ export const AddTopic: FC<AddTopicProps> = ({
       onClose={() => setShowAddTopic(false)}
       anchorOrigin={{
         vertical: 'bottom',
-        horizontal: 'left',
+        horizontal: 'left'
       }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -50,7 +50,7 @@ export const AddTopic: FC<AddTopicProps> = ({
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}>
           <Typography component="h1" variant="h5" mb={2}>
             Название топика
