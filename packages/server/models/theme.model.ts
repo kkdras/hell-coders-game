@@ -1,18 +1,12 @@
-import type { DataTypes as sequelizeDataTypes, Sequelize } from 'sequelize'
+import { DataTypes } from 'sequelize'
+import { sequelize } from './init'
 
-export const themeModel = (
-  sequelize: Sequelize,
-  DataTypes: typeof sequelizeDataTypes
-) => {
-  const Theme = sequelize.define('theme', {
-    userId: {
-      type: DataTypes.STRING,
-      primaryKey: true,
-    },
-    theme: {
-      type: DataTypes.STRING,
-    },
-  })
-
-  return Theme
-}
+export const Theme = sequelize.define('theme', {
+  userId: {
+    type: DataTypes.STRING,
+    primaryKey: true
+  },
+  theme: {
+    type: DataTypes.STRING
+  }
+})

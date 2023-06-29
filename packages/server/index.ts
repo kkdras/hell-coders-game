@@ -1,11 +1,13 @@
+import { userRouter } from './routes/user.routes'
 import dotenv from 'dotenv'
 import cors from 'cors'
 dotenv.config()
 import bodyParser from 'body-parser'
 import express from 'express'
-import { db } from './models'
 import { themeRouter } from './routes/theme.routes'
 import { topicRouter } from './routes/topic.routes'
+import { sequelize } from './models'
+import { commentRouter } from './routes/comment.routes'
 
 const app = express()
 app.use(cors())
@@ -16,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const port = Number(process.env.SERVER_PORT) || 3001
 
-db.sequelize
+sequelize
   .sync()
   .then(() => {
     console.log('Synced db.')
@@ -27,6 +29,8 @@ db.sequelize
 
 app.use('/api/forum', topicRouter)
 app.use('/api/theme', themeRouter)
+app.use('/api/user', userRouter)
+app.use('/api/comment', commentRouter)
 
 app.get('/', (_, res) => {
   res.json('👋 Howdy from the server :)')

@@ -31,14 +31,16 @@ export const AddComment: FC<AddCommentProps> = ({
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
-  if (user) {
-    const requestData: CommentAndReplyRequestData = {     
-      content: data.content,
-      topicId: topicId,
-      userId: user?.id
-    }   
-    dispatch(postComment(requestData))
-    setShowAddComment(false)}
+    if (user) {
+      const requestData: CommentAndReplyRequestData = {
+        content: data.content,
+        topicId: topicId,
+        userId: user?.id
+      }
+      console.log(requestData);
+      dispatch(postComment(requestData))
+      setShowAddComment(false)
+    }
   })
 
   return (
@@ -63,7 +65,7 @@ export const AddComment: FC<AddCommentProps> = ({
           </Typography>
           <FormProvider {...methods}>
             <form onSubmit={formSubmit}>
-              <FormInput placeholder="Название" type="text" name="title" />
+              <FormInput placeholder="Название" type="text" name="content" />
               <Button
                 type="submit"
                 fullWidth

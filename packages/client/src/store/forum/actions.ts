@@ -26,11 +26,12 @@ export const getAllComments = createAsyncThunk<
   AxiosResponse<ICommentAndReply[]>,
   number,
   { rejectValue: AxiosError['response'] }
->('forum/getTopicComments', async (forumId: number, { rejectWithValue }) => {
+>('forum/getTopicComments', async (topicId: number, { rejectWithValue }) => {
   try {
     const response = await customAxios.get(
-      `${CUSTOM_BASE_URL}/forum/${forumId}/comments`
+      `${CUSTOM_BASE_URL}/forum/${topicId}/comments`
     )
+    
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
