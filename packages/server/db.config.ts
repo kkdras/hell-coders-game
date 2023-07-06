@@ -15,7 +15,7 @@ export interface IDbConfig {
 }
 
 export const dbConfig: IDbConfig = {
-  HOST: 'postgres',
+  HOST: 'localhost',
   USER: 'postgres',
   PASSWORD: 'postgres',
   DB: 'postgres',

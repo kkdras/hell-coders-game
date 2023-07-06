@@ -17,6 +17,7 @@ import { RootState } from './store/rootReducer'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { Themes, themes } from './themes'
 import { getTheme } from './store/theme/actions'
+import { getUserByLogin } from './store/user/actions'
 
 export enum RouteNames {
   MAIN = '/',
@@ -32,14 +33,20 @@ export enum RouteNames {
 
 function App() {
   const { theme } = useSelector((state: RootState) => state.theme)
-  const { user } = useSelector((state: RootState) => state.user)
+  const { user, localUser } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (user) {
-      dispatch(getTheme(user.id))
+    if (localUser) {
+      dispatch(getTheme(localUser.id))
     }
-  }, [dispatch, user])
+  }, [dispatch, localUser])
+
+  useEffect(() => {
+    if (user) {
+      dispatch(getUserByLogin(user))
+    }
+  }, [user])
 
   return (
     <ThemeProvider theme={themes[theme || Themes.LightTheme]}>

@@ -1,15 +1,26 @@
 import type { Response } from 'express'
 import type { IRequestGetTheme, Request, ITheme } from './types'
-import { Theme } from '../models'
+import { Theme, User } from '../models'
 
-export const postTheme = async (req:  Request<ITheme>, res: Response) => {
+export const postTheme = async (req: Request<ITheme>, res: Response) => {
   const { userId, theme } = req.body
 
-  const user = await Theme.findOne({ where: { userId } })
+  const user = await User.findOne({ where: { id: userId } })
 
-  if (user) {
+  if (!user) {
+    res.status(400).send({ message: 'User with specified id doesn\'t exist' })
+    return
+  }
+
+  const dbTheme = await Theme.findOne({
+    where: {
+      userId
+    }
+  })
+
+  if (dbTheme) {
     const data = await Theme.update(
-      { userId, theme },
+      { theme },
       { where: { userId }, returning: true }
     )
 
@@ -31,7 +42,7 @@ export const getTheme = (req: IRequestGetTheme, res: Response) => {
     .then(data => {
       res.send(data)
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err)
 
       res.status(500).send({

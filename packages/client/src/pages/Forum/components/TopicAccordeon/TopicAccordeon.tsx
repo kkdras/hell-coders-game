@@ -22,14 +22,15 @@ export function TopicAccordeon(topic?: ITopic) {
   const lightLightBlue = lightBlue[50]
   const [showAddComment, setShowAddComment] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
-  
-  const { localUser } = useSelector((state: RootState) => state.user)
+
+  const { localUserId } = useSelector((state: RootState) => state.user)
   const { comments } = useSelector((state: RootState) => state.forum)
   const topicComments =
     topic && topic.id && comments[topic.id] ? comments[topic.id] : []
 
   useEffect(() => {
-    if (topic && topic.id && localUser) dispatch(getAllComments({id:topic.id, userId: localUser.id}))
+    if (topic && topic.id && localUserId)
+      dispatch(getAllComments({ id: topic.id, userId: localUserId }))
   }, [])
 
   if (!(topic && topic.id)) return null

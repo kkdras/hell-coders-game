@@ -27,4 +27,28 @@ export class UserController {
       }
     }
   }
+
+  static async getUserByLogin(req: Request, res: Response) {
+    const login = req.query.login
+
+    try {
+      if (!login) {
+        res.status(400).send({ message: 'Login doesn\'t specified' })
+      }
+
+      const userProfile = await User.findOne({ where: {
+        login
+      }})
+
+      if (userProfile) {
+        res.send(userProfile)
+      } else {
+        res.status(400).send({ message: 'User not found' })
+      }
+
+    } catch(e) {
+      res.status(500).send({ message: 'Internal Server Error' })
+    }
+
+  }
 }
