@@ -6,11 +6,28 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import { themeRouter } from './routes/theme.routes'
 import { sequelize } from './models'
+import helmet from 'helmet'
 
 dotenv.config()
 
 const app = express()
 app.use(cors())
+
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      'default-src': helmet.contentSecurityPolicy.dangerouslyDisableDefaultSrc,
+      'script-src': [
+        '\'self\'',
+        'https: \'unsafe-inline\'',
+        'https://ya-praktikum.tech/api/v2/*',
+        'localhost:*'
+      ],
+      imgSrc: ['\'self\'', 'data:', 'blob:', 'https://ya-praktikum.tech/']
+    }
+  })
+)
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
