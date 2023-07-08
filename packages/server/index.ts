@@ -17,14 +17,20 @@ app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
     directives: {
-      'default-src': helmet.contentSecurityPolicy.dangerouslyDisableDefaultSrc,
-      'script-src': [
+      defaultSrc: helmet.contentSecurityPolicy.dangerouslyDisableDefaultSrc,
+      scriptSrc: [
         '\'self\'',
         'https: \'unsafe-inline\'',
         'https://ya-praktikum.tech/api/v2/*',
         'localhost:*'
       ],
-      imgSrc: ['\'self\'', 'data:', 'blob:', 'https://ya-praktikum.tech/']
+      imgSrc: ['\'self\'', 'data:', 'blob:', 'https://ya-praktikum.tech/'],
+      connectSrc: [
+        '\'self\'',
+        'https: \'unsafe-inline\'',
+        'https://ya-praktikum.tech/api/v2/*',
+        'localhost:*'
+      ]
     }
   })
 )
