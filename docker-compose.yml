@@ -47,6 +47,19 @@ services:
     networks:
       - skynet
 
+  nginx:
+    container_name: nginx
+    build:
+      dockerfile: Dockerfile.nginx
+    restart: always
+    depends_on:
+      - app
+      - db
+    ports:
+      - "80:80"
+    networks:
+      - skynet
+
 networks:
     skynet:
         driver: bridge
