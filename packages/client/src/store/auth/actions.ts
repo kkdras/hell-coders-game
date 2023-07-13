@@ -68,8 +68,7 @@ export const postYandexOAuth = createAsyncThunk<
         withCredentials: true
       }
     )
-    dispatch(getAuthUser())
-   // if(response)dispatch(getUserByLogin(response.data.))
+    dispatch(getAuthUser())  
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
