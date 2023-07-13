@@ -14,7 +14,7 @@ import {
 import { ICommentAndReply } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { ReplyesTable } from '../ReplyesTable/ReplyesTable'
-import { deepOrange } from '@mui/material/colors'
+import { cyan, deepOrange } from '@mui/material/colors'
 import { useEffect, useState } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import { AddReply } from '../AddReply/AddReply'
@@ -27,6 +27,7 @@ export function CommentAccordeon(comment?: ICommentAndReply) {
   const lightOrange = deepOrange[400]
   const [showAddReply, setShowAddReply] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
+  const typographyColor = cyan["A400"]
 
   const { localUserId, localUser } = useSelector((state: RootState) => state.user)
   const { replyes } = useSelector((state: RootState) => state.forum)
@@ -70,9 +71,9 @@ export function CommentAccordeon(comment?: ICommentAndReply) {
                     <TableCell
                       align="center"
                       colSpan={6}
-                      sx={{ color: 'blue' }}>
+                      sx={{ color: typographyColor }}>
                       Ответы
-                    </TableCell>                   
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 {commentReplyes.length && (
