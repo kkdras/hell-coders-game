@@ -96,7 +96,7 @@ export const createReply = createAsyncThunk<
 >('forum/comments/create', async (data, { rejectWithValue, dispatch }) => {
   try {
     const response: AxiosResponse = await customAxios.post(
-      `${CUSTOM_BASE_URL}/forum/comments/`,
+      `${CUSTOM_BASE_URL}/forum/comments/create`,
       data
     )
     if (data.parentId) dispatch(getCommentsReply({ commentId: data.parentId, userId: data.userId }))

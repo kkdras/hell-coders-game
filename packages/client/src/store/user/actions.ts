@@ -21,8 +21,7 @@ export const getAuthUser = createAsyncThunk<
         'Content-type': 'application/json'
       }
     })
-
-    if(response) dispatch(getUserByLogin(response.data.login))
+    if (response.data.login) dispatch(getUserByLogin(response.data.login))
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)

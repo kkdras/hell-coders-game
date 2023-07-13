@@ -7,19 +7,22 @@ import AddIcon from '@mui/icons-material/Add'
 import { AddTopic } from './components/AddTopic/AddTopic'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/rootReducer'
-import { getAllTopics } from '../../store/forum/actions'
+import { getAllComments, getAllTopics, getCommentsReply } from '../../store/forum/actions'
 import { AppStoreDispatch } from '../../store'
+import { ITopic } from '../../store/forum/types'
 
 export function Forum() {
   const navigate = useNavigate()
-  const { topics } = useSelector((state: RootState) => state.forum)
+  const { topics, comments } = useSelector((state: RootState) => state.forum)
+  const { localUserId } = useSelector((state: RootState) => state.user)
   const [showAddTopic, setShowAddTopic] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
 
   useEffect(() => {
     document.title = 'Форум'
     dispatch(getAllTopics())
-  }, [])
+    if (topics && localUserId) topics.forEach((topic: ITopic) => dispatch(getAllComments({ id: topic.id, userId: localUserId })))
+  }, [localUserId])
 
   return (
     <Box pt={4}>

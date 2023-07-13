@@ -69,22 +69,10 @@ export function CommentAccordeon(comment?: ICommentAndReply) {
                   <TableRow>
                     <TableCell
                       align="center"
-                      colSpan={2}
+                      colSpan={6}
                       sx={{ color: 'blue' }}>
-                      Сообщение
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      colSpan={2}
-                      sx={{ color: 'blue' }}>
-                      Автор
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      colSpan={2}
-                      sx={{ color: 'blue' }}>
-                      Время
-                    </TableCell>
+                      Ответы
+                    </TableCell>                   
                   </TableRow>
                 </TableHead>
                 {commentReplyes.length && (

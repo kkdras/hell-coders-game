@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AxiosError, AxiosResponse } from 'axios'
 import { mainAxios } from '../../http-common'
 import { BASE_URL } from '../../shared/consts'
-import { createLocalUser, getAuthUser } from '../user/actions'
+import { createLocalUser, getAuthUser, getUserByLogin } from '../user/actions'
 import { OauthSignInRequest, SignUpRequest } from './types'
 
 export const postRegister = createAsyncThunk<
@@ -69,6 +69,7 @@ export const postYandexOAuth = createAsyncThunk<
       }
     )
     dispatch(getAuthUser())
+   // if(response)dispatch(getUserByLogin(response.data.))
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
