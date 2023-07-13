@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const port = Number(process.env.SERVER_PORT) || 3001
 
 sequelize
-  .sync()
+  .sync({force: true})
   .then(() => {
     console.log('Synced db.')
   })
