@@ -2,19 +2,31 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AxiosError, AxiosResponse } from 'axios'
 import { mainAxios } from '../../http-common'
 import { BASE_URL } from '../../shared/consts'
-import { getAuthUser } from '../user/actions'
+import { createLocalUser, getAuthUser } from '../user/actions'
 import { OauthSignInRequest, SignUpRequest } from './types'
 
 export const postRegister = createAsyncThunk<
   AxiosResponse,
   SignUpRequest,
   { rejectValue: AxiosError['response'] }
->('auth/postRegister', async (data, { rejectWithValue }) => {
+>('auth/postRegister', async (data, { rejectWithValue, dispatch }) => {
   try {
     const response: AxiosResponse = await mainAxios.post(
       `${BASE_URL}/auth/signup`,
       data
     )
+    if (response) {
+      dispatch(
+        createLocalUser({
+          first_name: data.first_name || '',
+          second_name: data.second_name || '',
+          password: '',
+          phone: data.phone || '',
+          login: data.login || '',
+          email: data.email || ''
+        })
+      )
+    }
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)

@@ -22,18 +22,7 @@ export const getAuthUser = createAsyncThunk<
       }
     })
 
-    if (response) {
-      dispatch(
-        createLocalUser({
-          first_name: response.data.first_name || '',
-          second_name: response.data.second_name || '',
-          password: '', // что сюдат вставлять и зачем нужен?????
-          phone: response.data.phone || '',
-          login: response.data.login || '',
-          email: response.data.email || ''
-        })
-      )
-    }
+    if(response) dispatch(getUserByLogin(response.data.login))
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
