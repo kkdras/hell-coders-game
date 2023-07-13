@@ -27,7 +27,7 @@ export const AddComment: FC<AddCommentProps> = ({
     defaultValues: { content: '' },
     resolver: yupResolver(addCommentSchema)
   })
-  console.log(localUser)
+
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
     console.log('subit')

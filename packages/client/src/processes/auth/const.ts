@@ -5,4 +5,4 @@ export const defaultValues: SignInRequest = {
   password: ''
 }
 
-export const redirect_uri = `http://localhost:3000`
+export const redirect_uri = `https://hell-coders-tetris-25.ya-praktikum.tech`
