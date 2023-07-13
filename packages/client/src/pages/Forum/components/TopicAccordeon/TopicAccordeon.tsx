@@ -9,28 +9,19 @@ import {
 import { ITopic } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { CommentAccordeon } from '../CommentAccordeon/CommentAccordeon'
-import { lightBlue } from '@mui/material/colors'
+import { teal } from '@mui/material/colors'
 import AddIcon from '@mui/icons-material/Add'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AddComment } from '../AddComment/AddComment'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '../../../../store/rootReducer'
-import { AppStoreDispatch } from '../../../../store'
-import { getAllComments } from '../../../../store/forum/actions'
 
 export function TopicAccordeon(topic?: ITopic) {
-  const lightLightBlue = lightBlue[50]
+  const background = teal['A400']
   const [showAddComment, setShowAddComment] = useState<boolean>(false)
-  const dispatch = useDispatch<AppStoreDispatch>()
-  
-  const { localUser } = useSelector((state: RootState) => state.user)
   const { comments } = useSelector((state: RootState) => state.forum)
   const topicComments =
     topic && topic.id && comments[topic.id] ? comments[topic.id] : []
-
-  useEffect(() => {
-    if (topic && topic.id && localUser) dispatch(getAllComments({id:topic.id, userId: localUser.id}))
-  }, [])
 
   if (!(topic && topic.id)) return null
 
@@ -39,7 +30,7 @@ export function TopicAccordeon(topic?: ITopic) {
       <Grid container spacing={2} color={'text.primary'}>
         <Grid item xs={11}>
           <Accordion
-            sx={{ backgroundColor: lightLightBlue, borderRadius: '5%' }}
+            sx={{ backgroundColor: background, borderRadius: '5%' }}
             key={topic.id}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -56,19 +47,14 @@ export function TopicAccordeon(topic?: ITopic) {
               </Grid>
             </AccordionSummary>
             <AccordionDetails>
-              <Grid
-                container
-                spacing={2}
-                pb={2}
-                color={'text.secondary'}
-                fontStyle={'italic'}>
+              <Grid container spacing={2} pb={2} color={'text.secondary'}>
                 <Grid item xs={8}>
-                  <Typography pl={2} variant="body2">
+                  <Typography pl={2} variant="h6">
                     Комментарии
                   </Typography>
                 </Grid>
                 <Grid item xs={4}>
-                  <Typography pl={4} variant="body2">
+                  <Typography pl={4} variant="h6">
                     Ответы
                   </Typography>
                 </Grid>

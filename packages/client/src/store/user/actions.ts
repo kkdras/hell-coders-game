@@ -2,7 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AxiosError, AxiosResponse } from 'axios'
 import { mainAxios } from '../../http-common'
 import { BASE_URL, CUSTOM_BASE_URL } from '../../shared/consts'
-import { ChangePasswordRequest, CreateLocalUserRequest, User, UserUpdateRequest } from './types'
+import {
+  ChangePasswordRequest,
+  CreateLocalUserRequest,
+  User,
+  UserUpdateRequest
+} from './types'
 
 export const getAuthUser = createAsyncThunk<
   AxiosResponse<User>,
@@ -16,23 +21,12 @@ export const getAuthUser = createAsyncThunk<
         'Content-type': 'application/json'
       }
     })
-
-    if (response) {
-      dispatch(createLocalUser({
-        'first_name': response.data.first_name || '',
-        'second_name': response.data.second_name || '',
-        'password': '', // что сюдат вставлять и зачем нужен?????
-        'phone': response.data.phone || '',
-        'login': response.data.login || '',
-        'email': response.data.email || ''
-      }))
-    }
+    if (response.data.login) dispatch(getUserByLogin(response.data.login))
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
   }
 })
-
 
 export const putUser = createAsyncThunk<
   AxiosResponse<User>,
@@ -40,16 +34,12 @@ export const putUser = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('user/putUser', async (data, { rejectWithValue }) => {
   try {
-    const response = await mainAxios.put(
-      `${BASE_URL}/user/profile`,
-      data,
-      {
-        withCredentials: true,
-        headers: {
-          'Content-type': 'application/json'
-        }
+    const response = await mainAxios.put(`${BASE_URL}/user/profile`, data, {
+      withCredentials: true,
+      headers: {
+        'Content-type': 'application/json'
       }
-    )
+    })
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -84,16 +74,12 @@ export const putPassword = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('user/putPassword', async (data, { rejectWithValue }) => {
   try {
-    const response = await mainAxios.put(
-      `${BASE_URL}/user/password`,
-      data,
-      {
-        withCredentials: true,
-        headers: {
-          'Content-type': 'application/json'
-        }
+    const response = await mainAxios.put(`${BASE_URL}/user/password`, data, {
+      withCredentials: true,
+      headers: {
+        'Content-type': 'application/json'
       }
-    )
+    })
     return response
   } catch (error) {
     // @ts-ignore
@@ -114,6 +100,22 @@ export const createLocalUser = createAsyncThunk<
       `${CUSTOM_BASE_URL}/user/create`,
       data
     )
+    return response
+  } catch (error) {
+    return rejectWithValue((error as AxiosError)?.response)
+  }
+})
+
+export const getUserByLogin = createAsyncThunk<
+  AxiosResponse,
+  { login: string },
+  { rejectValue: AxiosError['response'] }
+>('user/getByLogin', async ({ login }, { rejectWithValue }) => {
+  try {
+    const response = await mainAxios.get(
+      `${CUSTOM_BASE_URL}/user/?login=${login}`
+    )
+
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)

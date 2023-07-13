@@ -18,15 +18,22 @@ export const forumSlice = createSlice({
 
     builder.addCase(
       getAllComments.fulfilled,
-      (state, { payload }: PayloadAction<AxiosResponse<ICommentAndReply[]>>) => {
+      (
+        state,
+        { payload }: PayloadAction<AxiosResponse<ICommentAndReply[]>>
+      ) => {
         state.comments[payload.data[0].topicId] = payload.data
       }
     )
 
     builder.addCase(
       getCommentsReply.fulfilled,
-      (state, { payload }: PayloadAction<AxiosResponse<ICommentAndReply[]>>) => {
-        if(payload.data[0].parentId) state.replyes[payload.data[0].parentId] = payload.data
+      (
+        state,
+        { payload }: PayloadAction<AxiosResponse<ICommentAndReply[]>>
+      ) => {
+        if (payload.data[0].parentId)
+          state.replyes[payload.data[0].parentId] = payload.data
       }
     )
   }

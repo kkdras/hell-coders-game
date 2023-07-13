@@ -14,7 +14,7 @@ import {
 import { ICommentAndReply } from '../../../../store/forum/types'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { ReplyesTable } from '../ReplyesTable/ReplyesTable'
-import { deepOrange } from '@mui/material/colors'
+import { cyan, deepOrange } from '@mui/material/colors'
 import { useEffect, useState } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import { AddReply } from '../AddReply/AddReply'
@@ -27,17 +27,21 @@ export function CommentAccordeon(comment?: ICommentAndReply) {
   const lightOrange = deepOrange[400]
   const [showAddReply, setShowAddReply] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
+  const typographyColor = cyan['A400']
 
-  const { localUser } = useSelector((state: RootState) => state.user)
+  const { localUserId, localUser } = useSelector(
+    (state: RootState) => state.user
+  )
   const { replyes } = useSelector((state: RootState) => state.forum)
 
   const commentReplyes =
     comment && comment?.id && replyes[comment?.id] ? replyes[comment?.id] : []
-    
+
   console.log(commentReplyes)
 
   useEffect(() => {
-    if (comment && comment?.id && localUser?.id) dispatch(getCommentsReply({ commentId: comment.id, userId: localUser.id }))
+    if (comment && comment?.id && localUserId)
+      dispatch(getCommentsReply({ commentId: comment.id, userId: localUserId }))
   }, [])
 
   if (!comment || !comment?.id) return null
@@ -68,21 +72,9 @@ export function CommentAccordeon(comment?: ICommentAndReply) {
                   <TableRow>
                     <TableCell
                       align="center"
-                      colSpan={2}
-                      sx={{ color: 'blue' }}>
-                      Сообщение
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      colSpan={2}
-                      sx={{ color: 'blue' }}>
-                      Автор
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      colSpan={2}
-                      sx={{ color: 'blue' }}>
-                      Время
+                      colSpan={6}
+                      sx={{ color: typographyColor }}>
+                      Ответы
                     </TableCell>
                   </TableRow>
                 </TableHead>

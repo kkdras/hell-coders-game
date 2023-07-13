@@ -10,7 +10,10 @@ export const postTheme = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('theme/postTheme', async (data, { rejectWithValue }) => {
   try {
-    const response = await customAxios.post(`${CUSTOM_BASE_URL}/theme/create`, data)
+    const response = await customAxios.post(
+      `${CUSTOM_BASE_URL}/theme/create`,
+      data
+    )
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)

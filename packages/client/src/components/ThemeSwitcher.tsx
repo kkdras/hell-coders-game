@@ -9,14 +9,14 @@ import { setTheme } from '../store/theme/slice'
 
 export const ThemeSwitcher = () => {
   const { theme } = useSelector((state: RootState) => state.theme)
-  const { user } = useSelector((state: RootState) => state.user)
+  const { localUserId } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
 
   const handleChange = () => {
     const newTheme =
       theme === Themes.LightTheme ? Themes.DarkTheme : Themes.LightTheme
-    if (user) {
-      dispatch(postTheme({ userId: String(user.id), theme: newTheme }))
+    if (localUserId) {
+      dispatch(postTheme({ userId: String(localUserId), theme: newTheme }))
     } else {
       dispatch(setTheme(newTheme))
     }

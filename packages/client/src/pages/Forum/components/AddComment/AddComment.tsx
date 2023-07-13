@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { addCommentSchema, addForumItemSchema } from '../../../../shared/utils/formSchema'
+import { addCommentSchema } from '../../../../shared/utils/formSchema'
 import { FormInput } from '../../../../components/FormInput'
 import { Popover } from '@mui/material'
 import { FC } from 'react'
@@ -20,7 +20,6 @@ export const AddComment: FC<AddCommentProps> = ({
   setShowAddComment,
   topicId
 }) => {
-
   const dispatch = useDispatch<AppStoreDispatch>()
   const { localUser } = useSelector((state: RootState) => state.user)
 
@@ -31,7 +30,6 @@ export const AddComment: FC<AddCommentProps> = ({
 
   const { handleSubmit } = methods
   const formSubmit = handleSubmit(data => {
-
     console.log('subit')
     if (localUser) {
       const requestData: CommentAndReplyRequestData = {

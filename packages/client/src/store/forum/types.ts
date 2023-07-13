@@ -1,5 +1,3 @@
-import { string } from 'yup'
-
 export interface ICommentAndReply {
   id: number
   topicId: number
@@ -26,11 +24,10 @@ export interface CommentAndReplyRequestData {
 
 export interface GetCommentRequest {
   id: number
-  userId: number  
+  userId: number
 }
 
 export interface GetReliesRequest {
   commentId: number
-  userId: number  
+  userId: number
 }
-

@@ -7,19 +7,27 @@ import AddIcon from '@mui/icons-material/Add'
 import { AddTopic } from './components/AddTopic/AddTopic'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/rootReducer'
-import { getAllTopics } from '../../store/forum/actions'
+import { getAllComments, getAllTopics } from '../../store/forum/actions'
 import { AppStoreDispatch } from '../../store'
+import { ITopic } from '../../store/forum/types'
+import { cyan } from '@mui/material/colors'
 
 export function Forum() {
   const navigate = useNavigate()
   const { topics } = useSelector((state: RootState) => state.forum)
+  const { localUserId } = useSelector((state: RootState) => state.user)
   const [showAddTopic, setShowAddTopic] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
+  const typographyColor = cyan['A400']
 
   useEffect(() => {
     document.title = 'Форум'
     dispatch(getAllTopics())
-  }, [])
+    if (topics && localUserId)
+      topics.forEach((topic: ITopic) =>
+        dispatch(getAllComments({ id: topic.id, userId: localUserId }))
+      )
+  }, [localUserId])
 
   return (
     <Box pt={4}>
@@ -28,9 +36,11 @@ export function Forum() {
           navigate(-1)
         }}
       />
-      <Grid container spacing={2} pt={12} pb={4} color={'blue'}>
+      <Grid container spacing={2} pt={12} pb={4} color={typographyColor}>
         <Grid item xs={11}>
-          <Typography pl={2}>ТОПИКИ</Typography>
+          <Typography pl={2} variant="h5">
+            ТОПИКИ
+          </Typography>
         </Grid>
         <Grid item xs={1}>
           <IconButton
@@ -45,10 +55,14 @@ export function Forum() {
       {topics.length > 0 && (
         <Grid container spacing={2} pb={4} color={'red'}>
           <Grid item xs={7}>
-            <Typography pl={2}>Название</Typography>
+            <Typography pl={2} variant="h6">
+              Название
+            </Typography>
           </Grid>
           <Grid item xs={2}>
-            <Typography pl={5}>Комментарии</Typography>
+            <Typography pl={5} variant="h6">
+              Комментарии
+            </Typography>
           </Grid>
         </Grid>
       )}

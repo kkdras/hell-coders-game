@@ -6,9 +6,9 @@ export function ReplyesTable(reply?: ICommentAndReply) {
 
   return (
     <TableRow key={reply.id}>
-      <TableCell align="left" colSpan={2}>
+      <TableCell align="left" colSpan={6}>
         {reply.content}
-      </TableCell>       
+      </TableCell>
     </TableRow>
   )
 }

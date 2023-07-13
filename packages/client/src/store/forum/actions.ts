@@ -79,7 +79,7 @@ export const createComment = createAsyncThunk<
 >('forum/comments/create', async (data, { rejectWithValue, dispatch }) => {
   try {
     const response: AxiosResponse = await customAxios.post(
-      `${CUSTOM_BASE_URL}/forum/comments/`,
+      `${CUSTOM_BASE_URL}/forum/comments/create`,
       data
     )
     dispatch(getAllComments({ id: data.topicId, userId: data.userId }))
@@ -96,10 +96,13 @@ export const createReply = createAsyncThunk<
 >('forum/comments/create', async (data, { rejectWithValue, dispatch }) => {
   try {
     const response: AxiosResponse = await customAxios.post(
-      `${CUSTOM_BASE_URL}/forum/comments/`,
+      `${CUSTOM_BASE_URL}/forum/comments/create`,
       data
     )
-    if (data.parentId) dispatch(getCommentsReply({ commentId: data.parentId, userId: data.userId }))
+    if (data.parentId)
+      dispatch(
+        getCommentsReply({ commentId: data.parentId, userId: data.userId })
+      )
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)

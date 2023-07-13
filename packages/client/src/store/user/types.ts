@@ -23,8 +23,7 @@ export interface ChangePasswordRequest {
   newPassword: string
 }
 
-
-export interface CreateLocalUserRequest { 
+export interface CreateLocalUserRequest {
   first_name: string
   second_name: string
   password: string

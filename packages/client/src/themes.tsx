@@ -2,7 +2,7 @@ import { createTheme, Theme } from '@mui/material/styles'
 
 export enum Themes {
   LightTheme = 'lightTheme',
-  DarkTheme = 'darkTheme',
+  DarkTheme = 'darkTheme'
 }
 
 const darkTheme = createTheme({
