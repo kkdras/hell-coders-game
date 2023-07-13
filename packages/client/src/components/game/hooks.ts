@@ -9,7 +9,7 @@ enum UsedKeys {
   RIGHT = 'ArrowRight',
   LEFT = 'ArrowLeft',
   SPACE = 'Space',
-  DOWN = 'ArrowDown',
+  DOWN = 'ArrowDown'
 }
 
 const useTurnOnSpeedUp = (game: MutableRefObject<GameConstructor | null>) => {
@@ -120,7 +120,9 @@ export const useGame = (canvasRef: RefObject<HTMLCanvasElement>) => {
   return refGameInstance
 }
 
-export const useWatchGame = (game: MutableRefObject<GameConstructor | null>) => {
+export const useWatchGame = (
+  game: MutableRefObject<GameConstructor | null>
+) => {
   const dispatch = useDispatch<AppStoreDispatch>()
 
   useEffect(() => {

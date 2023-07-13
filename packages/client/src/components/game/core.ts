@@ -310,7 +310,7 @@ export class GameConstructor extends EventBus {
   }
 
   public pause() {
-    throw new Error('method doesn\'t implement')
+    throw new Error("method doesn't implement")
   }
 
   public rotateFigureRight() {
@@ -342,12 +342,12 @@ export class GameConstructor extends EventBus {
   }
 
   public toggleDropHint() {
-    throw new Error('method doesn\'t implement')
+    throw new Error("method doesn't implement")
   }
 }
 
 function assertFigure(figure: Figure | undefined): asserts figure is Figure {
   if (!figure) {
-    throw new Error('current figure doesn\'t defined')
+    throw new Error("current figure doesn't defined")
   }
 }

@@ -27,9 +27,11 @@ export function CommentAccordeon(comment?: ICommentAndReply) {
   const lightOrange = deepOrange[400]
   const [showAddReply, setShowAddReply] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
-  const typographyColor = cyan["A400"]
+  const typographyColor = cyan['A400']
 
-  const { localUserId, localUser } = useSelector((state: RootState) => state.user)
+  const { localUserId, localUser } = useSelector(
+    (state: RootState) => state.user
+  )
   const { replyes } = useSelector((state: RootState) => state.forum)
 
   const commentReplyes =

@@ -110,15 +110,14 @@ export const getUserByLogin = createAsyncThunk<
   AxiosResponse,
   { login: string },
   { rejectValue: AxiosError['response'] }
->(
-  'user/getByLogin',
-  async ({ login }, { rejectWithValue }) => {
-    try {
-      const response = await mainAxios.get(`${CUSTOM_BASE_URL}/user/?login=${login}`)
+>('user/getByLogin', async ({ login }, { rejectWithValue }) => {
+  try {
+    const response = await mainAxios.get(
+      `${CUSTOM_BASE_URL}/user/?login=${login}`
+    )
 
-      return response
-    } catch (error) {
-      return rejectWithValue((error as AxiosError)?.response)
-    }
+    return response
+  } catch (error) {
+    return rejectWithValue((error as AxiosError)?.response)
   }
-)
+})

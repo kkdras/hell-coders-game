@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { FormProvider, useForm } from 'react-hook-form'
 import { AuthForm } from './types'
 import { getYandexServiceId } from '../../store/auth/actions'
-import { AppStoreDispatch, RootState } from '../../store'
+import { AppStoreDispatch } from '../../store'
 import { FormInput } from '../../components/FormInput'
 import { RouteNames } from '../../App'
 import { defaultValues, redirect_uri } from './const'
@@ -35,7 +35,6 @@ export function AuthorizationForm() {
       dispatch(getAuthUser())
     })
   })
-
 
   return (
     <Container component="main" maxWidth="xs">

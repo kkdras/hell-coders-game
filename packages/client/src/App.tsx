@@ -28,7 +28,7 @@ export enum RouteNames {
   REGISTER = '/register',
   ERROR_404 = '/error404',
   ERROR_COMPONENT = '/errorcomponent',
-  FORUM = '/forum',
+  FORUM = '/forum'
 }
 
 function App() {

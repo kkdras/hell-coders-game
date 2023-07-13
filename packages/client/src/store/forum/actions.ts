@@ -99,7 +99,10 @@ export const createReply = createAsyncThunk<
       `${CUSTOM_BASE_URL}/forum/comments/create`,
       data
     )
-    if (data.parentId) dispatch(getCommentsReply({ commentId: data.parentId, userId: data.userId }))
+    if (data.parentId)
+      dispatch(
+        getCommentsReply({ commentId: data.parentId, userId: data.userId })
+      )
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)

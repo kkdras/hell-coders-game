@@ -49,7 +49,7 @@ export enum Colors {
   YELLOW = 'yellow',
   PINK = 'PINK',
   ORANGE = 'orange',
-  BLUE = 'blue',
+  BLUE = 'blue'
 }
 
 export const figuresColors: Record<FigureNames, Colors> = {

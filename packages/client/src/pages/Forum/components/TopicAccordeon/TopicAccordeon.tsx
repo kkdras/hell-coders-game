@@ -16,14 +16,12 @@ import { AddComment } from '../AddComment/AddComment'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../store/rootReducer'
 
-
 export function TopicAccordeon(topic?: ITopic) {
-  const background = teal["A400"]
+  const background = teal['A400']
   const [showAddComment, setShowAddComment] = useState<boolean>(false)
   const { comments } = useSelector((state: RootState) => state.forum)
   const topicComments =
     topic && topic.id && comments[topic.id] ? comments[topic.id] : []
-
 
   if (!(topic && topic.id)) return null
 
@@ -49,11 +47,7 @@ export function TopicAccordeon(topic?: ITopic) {
               </Grid>
             </AccordionSummary>
             <AccordionDetails>
-              <Grid
-                container
-                spacing={2}
-                pb={2}
-                color={'text.secondary'}>
+              <Grid container spacing={2} pb={2} color={'text.secondary'}>
                 <Grid item xs={8}>
                   <Typography pl={2} variant="h6">
                     Комментарии

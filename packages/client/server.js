@@ -60,9 +60,7 @@ export async function startServer() {
         .replace(`<!--emotionCss-->`, emotionCss)
         .replace(
           `<!--app-state-->`,
-          `<script>window.__PRELOADED_STATE__=${serialize(
-            state
-          )}</script>`
+          `<script>window.__PRELOADED_STATE__=${serialize(state)}</script>`
         )
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {

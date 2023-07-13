@@ -18,12 +18,15 @@ export function Forum() {
   const { localUserId } = useSelector((state: RootState) => state.user)
   const [showAddTopic, setShowAddTopic] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
-  const typographyColor = cyan["A400"]
+  const typographyColor = cyan['A400']
 
   useEffect(() => {
     document.title = 'Форум'
     dispatch(getAllTopics())
-    if (topics && localUserId) topics.forEach((topic: ITopic) => dispatch(getAllComments({ id: topic.id, userId: localUserId })))
+    if (topics && localUserId)
+      topics.forEach((topic: ITopic) =>
+        dispatch(getAllComments({ id: topic.id, userId: localUserId }))
+      )
   }, [localUserId])
 
   return (
@@ -35,7 +38,9 @@ export function Forum() {
       />
       <Grid container spacing={2} pt={12} pb={4} color={typographyColor}>
         <Grid item xs={11}>
-          <Typography pl={2} variant="h5">ТОПИКИ</Typography>
+          <Typography pl={2} variant="h5">
+            ТОПИКИ
+          </Typography>
         </Grid>
         <Grid item xs={1}>
           <IconButton
@@ -50,10 +55,14 @@ export function Forum() {
       {topics.length > 0 && (
         <Grid container spacing={2} pb={4} color={'red'}>
           <Grid item xs={7}>
-            <Typography pl={2} variant="h6">Название</Typography>
+            <Typography pl={2} variant="h6">
+              Название
+            </Typography>
           </Grid>
           <Grid item xs={2}>
-            <Typography pl={5} variant="h6">Комментарии</Typography>
+            <Typography pl={5} variant="h6">
+              Комментарии
+            </Typography>
           </Grid>
         </Grid>
       )}
