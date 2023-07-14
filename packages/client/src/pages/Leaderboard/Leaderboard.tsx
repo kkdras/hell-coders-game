@@ -1,5 +1,5 @@
 import { BASE_URL } from '../../shared/consts'
-import { Box } from '@mui/material'
+import { Avatar, Box } from '@mui/material'
 import { DataGrid, GridCellParams } from '@mui/x-data-grid'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -12,12 +12,18 @@ const columns = [
     headerName: 'Avatar',
     sortable: false,
     width: 80,
-    renderCell: (params: GridCellParams) => (
-      <img
-        src={`${BASE_URL}/resources${params.value}`}
-        style={{ width: 37, borderRadius: '50%' }}
-      />
-    )
+    renderCell: (params: GridCellParams) => {
+      const nameFirstLetter = String(Array.from(params.row.name)[0])
+      return params.value ? (
+        <img
+          src={`${BASE_URL}/resources${params.value}`}
+          style={{ width: 40, borderRadius: '50%', height: 40 }}
+          alt="Аватар"
+        />
+      ) : (
+        <Avatar>{nameFirstLetter}</Avatar>
+      )
+    }
   },
   {
     field: 'name',
