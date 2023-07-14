@@ -10,6 +10,8 @@ COPY . .
 
 RUN yarn lerna bootstrap && yarn build
 
+COPY ./packages/client/src/sw.js ./packages/client/dist/client/sw.js
+
 EXPOSE 3000
 
 EXPOSE 3001
