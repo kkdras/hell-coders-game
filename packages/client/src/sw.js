@@ -35,7 +35,6 @@ this.addEventListener('install', event => {
 })
 
 this.addEventListener('fetch', event => {
-  console.log('fetch')
 
   event.respondWith(
     caches.match(event.request).then(response => {
