@@ -33,7 +33,7 @@ services:
 
   app:
     container_name: tetris-app
-    image: ghcr.io/hell-coders-tetris/hell-coders-game/tetris:7c47862c9cde3eff6d724aa5433f7f851c8024b4
+    image: ghcr.io/hell-coders-tetris/hell-coders-game/tetris:f14b69e47c9776c769785d304cae925e888d0cbc
     restart: always
     ports:
       - "3000:3000"
