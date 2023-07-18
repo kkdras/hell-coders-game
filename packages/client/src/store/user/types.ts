@@ -1,3 +1,4 @@
+
 export interface UserUpdateRequest {
   first_name: string
   second_name: string
@@ -31,3 +32,4 @@ export interface CreateLocalUserRequest {
   login: string
   email: string
 }
+

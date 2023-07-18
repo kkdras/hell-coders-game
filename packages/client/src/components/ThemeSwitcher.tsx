@@ -6,11 +6,12 @@ import DarkModeIcon from '@mui/icons-material/DarkMode'
 import { RootState } from '../store/rootReducer'
 import { postTheme } from '../store/theme/actions'
 import { setTheme } from '../store/theme/slice'
+import { AppStoreDispatch } from '../store'
 
 export const ThemeSwitcher = () => {
   const { theme } = useSelector((state: RootState) => state.theme)
   const { localUserId } = useSelector((state: RootState) => state.user)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppStoreDispatch>()
 
   const handleChange = () => {
     const newTheme =
