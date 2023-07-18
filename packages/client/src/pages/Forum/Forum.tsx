@@ -7,14 +7,14 @@ import AddIcon from '@mui/icons-material/Add'
 import { AddTopic } from './components/AddTopic/AddTopic'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/rootReducer'
-import { getAllComments, getAllTopics } from '../../store/forum/actions'
+import { getAllComments, getAllTopics, getCommentsReply } from '../../store/forum/actions'
 import { AppStoreDispatch } from '../../store'
-import { ITopic } from '../../store/forum/types'
+import { ICommentAndReply, ITopic } from '../../store/forum/types'
 import { cyan } from '@mui/material/colors'
 
 export function Forum() {
   const navigate = useNavigate()
-  const { topics } = useSelector((state: RootState) => state.forum)
+  const { topics, comments } = useSelector((state: RootState) => state.forum)
   const { localUserId } = useSelector((state: RootState) => state.user)
   const [showAddTopic, setShowAddTopic] = useState<boolean>(false)
   const dispatch = useDispatch<AppStoreDispatch>()
@@ -23,11 +23,17 @@ export function Forum() {
   useEffect(() => {
     document.title = 'Форум'
     dispatch(getAllTopics())
-    if (topics && localUserId)
+    if (topics.length && localUserId)
       topics.forEach((topic: ITopic) =>
         dispatch(getAllComments({ id: topic.id, userId: localUserId }))
       )
-  }, [localUserId])
+    if (Object.keys(comments).length && localUserId)
+      Object.values(comments).forEach((comments: ICommentAndReply[]) => comments.forEach((comment: ICommentAndReply) => dispatch(getCommentsReply({
+        commentId: comment.id,
+        userId: localUserId
+      }))))
+
+  }, [localUserId, topics.length])
 
   return (
     <Box pt={4}>
