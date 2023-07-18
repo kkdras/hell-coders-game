@@ -7,7 +7,11 @@ import AddIcon from '@mui/icons-material/Add'
 import { AddTopic } from './components/AddTopic/AddTopic'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/rootReducer'
-import { getAllComments, getAllTopics, getCommentsReply } from '../../store/forum/actions'
+import {
+  getAllComments,
+  getAllTopics,
+  getCommentsReply
+} from '../../store/forum/actions'
 import { AppStoreDispatch } from '../../store'
 import { ICommentAndReply, ITopic } from '../../store/forum/types'
 import { cyan } from '@mui/material/colors'
@@ -28,11 +32,16 @@ export function Forum() {
         dispatch(getAllComments({ id: topic.id, userId: localUserId }))
       )
     if (Object.keys(comments).length && localUserId)
-      Object.values(comments).forEach((comments: ICommentAndReply[]) => comments.forEach((comment: ICommentAndReply) => dispatch(getCommentsReply({
-        commentId: comment.id,
-        userId: localUserId
-      }))))
-
+      Object.values(comments).forEach((comments: ICommentAndReply[]) =>
+        comments.forEach((comment: ICommentAndReply) =>
+          dispatch(
+            getCommentsReply({
+              commentId: comment.id,
+              userId: localUserId
+            })
+          )
+        )
+      )
   }, [localUserId, topics.length])
 
   return (

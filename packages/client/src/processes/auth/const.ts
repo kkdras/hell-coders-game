@@ -6,4 +6,3 @@ export const defaultValues: SignInRequest = {
 }
 
 export const redirect_uri = `http://hell-coders-tetris-25.ya-praktikum.tech`
-
