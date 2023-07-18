@@ -1,5 +1,3 @@
-import { AxiosError } from 'axios';
-
 export interface UserUpdateRequest {
   first_name: string
   second_name: string
