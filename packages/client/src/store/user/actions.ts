@@ -131,7 +131,7 @@ export const getUserByLogin = createAsyncThunk<
           email: user.email
         })
       )
-      dispatch(getUserByLogin(user));
+      dispatch(getUserByLogin(user))
     }  
     return rejectWithValue((error as AxiosError)?.response)
   }
