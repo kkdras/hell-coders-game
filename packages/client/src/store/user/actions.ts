@@ -21,7 +21,6 @@ export const getAuthUser = createAsyncThunk<
         'Content-type': 'application/json'
       }
     })
-    if (response.data.login) dispatch(getUserByLogin(response.data.login))
     return response
   } catch (error) {
     return rejectWithValue((error as AxiosError)?.response)
@@ -74,6 +73,7 @@ export const putPassword = createAsyncThunk<
   { rejectValue: AxiosError['response'] }
 >('user/putPassword', async (data, { rejectWithValue }) => {
   try {
+    // @ts-ignore
     const response = await mainAxios.put(`${BASE_URL}/user/password`, data, {
       withCredentials: true,
       headers: {
@@ -108,16 +108,31 @@ export const createLocalUser = createAsyncThunk<
 
 export const getUserByLogin = createAsyncThunk<
   AxiosResponse,
-  { login: string },
+  User,
   { rejectValue: AxiosError['response'] }
->('user/getByLogin', async ({ login }, { rejectWithValue }) => {
+>('user/getByLogin', async (user, { rejectWithValue, dispatch }) => {
   try {
+
     const response = await mainAxios.get(
-      `${CUSTOM_BASE_URL}/user/?login=${login}`
+      `${CUSTOM_BASE_URL}/user/?login=${user.login}`
     )
 
     return response
   } catch (error) {
+    // @ts-ignore
+    if ((error as AxiosError)?.response?.data?.message === 'User not found') {
+      dispatch(
+        createLocalUser({
+          first_name: user.first_name,
+          second_name: user.second_name,
+          password: '',
+          phone: user.phone,
+          login: user.login,
+          email: user.email
+        })
+      )
+      dispatch(getUserByLogin(user));
+    }  
     return rejectWithValue((error as AxiosError)?.response)
   }
 })

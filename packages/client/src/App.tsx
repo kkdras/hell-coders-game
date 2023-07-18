@@ -18,6 +18,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import { Themes, themes } from './themes'
 import { getTheme } from './store/theme/actions'
 import { getUserByLogin } from './store/user/actions'
+import { AppStoreDispatch } from './store'
 
 export enum RouteNames {
   MAIN = '/',
@@ -34,7 +35,7 @@ export enum RouteNames {
 function App() {
   const { theme } = useSelector((state: RootState) => state.theme)
   const { user, localUser } = useSelector((state: RootState) => state.user)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppStoreDispatch>()
 
   useEffect(() => {
     if (localUser) {
