@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import { Box, Button } from '@mui/material'
-import { useRef } from 'react'
+import { Box, Button, Paper } from '@mui/material'
+import { useEffect, useRef, useState } from 'react'
 import { useGame, useWatchGame } from './hooks'
 import FullscreenButton from '../FullscreenButton'
 
@@ -16,6 +16,14 @@ export const GameContainer = () => {
   const game = useGame(refGame)
 
   useWatchGame(game)
+
+  const [points, setPoints] = useState(0)
+
+  useEffect(() => {
+    game.current?.on('upPoint', (newPoints) => {
+      setPoints(newPoints)
+    })
+  }, [])
 
   return (
     <Box
@@ -32,6 +40,18 @@ export const GameContainer = () => {
           flexDirection: 'column',
           m: 1
         }}>
+        <Paper
+          sx={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '30px',
+            mb: 1
+          }}
+        >
+          Points {points}
+        </Paper>
         <Button onClick={() => game.current?.start()} variant="contained">
           Начать игру
         </Button>

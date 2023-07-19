@@ -46,6 +46,7 @@ export class GameConstructor extends EventBus {
   private fieldHeight = 20
   private fieldWidth = 10
   public isGameEnd = true
+  public points = 0
 
   // milliseconds
   private movesBoundary: number
@@ -167,6 +168,7 @@ export class GameConstructor extends EventBus {
     }
 
     cancelAnimationFrame(this.rAF)
+    this.points = 0
     this.isGameEnd = true
     const img = new window.Image()
     img.onload = () => {
@@ -196,8 +198,7 @@ export class GameConstructor extends EventBus {
 
         if (figure.row + row <= 0) {
           this.showGameOver()
-          const score = Math.floor(Math.random() * 100000) // TODO replace to real score
-          this.emit('gameOver', score)
+          this.emit('gameOver', this.points)
         }
 
         this.gameField[figure.row + row][figure.column + col] = figure.name
@@ -210,6 +211,9 @@ export class GameConstructor extends EventBus {
       if (isCurrentRowFullFilled) {
         this.gameField.splice(row, 1)
         this.gameField.unshift(this.gameField[0].map(() => 0))
+        this.movesBoundary -= this.movesBoundary / 3
+        this.points += 10000
+        this.emit('upPoint', this.points)
         continue
       }
       row++
