@@ -168,6 +168,7 @@ export class GameConstructor extends EventBus {
     }
 
     cancelAnimationFrame(this.rAF)
+    this.points = 0
     this.isGameEnd = true
     const img = new window.Image()
     img.onload = () => {
