@@ -22,7 +22,7 @@ export const forumSlice = createSlice({
         state,
         { payload }: PayloadAction<AxiosResponse<ICommentAndReply[]>>
       ) => {
-        state.comments[payload.data[0].topicId] = payload.data
+        if (payload.data.length) state.comments[payload.data[0].topicId] = payload.data
       }
     )
 
@@ -32,7 +32,7 @@ export const forumSlice = createSlice({
         state,
         { payload }: PayloadAction<AxiosResponse<ICommentAndReply[]>>
       ) => {
-        if (payload.data[0].parentId)
+        if (payload.data.length && payload.data[0].parentId)
           state.replyes[payload.data[0].parentId] = payload.data
       }
     )
