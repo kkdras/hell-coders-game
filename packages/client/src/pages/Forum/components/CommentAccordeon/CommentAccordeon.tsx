@@ -37,8 +37,6 @@ export function CommentAccordeon(comment?: ICommentAndReply) {
   const commentReplyes =
     comment && comment?.id && replyes[comment?.id] ? replyes[comment?.id] : []
 
-  console.log(commentReplyes)
-
   useEffect(() => {
     if (comment && comment?.id && localUserId)
       dispatch(getCommentsReply({ commentId: comment.id, userId: localUserId }))
