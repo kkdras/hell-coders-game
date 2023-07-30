@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: postgres:14
+    container_name: postgres
+    restart: always     
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./tmp/pgdata:/var/lib/postgresql/data
+    networks:
+      - skynet
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@email.com
+      - PGADMIN_DEFAULT_PASSWORD=password2000
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - skynet
+
+  app:
+    container_name: tetris-app
+    image: ghcr.io/hell-coders-tetris/hell-coders-game/tetris:ef56bdb4b4d4592bbab614cf57458bc994f03664
+    restart: always
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    environment:
+      SERVER_PORT: 3001
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+    depends_on:
+      - db
+    networks:
+      - skynet
+
+  nginx:
+    container_name: nginx
+    build:
+      dockerfile: Dockerfile.nginx
+    restart: always
+    depends_on:
+      - app
+      - db
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - skynet
+
+networks:
+    skynet:
+        driver: bridge
